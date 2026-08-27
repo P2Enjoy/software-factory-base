@@ -8,7 +8,13 @@ dépende pas de la seule mémoire de contexte d'un agent.
 
 ---
 
-Tu travailles sur le dépôt "p2enjoy-crm".
+Tu travailles sur le dépôt courant, quel qu'il soit.
+
+Ce document est GÉNÉRIQUE : il décrit la méthode de travail d'une session planifiée, jamais
+la pile d'un produit particulier. Chaque fois qu'il renvoie à une commande — démarrage,
+seed, preuves —, la commande exacte est celle que le dépôt documente dans son "README.md",
+son "Makefile" ou ses scripts. Tu la lis dans le dépôt ; tu ne la supposes pas, et tu ne
+reprends aucune commande d'un autre projet.
 
 ## 0. TU DOIS COMMITTER ET POUSSER, SINON TOUT EST PERDU
 
@@ -66,6 +72,33 @@ Git → Docker → pile + seed → choisir l'unité → lire et écrire la spéc
 soixante-dix minutes ; lancée avant d'avoir choisi une unité, elle consomme la session entière pour
 mesurer un dépôt que tu n'as pas encore modifié. Elle est une opération de FIN, suivie d'une boucle
 de correction.
+
+### 0.1. ANNONCE D'OUVERTURE, AVANT TOUT AUTRE AFFICHAGE
+
+La toute première chose que tu ÉCRIS, avant tout diagnostic, toute commande et tout
+autre message, est cette ligne, seule et telle quelle :
+
+```
+A NEW SCHEDULED SESSION HAVE BEEN STARTED
+```
+
+suivie immédiatement de l'horodatage courant, relevé sur la machine et non
+supposé :
+
+```
+date -Is
+```
+
+Exemple de ce que tu affiches :
+
+```
+A NEW SCHEDULED SESSION HAVE BEEN STARTED
+2026-08-20T14:32:07+00:00
+```
+
+Motif : ces sessions s'enchaînent automatiquement et leurs sorties se lisent à la
+suite. Sans cette borne, on ne sait plus où finit une exécution et où commence la
+suivante, ni quand chacune a eu lieu — et deux comptes rendus se confondent.
 
 ## 1. BRANCHE : QUEL QUE SOIT L'ÉTAT INITIAL, TU DOIS TRAVAILLER ET FINIR SUR "main"
 
@@ -432,20 +465,20 @@ peut échouer avec :
 CERTIFICATE_VERIFY_FAILED
 ```
 
-"runDev.sh" s'arrêterait alors avant de démarrer le moindre service.
+Le script de démarrage de la pile s'arrêterait alors avant de démarrer le moindre service.
 
 ### 2.1 bis. NODE 24 : L'HÔTE A "nvm", MAIS PAS LA BONNE VERSION — INSTALLE-LA TOI-MÊME
 
 Comme pour Docker au §2, l'outil est là et rien n'est prêt : c'est à toi de le faire. Ne le
 redécouvre pas, tout ce qui suit est MESURÉ.
 
-L'hôte démarre sur **Node v22.22.2**, la version du système. Or le dépôt exige **Node 24 / npm 11+** :
-`.nvmrc` contient `24`, le "README.md" §7 nomme le couple, et **trente et un des trente-neuf**
-"scripts/verify-*.sh" refusent de s'exécuter sans lui. Leur refus tombe à la PREMIÈRE ligne, avant
-toute lecture du dépôt :
+L'hôte démarre sur **Node v22.22.2**, la version du système. Lorsque le dépôt exige une version
+plus récente — son `.nvmrc` la nomme et son "README.md" la documente —, ses harnais de vérification
+refusent de s'exécuter. Leur refus tombe à la PREMIÈRE ligne, avant toute lecture du dépôt, avec un
+message de cette forme :
 
 ```
-ERREUR : aucun couple Node 24 / npm 11+ Linux n'est utilisable. Exécutez « nvm use » puis relancez.
+ERREUR : aucun couple Node/npm utilisable. Exécutez « nvm use » puis relancez.
 ```
 
 Ce message dit « exécutez nvm use », et c'est trompeur tant que la version n'est pas installée :
@@ -504,12 +537,12 @@ node -v   => v24.x
 npm -v    => 11.x
 ```
 
-**Installe Node 24 AVANT "npm ci"**, et non après : les dépendances installées par une version le
+**Installe la version exigée AVANT "npm ci"**, et non après : les dépendances installées par une version le
 sont pour elle, et changer de version derrière expose à des modules natifs incompatibles.
 
-MESURÉ après l'installation : "scripts/verify-workflows.sh" **franchit la garde de version** et entre
-dans ses étapes, là où il s'arrêtait sur sa première ligne. Les harnais exigent en outre la pile
-debout — ils appellent "docker compose" —, donc §2 puis §2.2 avant eux.
+MESURÉ après l'installation : les harnais de vérification **franchissent la garde de version** et
+entrent dans leurs étapes, là où ils s'arrêtaient sur leur première ligne. Ils exigent en outre la
+pile debout — ils appellent "docker compose" —, donc §2 puis §2.2 avant eux.
 
 ### 2.1 ter. LES `verify-*.sh` SONT EXÉCUTABLES ICI — DEUX CONDITIONS, TOUTES DEUX MESURÉES
 
@@ -524,22 +557,35 @@ avant la moindre assertion, sur un binaire que l'hôte ne porte pas :
 export PLAYWRIGHT_CHROMIUM_PATH=/opt/pw-browsers/chromium
 ```
 
-`npm run e2e:ui` reçoit ce chemin ; les harnais ne le posent pas eux-mêmes.
+Les scénarios d'interface reçoivent ce chemin ; les harnais ne le posent pas eux-mêmes.
 
 **2. Libère le port 4173.** La configuration pose `reuseExistingServer: false`. Un `vite preview`
 laissé par une exécution précédente — une série interrompue en laisse un — fait échouer l'étape
 entière sur `http://127.0.0.1:4173 is already used`, ce qui ne dit rien du produit non plus :
 
 ```
-pkill -f vite
+pid=$(ss -ltnp 'sport = :4173' 2>/dev/null | grep -oP 'pid=\K[0-9]+' | head -1)
+[ -n "$pid" ] && kill "$pid"
 ```
 
-**Avec ces deux conditions**, `scripts/verify-administration-arborescence.sh` rend
-`27 contrôles, aucune anomalie` là où il rendait `3 en échec`. Sans elles, un verdict rouge de ces
-harnais ne doit être lu ni comme une régression, ni comme une preuve.
+**Ne jamais employer `pkill -f vite`**, et le motif de cette interdiction est
+mesuré, pas théorique. L'option `-f` fait correspondre la **ligne de commande
+entière** : la commande ne tue donc pas « les serveurs vite », elle tue **tout
+processus dont la ligne mentionne ce mot** — un `grep`, un éditeur, une commande
+d'une autre session qui parle de vite en passant. Relevé le 2026-08-21 sur cette
+machine : `pgrep -af vite` a rendu le shell d'une session voisine, qui ne servait
+rien du tout.
 
-**Budget, mesuré aussi.** Ces harnais rejouent des suites E2E complètes : plusieurs dépassent
-quatre minutes chacun, et il y en a **cinquante**. La série entière ne tient pas dans une session
+Sur une machine partagée, la version ci-dessus ne vise **que ce qui tient
+réellement le port** — c'est-à-dire la seule chose qui gêne. L'intention de la
+règle a toujours été « libérer 4173 s'il est tenu », jamais « faire le ménage sur
+la machine ».
+
+**Avec ces deux conditions**, les harnais de vérification rendent un verdict qui parle du produit.
+Sans elles, un verdict rouge ne doit être lu ni comme une régression, ni comme une preuve.
+
+**Budget.** Ces harnais rejouent des suites E2E complètes : plusieurs dépassent quatre minutes
+chacun, et un dépôt mûr en compte plusieurs dizaines. La série entière ne tient pas dans une session
 d'une heure. Exécute d'abord ceux que ton changement touche, puis autant du reste que le temps le
 permet, et dis exactement ce que tu n'as pas exécuté (§4.3).
 
@@ -547,19 +593,13 @@ permet, et dis exactement ce que tu n'as pas exécuté (§4.3).
 
 Ensuite seulement :
 
-```
-./runDev.sh
-```
+Lance la pile avec la commande de démarrage que le dépôt documente.
 
 Le premier démarrage peut être long, notamment à cause de la construction et du téléchargement des images.
 
-Puis applique obligatoirement le seed :
+Puis applique obligatoirement le seed, avec la commande que le dépôt documente pour cela.
 
-```
-supabase/seed/apply-seed.sh
-```
-
-Le seed n'est PAS appliqué par "runDev.sh".
+Le seed n'est en général PAS appliqué par la commande de démarrage : vérifie-le plutôt que de le supposer.
 
 Sans lui, aucun compte de démonstration ne se connecte.
 
@@ -569,7 +609,7 @@ Vérifie ensuite :
 docker compose ps
 ```
 
-Les 18 services doivent être "healthy" avant de lancer les preuves qui nécessitent la pile.
+Tous les services déclarés doivent être "healthy" avant de lancer les preuves qui nécessitent la pile.
 
 **La pile debout, tu vas directement au §4 pour choisir ton unité, puis au §3.2 pour travailler.**
 Tu ne lances aucune preuve maintenant — voir le §2.3 juste en dessous, qui dit pourquoi.
@@ -588,15 +628,18 @@ modifié. Ce temps appartient au produit (§4.2 bis).
 Les preuves du dépôt sont, pour mémoire, et **elles s'exécutent aux moments définis au §3.2** :
 
 ```
-npm run test:sql        npm run e2e:api        npm run e2e:ui        npm run e2e:mail
-npm run test:unit       npm run typecheck      npm run build         pytest
-scripts/verify-*.sh
+tests de base de données     tests d'API        E2E d'interface       E2E de messagerie
+tests unitaires              typecheck          build                 harnais de vérification
 ```
+
+Les commandes exactes sont celles que le dépôt documente. Tu les relèves dans son "README.md",
+son "Makefile" ou son "package.json" ; tu n'en inventes aucune et tu n'en reprends aucune d'un
+autre projet.
 
 Deux moments, et deux seulement :
 
-- **pendant le travail** — uniquement les preuves de TON unité : sa suite pgTAP, ses scénarios
-  d'API, son harnais dédié. Ciblées, courtes, rejouées autant de fois qu'il le faut ;
+- **pendant le travail** — uniquement les preuves de TON unité : sa suite de tests de base de
+  données, ses scénarios d'API, son harnais dédié. Ciblées, courtes, rejouées autant de fois qu'il le faut ;
 - **en fin de session** — la campagne complète, une seule fois, suivie de la boucle de correction
   du §4.3.
 
@@ -784,8 +827,8 @@ migration qui s'applique, un écran qui rend, un module qui compile —, tu comm
 **Tu n'attends pas d'avoir prouvé pour pousser.** Une session interrompue à la minute 40 doit laisser
 derrière elle du code poussé, pas un arbre de travail perdu (§0).
 
-**6. Tu prouves TON unité, et elle seule, pendant que tu codes.** Sa suite pgTAP, ses scénarios
-d'API, son harnais dédié, ses captures. Ce sont des exécutions courtes et ciblées, que tu rejoues
+**6. Tu prouves TON unité, et elle seule, pendant que tu codes.** Sa suite de tests de base de
+données, ses scénarios d'API, son harnais dédié, ses captures. Ce sont des exécutions courtes et ciblées, que tu rejoues
 autant de fois que nécessaire. **Tu ne lances pas la campagne complète ici.**
 
 **7. En fin de session seulement, tu lances la campagne complète**, une fois — et tu entres dans la
@@ -793,7 +836,7 @@ boucle de correction du §4.3.
 
 **Ce que cette séquence interdit explicitement**, parce que chacune de ces erreurs a été observée :
 
-- lancer `npm run test:sql`, `e2e:*` ou l'ensemble des `verify-*.sh` **avant d'avoir choisi une
+- lancer l'ensemble des suites de tests et des harnais de vérification **avant d'avoir choisi une
   unité** — quarante à soixante-dix minutes dépensées avant le premier geste utile ;
 - attendre que tout soit prouvé pour committer — une session interrompue ne laisse alors rien ;
 - coder une fonctionnalité neuve sans spécification écrite et committée d'abord ;
@@ -904,10 +947,13 @@ committé et poussé (§3.2, point 5) : ce qui suit ne peut donc plus rien te fa
 **1. Lance la campagne complète, une fois :**
 
 ```
-npm run test:sql        npm run e2e:api        npm run e2e:ui        npm run e2e:mail
-npm run test:unit       npm run typecheck      npm run build         pytest
-scripts/verify-*.sh
+tests de base de données     tests d'API        E2E d'interface       E2E de messagerie
+tests unitaires              typecheck          build                 harnais de vérification
 ```
+
+Les commandes exactes sont celles que le dépôt documente. Tu les relèves dans son "README.md",
+son "Makefile" ou son "package.json" ; tu n'en inventes aucune et tu n'en reprends aucune d'un
+autre projet.
 
 **2. Entre dans la BOUCLE DE CORRECTION.** Tant qu'il reste une anomalie **imputable à ton
 changement** :
@@ -933,12 +979,12 @@ exécuté**. Une campagne partielle annoncée comme telle vaut mieux qu'une sess
 
 **3. Écris dans "docs/JOURNAL.md" une entrée datée disant :**
 
-   - ce que tu as mesuré ;
-   - ce que tu as modifié ;
-   - ce que tu as vérifié ;
-   - ce qui a échoué ;
-   - où tu t'arrêtes ;
-   - où l'exécution suivante doit reprendre.
+- ce que tu as mesuré ;
+- ce que tu as modifié ;
+- ce que tu as vérifié ;
+- ce qui a échoué ;
+- où tu t'arrêtes ;
+- où l'exécution suivante doit reprendre.
 
 **4. Mets "docs/BACKLOG.md" au véritable état de l'unité**, et nomme précisément les preuves qui
 restent à exécuter.
@@ -968,7 +1014,63 @@ Il couvre l'INTÉGRALITÉ de la session, pas seulement son dernier geste. La HI�
 4. En bref, sans développer : les migrations, les entrées de "docs/INCONSISTENCY_REPORT.md" consignées, et tout arbitrage désormais attendu du responsable.
 5. Le commit final et la confirmation que "origin/main" le porte.
 
+Lorsque la session conclut à l'arrêt définitif de la boucle, ce compte rendu prend la
+forme du §4.5 : il reste celui décrit ici, et il dit EN PREMIÈRE LIGNE que la tâche
+automatique est arrêtée.
+
 Une session qui n'a livré AUCUN code reste soumise à ce compte rendu, et le dit en PREMIÈRE ligne, sans détour : l'absence de fonctionnalité codée est l'information la plus importante de ce compte rendu-là, pas un fait noyé après le travail documentaire (§4.2 bis).
+
+### 4.5. CONDITION D'ARRÊT DÉFINITIF DE LA TÂCHE PLANIFIÉE
+
+La boucle planifiée n'est pas éternelle. Elle a une FIN, et cette fin est un geste
+explicite que tu poses toi-même.
+
+**Tu arrêtes définitivement la tâche planifiée dans exactement deux cas :**
+
+1. **Le backlog est terminé** : plus aucune unité `[ ]` ni `[~]` dans
+   `docs/BACKLOG.md`, autrement dit toute unité restante est `[x]` avec sa
+   Definition of Done satisfaite. Une unité laissée `[~]` NE compte pas comme
+   terminée, et n'autorise donc pas l'arrêt à ce titre.
+2. **Tu n'as plus aucune option pour avancer** : tout ce qui reste est bloqué par
+   quelque chose que la session ne peut pas fournir — un matériel absent, un
+   service extérieur indisponible, un arbitrage du responsable non rendu, un
+   accès manquant. « Difficile » n'est pas « bloqué » : avant de conclure à
+   l'arrêt, tu dois avoir vérifié une par une TOUTES les unités restantes et
+   nommé, pour chacune, ce qui l'empêche précisément.
+
+Tant que l'un des deux cas n'est pas ÉTABLI, tu ne t'arrêtes pas : tu choisis une
+unité et tu travailles, comme au §4.2.
+
+**La procédure d'arrêt, dans cet ordre, sans en sauter une étape :**
+
+1. **Arrête la tâche planifiée elle-même.** C'est le premier geste, pas le
+   dernier : une session qui rédige son compte rendu d'arrêt sans couper la
+   boucle sera relancée à l'heure suivante et refera le même constat. Selon
+   l'outillage qui porte la tâche, cela signifie supprimer le travail planifié
+   — `CronDelete` avec l'identifiant de la tâche, arrêt de la boucle dynamique,
+   ou suppression de la tâche planifiée dans le nuage. Si plusieurs mécanismes
+   la portent, coupe-les TOUS ; si l'outillage ne permet pas de couper toi-même,
+   dis-le explicitement et demande au responsable de le faire.
+2. **Mets le dépôt à jour et committe une dernière fois** : `docs/JOURNAL.md`
+   porte une entrée d'arrêt datée, `docs/BACKLOG.md` porte l'état RÉEL de chaque
+   unité, et tout blocage nommé au point 2 ci-dessus est écrit là où quelqu'un le
+   cherchera — dans l'unité concernée, pas seulement dans le journal.
+3. **Pousse ce commit sur `origin/main`** et satisfais la garde du §5.
+4. **Produis un compte rendu final d'ARRÊT**, qui reprend le §4.4 et y ajoute,
+   clairement et sans détour :
+   - **que la tâche automatique est ARRÊTÉE**, dit en toutes lettres et en
+     PREMIÈRE ligne du compte rendu, pas noyé au milieu ;
+   - lequel des deux cas ci-dessus l'a déclenché ;
+   - où en est le projet : ce qui est livré et prouvé, ce qui ne l'est pas ;
+   - ce qui RESTE en attente, unité par unité ;
+   - ce qui a EMPÊCHÉ d'aller plus loin, précisément, pour chaque unité restante,
+     et ce qu'il faudrait pour la débloquer — un matériel, un accès, un
+     arbitrage ;
+   - le commit final et la confirmation que `origin/main` le porte.
+
+N'arrête JAMAIS la tâche en silence, et ne la laisse JAMAIS tourner sur un projet
+qui n'a plus rien à avancer : les deux font perdre du temps, l'un en cachant la
+fin, l'autre en la répétant indéfiniment.
 
 ## 5. RÈGLE FINALE, AUCUNE EXCEPTION
 
