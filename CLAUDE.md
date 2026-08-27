@@ -6,6 +6,10 @@ Ce fichier est lu au début de chaque session.
 
 Il définit les conventions durables du responsable du projet, "martino.bettucci@gmail.com".
 
+**Ce fichier est une référence GLOBALE. Il doit rester strictement indépendant de tout projet particulier.** Il ne doit contenir aucun nom de produit, aucune terminologie métier, aucun identifiant de ticket, aucune commande propre à un dépôt, aucun chemin spécifique, aucune architecture locale, aucune donnée seedée, aucun compte de démonstration, aucune référence documentaire propre à un produit ni aucune exception issue d'un projet précis.
+
+Toute information qui ne peut pas être comprise ou appliquée sans connaître le projet courant appartient au fichier compagnon `CLAUDE_PROJECT.md` du dépôt, jamais à ce fichier. Pour l'UI et l'UX, les références ou exceptions propres au produit appartiennent à `docs/DESIGN_SYSTEM_APP.md`, jamais à `docs/DESIGN_SYSTEM.md`.
+
 Ces règles s'appliquent par défaut à tous les projets, sauf lorsqu'un fichier local documente explicitement une contrainte différente imposée par le projet, son infrastructure ou son environnement d'exécution.
 
 Les règles locales peuvent préciser le fonctionnement d'un projet, mais elles ne doivent jamais réduire les exigences de qualité, de sécurité, de documentation ou de vérification définies ici.
@@ -33,7 +37,8 @@ Avant toute modification significative :
 - inspecter la structure du dépôt ;
 - identifier les commandes de lancement, de build et de test ;
 - lire les documents présents dans "docs/" et s'il n'existe pas l'initialiser puis le maintenir;
-- identifier les conventions locales du projet ;
+- lire `CLAUDE_PROJECT.md` lorsqu'il existe ;
+- identifier les conventions locales du projet sans les recopier dans ce fichier global ;
 - vérifier l'état Git courant ;
 - comprendre les composants, services, données et flux concernés par la demande.
 
@@ -121,18 +126,25 @@ Principes visuels par défaut :
 
 Design system
 
-Tout projet comportant une interface maintient un fichier :
+Tout projet comportant une interface maintient les deux fichiers jumeaux :
 
-"docs/DESIGN_SYSTEM.md"
+- `docs/DESIGN_SYSTEM.md` ;
+- `docs/DESIGN_SYSTEM_APP.md`.
 
-Avant toute modification, revue ou commit qui touche l'UI ou l'UX, lire
-**intégralement** le fichier local "docs/DESIGN_SYSTEM.md". Vérifier ensuite le
-diff UI/UX contre ce document avant de commit. Cette lecture et cette
-vérification sont obligatoires même pour une correction visuelle jugée
-mineure ; le commit maintient le design system dans le même changement si une
-nouvelle règle, un nouveau composant ou un écart est introduit.
+`docs/DESIGN_SYSTEM.md` est la référence **GLOBALE** P2Enjoy. Il définit uniquement les règles transversales réutilisables sans connaître le métier du projet. Il ne doit contenir **AUCUNE TRACE D'UN PROJET PRÉCIS** : aucun nom de produit, aucune entité métier, aucune arborescence d'écran propre au produit, aucun ticket, aucune mesure ou capture locale, aucun chemin documentaire propre au dépôt, aucune exception et aucun exemple permettant d'identifier le projet qui a motivé une règle.
 
-Ce document décrit au minimum :
+`docs/DESIGN_SYSTEM_APP.md` est son compagnon **LOCAL**. Il contient l'application du socle au projet courant : terminologie métier, architecture particulière, composants spécifiques, références vers les spécifications locales, mesures et preuves, captures de référence, choix responsive propres au produit et exceptions documentées au socle global.
+
+Avant toute modification, revue ou commit qui touche l'UI ou l'UX, lire **intégralement les deux fichiers** lorsqu'ils existent. Vérifier ensuite le diff UI/UX contre les deux références avant de commit. Cette lecture et cette vérification sont obligatoires même pour une correction visuelle jugée mineure.
+
+Lorsqu'une nouvelle décision UI ou UX apparaît :
+
+- si elle est réutilisable sans connaître le projet, elle peut être ajoutée à `docs/DESIGN_SYSTEM.md` ;
+- si elle dépend du métier, de l'architecture, des données, des écrans ou d'une contrainte du projet, elle est ajoutée à `docs/DESIGN_SYSTEM_APP.md` ;
+- si le projet déroge au socle global, l'écart est documenté dans `docs/DESIGN_SYSTEM_APP.md` avec sa justification et, lorsqu'elle existe, sa preuve ;
+- une règle locale ne doit jamais être copiée dans le global sous prétexte qu'elle a permis de découvrir un principe général : seul le principe abstrait et désinfecté peut remonter dans `docs/DESIGN_SYSTEM.md`.
+
+Le document global décrit au minimum :
 
 - les couleurs ;
 - les tokens ;
@@ -142,8 +154,7 @@ Ce document décrit au minimum :
 - les états interactifs ;
 - les règles responsive ;
 - les règles d'accessibilité ;
-- les conventions d'icônes ;
-- les éventuels écarts propres au projet.
+- les conventions d'icônes.
 
 Utiliser des icônes vectorielles cohérentes, par exemple Lucide.
 
@@ -178,7 +189,7 @@ Les documents suivants doivent exister ou avoir un équivalent clairement identi
 - "README.md" ;
 - "CHANGELOG.md" ;
 - "docs/DAT.md" ;
-- "docs/DESIGN_SYSTEM.md" pour les projets avec interface ;
+- `docs/DESIGN_SYSTEM.md` et `docs/DESIGN_SYSTEM_APP.md` pour les projets avec interface ;
 - "docs/JOURNAL.md" ;
 - "docs/BACKLOG.md" ;
 - "docs/manual.md" ou un dossier "manuals/" lorsque le projet nécessite une documentation utilisateur ;
@@ -197,11 +208,11 @@ styles, générateurs et tests.
 
 - Chaque fichier de code commence par un commentaire de portée fichier au format
   `@spec` qui nomme au minimum l'unité exacte de `docs/BACKLOG.md` ET le ou
-  les fichiers documentaires pertinents avec leur chapitre ou section :
-  `docs/GAME_BOOK.md`, `docs/GAME_BIBLE.md`, `docs/DESIGN_GUIDE.md`, `docs/DAT.md`,
-  `docs/SCHEMA.md`, `docs/DESIGN_SYSTEM.md`, `docs/MANUAL_PLAN.md`, etc.
-  ces fichiers n'existent pas tous forcement, cela est contextuel en fonction du
-  projet (un jeu, une webapp, un serveur, ...)
+  les fichiers documentaires réellement pertinents avec leur chapitre ou section,
+  par exemple `docs/DAT.md`, `docs/SCHEMA.md`, `docs/DESIGN_SYSTEM.md`,
+  `docs/DESIGN_SYSTEM_APP.md` ou la documentation utilisateur du projet lorsqu'elle
+  existe. Les références citées sont contextuelles et correspondent uniquement aux
+  documents effectivement présents et applicables dans le dépôt.
 - Le commentaire de portée fichier couvre explicitement toutes les déclarations,
   fonctions auxiliaires et algorithmes du fichier qui partagent les mêmes
   références. Lorsqu'un fichier met en œuvre plusieurs unités fonctionnelles,
@@ -211,8 +222,10 @@ styles, générateurs et tests.
   les chapitres dont il prouve le contrat. Un test ne référence pas seulement le
   fichier de code testé.
 - Une migration cite `docs/SCHEMA.md` et l'unité fonctionnelle correspondante ;
-  une règle d'interface cite aussi `docs/DESIGN_SYSTEM.md` ; une fonctionnalité
-  visible cite aussi le chapitre concerné du Player Codex (`docs/MANUAL_PLAN.md`).
+  une règle d'interface cite aussi `docs/DESIGN_SYSTEM.md` et, lorsqu'une règle ou
+  une référence locale est concernée, `docs/DESIGN_SYSTEM_APP.md` ; une
+  fonctionnalité visible cite aussi la documentation utilisateur pertinente
+  lorsqu'elle existe.
 - `CHANGELOG.md` et `docs/JOURNAL.md` peuvent compléter la trace, mais ne remplacent
   jamais la spécification ni l'unité de backlog.
 - Aucun code d'une nouvelle fonctionnalité ne peut être écrit tant que son unité
@@ -254,6 +267,38 @@ Règles d'application :
   lui-même est un artefact documentaire à persister, pas seulement une
   narration de conversation ;
 - pousser le commit immédiatement après sa création (cf. §13).
+
+La documentation suit la réalité, y compris quand la réalité s'améliore (règle non négociable du responsable)
+
+La documentation n'est pas un journal d'intentions : elle décrit l'état réel du
+projet à l'instant du commit. Un document qui a cessé d'être vrai est un défaut,
+au même titre qu'un test faux.
+
+Dès qu'un fait change, le document qui le portait est mis à jour DANS LE MÊME
+CHANGEMENT que le fait. Sans exception, et dans les deux sens :
+
+- lorsqu'une décision est remplacée, le document énonce la nouvelle décision et
+  la raison du changement ; il ne conserve pas les deux versions côte à côte ;
+- lorsqu'un élément noté « bloqué » cesse de l'être, la mention de blocage est
+  RETIRÉE, partout où elle figure, et pas seulement là où on l'a écrite en
+  premier ;
+- lorsqu'une incohérence signalée est résolue, elle est RETIRÉE du rapport
+  d'incohérences ; lorsque le rapport devient vide, le fichier lui-même est
+  supprimé du dépôt ;
+- lorsqu'une hypothèse est vérifiée, elle cesse d'être présentée comme une
+  hypothèse ; lorsqu'elle est infirmée, le document qui s'appuyait dessus est
+  corrigé, pas complété d'une note ;
+- lorsqu'une limite connue disparaît, elle sort de la liste des limites connues ;
+- lorsqu'une commande, une variable ou un chemin change, le README et le contrat
+  de déploiement changent dans le même commit.
+
+Une mention périmée coûte plus cher qu'une absence de mention : elle est lue
+comme vraie. Laisser traîner un « bloqué » levé, une incohérence déjà corrigée ou
+une décision abandonnée fait perdre un temps réel à la personne suivante, et fait
+douter de tout le reste du document.
+
+Avant de conclure un chunk, relire les documents que le changement rend faux et
+les corriger. Cette relecture fait partie de la Definition of Done (§17).
 
 README
 
@@ -789,11 +834,15 @@ Une tâche n'est terminée que lorsque toutes les conditions applicables sont sa
 - les données seedées ont été mises à jour ;
 - le README a été mis à jour si nécessaire ;
 - le DAT a été mis à jour si nécessaire ;
-- le design system a été mis à jour si nécessaire ;
+- `docs/DESIGN_SYSTEM.md` a été mis à jour si une règle réellement globale a évolué ;
+- `docs/DESIGN_SYSTEM_APP.md` a été mis à jour si une règle, une référence ou un écart propre au projet a évolué ;
 - le manuel utilisateur a été mis à jour si nécessaire ;
 - le changelog a été mis à jour sous "[Non publié]" ;
 - le contrat de déploiement a été mis à jour si nécessaire ;
 - le backlog reflète le véritable état ;
+- les documents que le changement rend faux ont été relus et corrigés : mentions
+  de blocage levées retirées, incohérences résolues supprimées du rapport,
+  hypothèses vérifiées requalifiées, limites connues disparues retirées ;
 - chaque fichier et unité d'implémentation possède ses commentaires de
   traçabilité `@spec` / `@verifies` vers le backlog et les chapitres pertinents ;
 - les modifications distantes ont été récupérées ;
@@ -1005,13 +1054,15 @@ Une instruction locale ne peut pas autoriser :
 - la déclaration mensongère d'une tâche comme terminée ;
 - la suppression des tests pour obtenir artificiellement un résultat vert.
 
-## 27. Bloc local facultatif
+## 27. Séparation entre conventions globales et projet local
 
-Chaque dépôt peut ajouter à la fin de ce fichier une section :
+`CLAUDE.md` reste une référence globale. Il ne reçoit jamais de bloc « Spécificités du projet » et ne doit pas être personnalisé avec des éléments propres au dépôt courant.
 
-## Spécificités du projet
+Lorsqu'un dépôt possède des contraintes ou conventions qui lui sont propres, elles sont documentées dans un fichier compagnon :
 
-Cette section peut décrire :
+`CLAUDE_PROJECT.md`
+
+Ce fichier local peut décrire notamment :
 
 - la stack effectivement utilisée ;
 - les commandes propres au dépôt ;
@@ -1027,10 +1078,11 @@ Cette section peut décrire :
 - les procédures de déploiement ;
 - les exceptions techniques justifiées.
 
-Cette section doit rester limitée aux informations réellement spécifiques au projet.
+Le fichier `CLAUDE_PROJECT.md` complète `CLAUDE.md` sans le recopier. Une règle suffisamment générale pour être utile à plusieurs dépôts doit être abstraite de tout contexte local avant d'être remontée dans `CLAUDE.md`. La version globale ne conserve ni le nom, ni les exemples, ni les tickets, ni les preuves, ni les chemins particuliers du projet qui a permis de découvrir cette règle.
 
-Toute règle suffisamment générale pour être utile à plusieurs dépôts doit être remontée dans les conventions générales plutôt que dupliquée dans les blocs locaux.
+Pour les interfaces, la même séparation s'applique :
 
-## Spécificités du projet
+- `docs/DESIGN_SYSTEM.md` contient le socle global ;
+- `docs/DESIGN_SYSTEM_APP.md` contient l'application, les références et les exceptions du projet courant.
 
-Lire et maintenir le fichier README.md
+Une information spécifique au produit ne doit jamais être dupliquée dans les fichiers globaux.
