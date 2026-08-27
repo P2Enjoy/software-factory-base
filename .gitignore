@@ -1,69 +1,250 @@
-# Prerequisites
-*.d
+# =============================================================================
+# Generic .gitignore for Python, C/C++, Node.js and Deno
+# =============================================================================
 
-# Compiled Object files
-*.slo
-*.lo
+# -----------------------------------------------------------------------------
+# OS / editor temporary files
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# -----------------------------------------------------------------------------
+# Logs / runtime files
+# -----------------------------------------------------------------------------
+*.log
+*.pid
+*.pid.lock
+*.seed
+*.stackdump
+
+# =============================================================================
+# Shared build / generated output
+# =============================================================================
+[Bb]uild/
+build-*/
+dist/
+out/
+.tmp/
+tmp/
+temp/
+.cache/
+
+# =============================================================================
+# Python
+# =============================================================================
+
+# Bytecode / interpreter cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Native extensions
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+__pypackages__/
+
+# Packaging
+.eggs/
+*.egg
+*.egg-info/
+pip-wheel-metadata/
+wheels/
+
+# Tests / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
+.nox/
+
+# Linters / type checkers
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter / Cython
+.ipynb_checkpoints/
+cython_debug/
+
+# =============================================================================
+# C / C++
+# =============================================================================
+
+# Dependency / object files
+*.d
 *.o
 *.obj
+*.lo
+*.slo
 
-# Precompiled Headers
+# Precompiled headers
 *.gch
 *.pch
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
+# Static libraries
 *.a
 *.lib
+*.la
+*.lai
 
-# Executables
+# Shared libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+
+# Executables / application bundles
 *.exe
 *.out
 *.app
 
-# Build directories
-build/
-Build/
-build-*/
+# Linker / debugger artifacts
+*.ilk
+*.pdb
+*.dwo
+*.dwp
+*.su
 
-# CMake generated files
+# GCC / Clang profiling and coverage
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+
+# CMake
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 install_manifest.txt
+CTestTestfile.cmake
 compile_commands.json
+CMakeUserPresets.json
+_deps/
+cmake-build-*/
 
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
+# Ninja
+.ninja_deps
+.ninja_log
+build.ninja
+rules.ninja
 
-# vcpkg
+# Meson
+meson-private/
+meson-logs/
+meson-info/
+
+# Autotools generated state
+.deps/
+.libs/
+autom4te.cache/
+
+# Package managers
 vcpkg_installed/
 
-# debug information files
-*.dwo
-
-# test output & cache
+# CTest
 Testing/
-.cache/
+
+# =============================================================================
+# Node.js
+# =============================================================================
+
+# Dependencies
+node_modules/
+
+# Native addons
+*.node
+
+# Package-manager caches
+.npm/
+.pnpm-store/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Package-manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# TypeScript incremental state
+*.tsbuildinfo
+
+# Tool / framework caches and generated output
+.parcel-cache/
+.turbo/
+.vite/
+.next/
+.nuxt/
+.svelte-kit/
+.angular/
+.cache-loader/
+.eslintcache
+.stylelintcache
+.nyc_output/
+lib-cov/
+
+# =============================================================================
+# Deno
+# =============================================================================
+
+# Local DENO_DIR when configured inside the repository
+.deno/
+
+# Common local Deno build / coverage output
+.deno-build/
+coverage/
+
+# Keep these versioned when used:
+# deno.json
+# deno.jsonc
+# deno.lock
+# vendor/
+
+# =============================================================================
+# Local environment / secrets
+# =============================================================================
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# =============================================================================
+# Intentionally NOT ignored
+# =============================================================================
+# Makefile
+# CMakeLists.txt
+# CMakePresets.json
+# package.json
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
+# deno.json
+# deno.jsonc
+# deno.lock
+# pyproject.toml
+# poetry.lock
+# uv.lock
+# requirements*.txt
