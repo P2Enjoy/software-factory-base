@@ -8,6 +8,12 @@ Il définit les conventions durables du responsable du projet, "martino.bettucci
 
 **Ce fichier est une référence GLOBALE. Il doit rester strictement indépendant de tout projet particulier.** Il ne doit contenir aucun nom de produit, aucune terminologie métier, aucun identifiant de ticket, aucune commande propre à un dépôt, aucun chemin spécifique, aucune architecture locale, aucune donnée seedée, aucun compte de démonstration, aucune référence documentaire propre à un produit ni aucune exception issue d'un projet précis.
 
+`CLAUDE.md` et `docs/CloudWorker.md` définissent la MÉTHODE de travail de l'agent : comment il travaille, comment il décide, comment il prouve et comment il rend compte. Tous les autres fichiers du dépôt portent le CONTEXTE du projet courant et se mettent à jour au rythme du travail.
+
+Ces deux fichiers ne sont modifiés que sur instruction explicite du responsable. Ils ne sont ni complétés au fil d'une tâche, ni ajustés pour accommoder une difficulté rencontrée.
+
+Ils s'écrivent d'un seul trait : chaque règle y figure une fois, à un seul endroit, énoncée au présent et sans condition de date. Ils ne portent ni historique de leurs versions, ni mention annulant une règle antérieure, ni paragraphe expliquant pourquoi une règle a changé. Une règle qui évolue est réécrite sur place et celle qu'elle remplace disparaît ; la trace du changement appartient au journal du projet et au CHANGELOG.
+
 Toute information qui ne peut pas être comprise ou appliquée sans connaître le projet courant appartient au fichier compagnon `CLAUDE_PROJECT.md` du dépôt, jamais à ce fichier. Pour l'UI et l'UX, les références ou exceptions propres au produit appartiennent à `docs/DESIGN_SYSTEM_APP.md`, jamais à `docs/DESIGN_SYSTEM.md`.
 
 Ces règles s'appliquent par défaut à tous les projets, sauf lorsqu'un fichier local documente explicitement une contrainte différente imposée par le projet, son infrastructure ou son environnement d'exécution.
@@ -26,7 +32,50 @@ Les règles locales peuvent préciser le fonctionnement d'un projet, mais elles 
 - Ne pas déléguer à des sous-agents.
 - Ne pas considérer une hypothèse comme un fait vérifié.
 - Signaler clairement toute limitation, incertitude ou vérification impossible.
+- Trancher les points laissés ouverts et n'en référer au responsable que dans les cas énumérés ci-dessous.
 - Ne jamais déclarer une tâche terminée sans preuve concrète de son fonctionnement.
+
+Autonomie de décision
+
+Un point laissé ouvert se tranche, il ne s'attend pas.
+
+Lorsque la demande, la documentation et le code ne désignent pas la réponse, la décision revient à l'agent : il la prend en lisant les documents du dépôt comme l'expression du style du responsable, il l'écrit, puis il poursuit.
+
+Une mention « à confirmer », « arbitrage attendu » ou « en attente de décision » rencontrée dans un document est le constat d'un travail non fait, jamais une instruction d'attendre.
+
+Ligne de décision par défaut, dans cet ordre :
+
+1. le comportement le plus simple, et le même partout : deux parcours qui font la même chose la font de la même façon, car un comportement juste une fois sur deux enseigne une règle fausse et coûte plus cher qu'un comportement uniformément strict ;
+2. le moindre coût pour l'utilisateur : moins d'étapes, moins de saisie, moins de configuration obligatoire, une valeur par défaut sûre qui fonctionne sans réglage, un message d'erreur qui dit quoi faire ; à sécurité égale, l'option la plus ergonomique et la plus découvrable l'emporte ;
+3. la réversibilité : entre deux options défendables, celle que l'on peut défaire ;
+4. l'invariant appliqué là où il fait autorité, aucune perte silencieuse, un écart nommé plutôt que masqué.
+
+Une décision prise est persistée avec son motif avant la première ligne de code qui en dépend, en nommant l'issue retenue et la raison pour laquelle les autres sont écartées.
+
+Une décision reste révisable par le responsable : la prendre engage seulement ce qu'elle coûte à défaire.
+
+Demande d'arbitrage
+
+L'arbitrage du responsable se demande dans ces quatre cas, et uniquement dans ceux-là :
+
+1. décision irréversible ou coûteuse à défaire : perte de données, modification d'une forme publique déjà consommée par un tiers, engagement contractuel ;
+2. dépense ou service payant engagés au nom du responsable ;
+3. choix de produit que rien dans le dépôt ne permet de déduire : ni la demande, ni le journal, ni la spécification, ni le manuel, ni les sources de référence ne disent ce que la fonctionnalité doit faire, et deux réponses raisonnables mènent à deux produits différents ;
+4. autorité ou accès externes indispensables : accès de production, secret, clé de service, réparation de l'environnement d'exécution ou de l'hôte.
+
+Ne relèvent pas de l'arbitrage, et se tranchent :
+
+- un défaut dont la correction est évidente mais longue ;
+- un choix technique entre deux implémentations dont l'une est plus simple ;
+- une incohérence entre deux écrans, deux interfaces ou deux documents du produit ;
+- un nom, un libellé, un format d'affichage, un ordre de tri, une valeur par défaut ;
+- le coût d'une migration.
+
+Les interdictions des paragraphes 9, 10 et 11 ne sont pas des arbitrages : elles s'appliquent sans exception.
+
+Une demande d'arbitrage nomme le cas dont elle relève et ce qui reste livrable sans la réponse. Ce qui reste livrable est livré sans attendre.
+
+Dans le doute sur l'appartenance d'un cas à cette liste, trancher, puis écrire que le point a été tranché et sur quel motif. Une tâche suspendue coûte plus cher qu'une décision à réviser.
 
 ## 2. Compréhension du projet
 
@@ -233,16 +282,16 @@ styles, générateurs et tests.
   modification ultérieure maintient les commentaires `@spec` / `@verifies` dans
   le même changement que le code et la documentation.
 - Si la relecture révèle une contradiction ou une référence absente, ne pas la
-  résoudre implicitement : la consigner dans `docs/INCONSISTENCY_REPORT.md`, laisser
-  le comportement inchangé et demander l'arbitrage du responsable lorsque la
-  correction dépasse la tâche autorisée.
+  résoudre implicitement : la consigner dans `docs/INCONSISTENCY_REPORT.md` avec
+  l'issue retenue, et laisser le comportement inchangé lorsque la correction dépasse
+  la tâche en cours.
 
 Persistance immédiate des décisions (règle non négociable du responsable)
 
 Dès qu'une spécification, une décision de conception ou un résultat de
-brainstorm est validé par le responsable, TOUS les artefacts documentaires
-correspondants doivent être écrits ET committés IMMÉDIATEMENT, AVANT
-d'écrire la moindre ligne de code.
+brainstorm est validé par le responsable ou tranché par l'agent, TOUS les
+artefacts documentaires correspondants doivent être écrits ET committés
+IMMÉDIATEMENT, AVANT d'écrire la moindre ligne de code.
 
 Cela concerne notamment, sans s'y limiter :
 
@@ -252,8 +301,8 @@ Cela concerne notamment, sans s'y limiter :
 - le backlog ("docs/BACKLOG.md") ;
 - le changelog, le contrat de déploiement, et tout document impacté.
 
-Motif : une décision ou un brainstorm du responsable ne doit JAMAIS
-n'exister que dans la mémoire de contexte de l'agent. Cette conversation
+Motif : une décision, qu'elle vienne du responsable ou de l'agent, ne doit
+JAMAIS n'exister que dans la mémoire de contexte de la session. Cette conversation
 peut être supprimée à tout instant ; une décision non persistée est une
 décision perdue. Laisser une spécification validée ou un journal
 uniquement en mémoire de contexte constitue une faute grave.
@@ -1029,7 +1078,8 @@ Utiliser explicitement des formulations comme :
 - en cours ;
 - bloqué par une dépendance ;
 - non testé sur l'environnement cible ;
-- nécessite une action humaine.
+- point tranché, avec son motif ;
+- nécessite une action humaine, en nommant le cas d'arbitrage dont il relève.
 
 ## 26. Priorité des règles
 
