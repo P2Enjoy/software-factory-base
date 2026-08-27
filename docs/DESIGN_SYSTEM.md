@@ -6,11 +6,31 @@ Référence maîtresse pour l’interface des applications P2Enjoy. Elle dérive
 
 Tout changement d’interface doit être vérifié contre ce document avant commit.
 
+## Périmètre impératif : socle global uniquement
+
+**`DESIGN_SYSTEM.md` est GLOBAL à toutes les applications P2Enjoy. Il ne doit contenir AUCUNE trace d’un projet précis.**
+
+Cette interdiction couvre notamment :
+
+* le nom d’un produit, d’un projet ou d’une application ;
+* une entité métier propre à un projet ;
+* un nom d’écran, d’onglet, de route, de section ou de commande propre à un produit ;
+* une architecture fonctionnelle particulière ;
+* un état, un quota, une mesure, une valeur, une terminologie ou un comportement propre au métier courant ;
+* un identifiant de ticket, de backlog ou de décision ;
+* une capture, un chemin de preuve ou un résultat de test propre à un dépôt ;
+* une exception décidée pour une seule application ;
+* un exemple qui ne peut être compris qu’en connaissant le projet ayant servi à produire la règle.
+
+Le test d’admission est simple : **une règle ou un exemple ne reste ici que s’il peut être compris, appliqué et réutilisé sans connaître le projet courant**. Dans le cas contraire, il appartient au fichier jumelé `docs/DESIGN_SYSTEM_APP.md`.
+
+`DESIGN_SYSTEM_APP.md` est l’extension locale obligatoire dès qu’un projet possède des références, décisions, terminologies, composants, mesures ou exceptions spécifiques. Il référence les sections de ce socle au lieu de les recopier.
+
 Lorsqu’une règle nouvelle apparaît :
 
-* si elle est applicable à plusieurs applications, elle est ajoutée ici ;
-* si elle relève du métier ou d’un produit particulier, elle reste dans la documentation du projet ;
-* si une application doit déroger à une règle commune, l’écart est documenté dans sa propre section ou son propre fichier d’extension, avec justification, date et preuve lorsque celle-ci existe.
+* si elle est réutilisable entre plusieurs applications sans connaître leur métier, elle est ajoutée ici ;
+* si elle relève du métier, du produit ou de l’implémentation du projet courant, elle est ajoutée à `DESIGN_SYSTEM_APP.md` ;
+* si une application doit déroger à une règle commune, l’écart est documenté uniquement dans `DESIGN_SYSTEM_APP.md`, avec justification, date et preuve lorsque celle-ci existe.
 
 Le design system définit **comment une information ou une interaction doit être représentée**. Il ne définit pas les règles métier qui décident quelles informations, permissions, transitions ou données existent.
 
@@ -64,6 +84,38 @@ Tout état porté par une couleur doit également être identifiable par au moin
 * icône ;
 * forme ;
 * attribut ARIA adapté.
+
+## 1.5 bis L’écran nomme, le manuel explique
+
+Un écran d’administration affiche des **valeurs** et des **noms**. Il ne porte pas
+le raisonnement qui a conduit à les produire.
+
+Ce qui reste à l’écran :
+
+* la valeur, son unité, et ce à quoi elle se rapporte ;
+* le nom de ce qui la commande — un réglage, une variable, une source ;
+* le mot exact qui la qualifie lorsqu’elle est ambiguë : « plafond », « réservé »,
+  « alloué », « non mesuré ».
+
+Ce qui part au manuel :
+
+* **pourquoi** la grandeur existe et ce qui arrive sans elle ;
+* le mode de panne qu’elle évite ;
+* l’historique de la décision, la mesure qui l’a établie, le compromis retenu.
+
+Motif, et il est double. D’abord, une explication de trois lignes par ligne de
+tableau **noie la valeur** : l’écran d’un exploitant se lit en diagonale, sous
+pression, pour trouver un chiffre. Ensuite, une explication écrite deux fois — à
+l’écran et au manuel — **diverge**. Celle de l’écran est la plus difficile à
+maintenir et la plus lue : c’est donc celle qui ment en premier.
+
+Le test : si la phrase reste vraie quand toutes les valeurs de l’écran changent,
+elle n’appartient pas à l’écran. Elle appartient au manuel.
+
+Ce n’est pas une invitation à rendre l’interface muette. Une valeur ambiguë est
+**qualifiée** par son unité et son référentiel lorsque ceux-ci sont nécessaires à sa compréhension, une absence est
+**nommée** (§14.5, §14.6), et un renvoi mène au chapitre du manuel qui explique.
+Le renvoi remplace le paragraphe ; il ne remplace pas le mot juste.
 
 ## 1.6 Les décisions visuelles se vérifient sur l’application exécutée
 
@@ -242,9 +294,14 @@ Structure de référence :
 └──────────────┴──────────────────────────────────────────────────────┘
 ```
 
-Toutes les applications ne sont pas obligées d’utiliser une barre latérale.
+Ce patron n’est pas un exemple parmi d’autres : c’est la forme par défaut. La
+navigation de premier niveau est une barre latérale, celle de second niveau des
+onglets, et la modification d’une section passe par une modale. Les trois degrés
+sont définis au §5.4 ; la surface qu’ils ouvrent l’est au §6.27.
 
-Le patron dépend de la quantité et de la nature de la navigation.
+Une application peut retenir un autre patron — une barre horizontale sur deux ou
+trois destinations, par exemple. Ce n’est alors plus une préférence de mise en
+page mais un **écart**, documenté comme tel (§16), avec le motif qui le justifie.
 
 ## 5.1 Navigation principale
 
@@ -279,6 +336,91 @@ Ordre recommandé de sacrifice :
 4. jamais le titre principal de la route sans autre point d’accès.
 
 Un libellé nécessaire aux technologies d’assistance peut devenir `sr-only`, mais ne doit pas être supprimé.
+
+## 5.4 Les degrés de navigation
+
+Chaque degré a une forme, et cette forme dit à l’utilisateur *ce qui va changer*
+quand il clique.
+
+| Degré | Ce qu’il représente | Forme |
+|---|---|---|
+| 1 | destinations principales du produit | barre latérale |
+| 2 | sous-parties d’une même destination | onglets |
+| 3 | l’objet ouvert depuis une sous-partie | fenêtre, elle-même découpée en sections — et en onglets lorsque l’objet a plusieurs facettes |
+| — | modifier une section, ou lui insérer un élément | modale limitée à cette section (§6.27) |
+
+**Cette hiérarchie est une orientation, pas une loi.** Elle donne la forme par
+défaut de chaque niveau ; elle n’interdit pas un niveau de plus lorsqu’il rend
+l’écran plus clair. Un niveau supplémentaire est légitime lorsqu’il sépare une
+facette réellement distincte d’un objet, sans introduire une navigation redondante.
+
+Ce qui n’est **pas** négociable, en revanche, tient en trois points — et c’est ce
+que la hiérarchie sert à obtenir, pas l’inverse :
+
+1. **Ce qu’on affiche et ce qu’on saisit ne partagent pas la même surface.** Une
+   fenêtre montre ; une modale recueille. Un écran qui mélange les deux ne dit
+   plus ce qui fait foi.
+2. **Une surface a un sujet, et un seul.** Une section, un objet, une modale : à
+   chaque fois, nommable en une phrase. Une surface qu’on ne peut pas nommer est
+   une surface qui en contient deux.
+3. **Une action sensible demande toujours une confirmation explicite** (§6.23).
+   Aucun degré de navigation n’en dispense.
+
+Un niveau de plus n’est jamais gratuit : chacun ajoute un clic, un état à retenir
+et une chose à annoncer. Il se justifie par ce qu’il **sépare**. Un niveau qui ne
+contient qu’un seul panneau ne sépare rien : c’est un clic de plus pour arriver
+au même endroit.
+
+### Degré 1 — barre latérale
+
+Une liste verticale absorbe une destination de plus sans rien sacrifier. Une
+barre horizontale, elle, oblige à arbitrer la largeur dès la cinquième entrée :
+on replie, on abrège, on cache derrière un « plus », et la destination courante
+finit par ne plus être visible. La barre latérale est donc le défaut, y compris
+lorsque le produit n’a encore que deux destinations — c’est précisément le moment
+où le choix ne coûte rien.
+
+Elle suit les règles du §5.1 : identifiable, libellés accessibles conservés même
+lorsqu’elle devient iconographique, `aria-current="page"` sur la destination
+courante, état actif jamais porté par la seule couleur.
+
+Sous 1024 px, elle devient un tiroir ou une barre inférieure. Elle ne devient
+jamais un menu iconographique sans libellés : un pictogramme seul n’est pas une
+navigation, c’est une devinette.
+
+### Degré 2 — onglets
+
+Les sous-parties d’une destination sont des onglets. Visuellement, ce sont des
+onglets dans les deux cas ; la sémantique, elle, dépend de ce qui change
+réellement (§5.2) :
+
+* les panneaux sont **échangés dans la même vue**, sans changement d’URL — patron
+  ARIA `tablist` / `tab` / `tabpanel`, navigation par flèches, `Home` et `End` ;
+* la sous-partie est une **véritable destination** — URL propre, partageable,
+  rechargeable — ce sont des **liens** dans un `nav`, avec
+  `aria-current="page"`, et surtout **pas** un `tablist`.
+
+Le critère est l’URL, jamais l’apparence.
+
+Un onglet change ce que l’on regarde. Il ne modifie jamais l’état des données, et
+ne porte donc aucune action : les actions appartiennent à la section qu’il
+révèle. C’est le point 1 ci-dessus, appliqué à la navigation.
+
+Des onglets peuvent apparaître **deux fois** dans une même arborescence — au
+second degré pour choisir une sous-partie, puis dans la fenêtre d’un objet pour
+choisir une de ses facettes. Ce n’est pas une entorse : ce sont deux sujets
+différents, et chacun est nommable. Ce qui serait une faute, c’est deux rangées
+d’onglets **côte à côte** pour un même sujet.
+
+### Degré 3 — la fenêtre d’un objet
+
+Ouvrir un élément d’une liste ouvre sa **fenêtre** : la surface où cet objet est
+lu, découpée en sections, et découpée en onglets lorsqu’il a plusieurs facettes
+(§6.27).
+
+Une fenêtre est une **destination** dès qu’on peut vouloir la rouvrir, la
+recharger ou en partager l’adresse. Elle a alors une URL, comme n’importe quelle
+destination du §5.2.
 
 ---
 
@@ -518,6 +660,83 @@ Exemple :
 « Requis pour effectuer cette action »
 
 plutôt qu’un simple astérisque dépourvu de contexte.
+
+### Un champ en lecture seule se VOIT
+
+Un contrôle `readonly` qui a l'apparence d'un contrôle modifiable est un piège :
+on clique dedans, on tape, et rien ne se passe — sans qu'aucun message
+n'explique pourquoi.
+
+Un champ en lecture seule porte donc, en plus de l'attribut :
+
+* un fond `--color-bg`, distinct du blanc des contrôles modifiables ;
+* un curseur `default`, jamais le curseur de saisie ;
+* un texte d'aide qui dit **d'où vient la valeur**, pas seulement qu'elle est
+  figée, par exemple « valeur fournie par une source externe » ou « valeur définie par le système ».
+
+Il reste **focusable** au clavier et sélectionnable à la souris : la valeur doit
+pouvoir être lue par une synthèse vocale et copiée. C'est ce qui distingue
+`readonly` de `disabled`, lequel sort du parcours de tabulation et ne convient
+donc pas à une valeur qu'on veut donner à lire.
+
+Le focus entrant d'une modale ignore ces champs et va au premier contrôle
+**modifiable** (§6.27).
+
+## 6.9 bis Curseur ou saisie numérique
+
+Pour une valeur numérique, le **curseur** (`input[type="range"]`) est la forme
+préférée. Il montre la plage en même temps que la valeur, il se règle d'un geste,
+et il rend une valeur hors bornes impossible à produire.
+
+Ce n'est pas une obligation. Le curseur est retenu lorsque les **trois**
+conditions suivantes tiennent ensemble. Dès que l'une manque, la saisie numérique
+est le bon contrôle, et ce n'est pas un pis-aller.
+
+1. **Les deux bornes sont connues et stables.** Connues : l'écran sait dire
+   jusqu'où va la plage. Stables : la borne ne se périme pas entre l'ouverture de
+   l'écran et la soumission. Une borne posée sur une mesure rafraîchissable
+   ferait décider le contrôle à la place du serveur, et sur une photographie.
+2. **Un pas traverse la plage en un nombre de crans atteignables.** Le contrôle
+   mesure au plus 28 rem, soit 448 px : au-delà d'environ **400 crans**, un cran
+   devient plus étroit qu'un pixel et cesse d'être visé au pointeur. Au-delà,
+   c'est une saisie.
+3. **Ce pas ne dégrade pas la granularité que le sens métier exige.** Si le seul
+   pas qui ramène la plage sous 400 crans est plus grossier que ce que la valeur
+   signifie — au point de rendre une valeur courante inatteignable —, c'est une
+   saisie.
+
+Un curseur seul est illisible : la poignée ne dit pas où elle est. Il porte donc
+toujours
+
+* sa **valeur en clair**, formatée avec son unité, à côté de la piste ;
+* `aria-valuetext` avec cette même chaîne, sans quoi la synthèse peut annoncer
+  une valeur nue alors que l’écran affiche une valeur qualifiée par son unité ;
+* ses **deux bornes**, écrites sous la piste ;
+* une phrase disant **d'où vient la borne haute** lorsque celle-ci n'est pas
+  évidente. Une limite sans origine se lit comme un interdit arbitraire.
+
+La borne basse n'est jamais une valeur que le formulaire refusera ensuite : un
+curseur ne doit pas pouvoir produire une valeur invalide (§1.4).
+
+**La valeur affichée est EXACTE sur la grille du curseur.** Un format qui arrondit
+convient à une mesure qu'on lit — la dernière décimale n'y apprend rien — mais pas
+à un réglage qu'on transmet : un curseur qui affiche « 10 unités » pour 10,25 unités
+ment sur ce qu'il va envoyer, et l'utilisateur qui déplace la poignée d'un cran
+voit un chiffre immobile. Choisir le pas, c'est donc aussi choisir un format
+capable de le rendre ; si aucun format ne le peut, c'est le pas qui est mauvais.
+
+Le curseur est nativement utilisable au clavier — flèches, `Origine`, `Fin`,
+`Page préc.` et `Page suiv.` — et cet usage ne se remplace pas par un raccourci
+maison. Sa hauteur cliquable atteint `--size-target` (§4.4).
+
+Contre-exemple générique : un **identifiant numérique**. Même lorsqu’il est composé
+de chiffres et possède des bornes formelles, il ne représente pas une grandeur
+continue que l’on approxime. Une valeur voisine n’est pas « presque » correcte.
+Un identifiant se saisit ou se recopie ; un curseur n’est donc pas le bon contrôle.
+
+Lorsque les bornes ne sont **pas connues à l'exécution** — la mesure qui les donne
+a échoué —, l'écran se rabat sur la saisie et nomme l'absence (§14.6). Il
+n'invente pas une borne pour garder le curseur.
 
 ## 6.10 Cases à cocher
 
@@ -870,7 +1089,41 @@ Lorsqu’une confirmation s’ouvre :
 * `Échap` peut refermer un panneau réversible lorsque pertinent ;
 * l’annulation rend le focus au déclencheur.
 
-## 6.23 Actions destructives
+## 6.23 Actions sensibles et actions destructives
+
+Une action **sensible** demande toujours une confirmation explicite. Est sensible
+une action qui :
+
+* détruit une donnée ou en rend la récupération incertaine ;
+* est difficilement réversible ;
+* produit un effet **au-delà** de ce que la surface courante montre ;
+* porte sur un objet que le produit signale comme **protégé**.
+
+Le dernier cas ne se règle pas par une confirmation : lorsqu’un objet est
+protégé, la protection se **lève d’abord**, par un geste distinct et explicite.
+Une confirmation qui lèverait la protection au passage ne protégerait de rien.
+
+### Une protection ne bloque jamais un geste qui réduit un risque
+
+Il y a une exception, et elle est absolue : une protection est là pour arrêter
+l’erreur, jamais pour retenir un geste qui **diminue** l’exposition — révoquer un
+accès, retirer une clé, couper une publication, fermer une session.
+
+Refuser un tel geste ferait de la protection une vulnérabilité : un accès qui
+devait disparaître survivrait parce que quelqu’un a oublié de désarmer un
+interrupteur ailleurs. Le jour où l’on retire l’accès d’une personne partie, ou
+d’une clé qui a fuité, on ne veut pas d’un obstacle — on veut savoir ce qu’on
+touche.
+
+La protection **informe** alors au lieu de refuser :
+
+* les objets protégés concernés sont **nommés**, pas comptés ;
+* l’action demande sa confirmation explicite, portant cette liste ;
+* elle aboutit sans qu’aucune protection n’ait à être levée, et sans en lever
+  aucune.
+
+Le partage est celui-ci : **ajouter** un accès à un objet protégé se refuse,
+**en retirer un** se confirme.
 
 Une action destructive demande une confirmation explicite lorsqu’elle entraîne une perte ou une modification difficilement réversible.
 
@@ -881,6 +1134,44 @@ Le bouton final utilise la variante destructive.
 Le bouton qui ouvre la confirmation peut rester secondaire lorsque l’action n’est pas encore engagée.
 
 Ne pas utiliser la couleur `danger` simplement parce qu’une action est importante.
+
+### Frapper le nom : quand l'exiger, et quand ne pas l'exiger
+
+Une confirmation ordinaire prouve qu'on a **vu** l'écran. Frapper le nom de
+l'objet prouve qu'on a **lu lequel**. Ce n'est pas la même chose, et la
+différence n'apparaît que dans le cas qui compte : le mauvais objet sélectionné,
+la ligne cliquée trop vite, le script lancé sur le mauvais nom.
+
+**On l'exige quand les trois conditions tiennent ensemble :**
+
+1. l'action est **irréversible** — aucun retour arrière, aucune corbeille ;
+2. elle porte sur **un objet parmi d'autres qui se ressemblent**, donc
+   confondables ;
+3. le nom de l'objet est **court et visible** à l'écran au moment où on le frappe.
+   Faire recopier un identifiant long apprend à le coller sans le lire, ce qui
+   annule tout le bénéfice.
+
+**On ne l'exige pas** dès qu'une seule manque. En particulier :
+
+* jamais sur une action réversible (§6.24) ;
+* jamais sur une action fréquente. Le §6.24 le dit d'une confirmation, et cela
+  vaut à plus forte raison ici : une frappe demandée plusieurs fois par jour
+  devient un réflexe, et un réflexe ne lit plus.
+
+**Contrat.**
+
+* La confirmation dit **quoi frapper**, en montrant le nom attendu.
+* La comparaison est **exacte** : ni espaces de bordure ignorés en silence, ni
+  insensibilité à la casse. Un objet dont le nom ne diffère que par la casse
+  existe, et l'accepter rendrait la frappe inutile précisément là où elle sert.
+* Tant que la frappe ne correspond pas, le bouton d'engagement est **présent et
+  désactivé** — pas absent. Le §9.9 s'applique : l'action existe, elle est
+  indisponible dans un état connu, et la raison reste lisible.
+* Le champ porte son libellé, et l'engagement lui est associé par
+  `aria-describedby` : au clavier et à la synthèse vocale, on doit savoir
+  pourquoi le bouton ne part pas.
+* Une frappe fausse **n'est pas une erreur** et ne prend pas la couleur du refus
+  (§6.9). Rien n'a encore été tenté ; c'est un état d'attente, pas un échec.
 
 ## 6.24 Action réparatrice
 
@@ -942,6 +1233,106 @@ La progression est écrite :
 Une barre graphique peut l’accompagner, mais ne constitue pas l’unique représentation.
 
 Éviter par défaut les visites guidées flottantes et surimpressions lorsque le même objectif peut être atteint par un écran normal, accessible et persistant.
+
+## 6.27 Fenêtre, sections, et modale limitée à une section
+
+C’est le troisième degré du §5.4 : ce que l’on voit une fois qu’on a ouvert un
+objet.
+
+### La fenêtre et ses sections
+
+Une **fenêtre** est la surface de lecture d’un objet. Elle porte **plusieurs
+sections titrées** — jamais une seule, sans quoi elle n’avait pas besoin d’être
+une fenêtre —, rendues en paires terme / valeur (§6.4).
+
+Lorsque l’objet a plusieurs facettes, la fenêtre les répartit en **onglets**, et
+chaque onglet porte à son tour ses sections. Une facette regroupe ce qui se lit
+ensemble : l’identité et les mesures d’un côté, les paramètres, relations,
+activités ou historiques associés de l’autre.
+
+Une fenêtre est en **lecture**. Elle ne porte pas de champ de formulaire
+permanent : elle porte des valeurs, et chaque section porte la ou les commandes
+qui la concernent.
+
+Motif : une fenêtre entièrement éditable ne distingue plus ce qui est *enregistré*
+de ce qui est *en cours de saisie*. Le lecteur ne sait pas ce qui fait foi, et un
+« Enregistrer » unique en bas de page ne dit pas ce qu’il couvre.
+
+Les valeurs absentes suivent le §6.4 et le §14.5 : une absence utile est nommée,
+elle n’est pas rendue par un tiret muet.
+
+### La modale, limitée à une section
+
+Une commande de section — « Modifier », « Ajouter », « Déclarer », « Importer » —
+ouvre une **modale dont le sujet est cette section**, et rien d’autre.
+
+Deux usages, un seul composant :
+
+* **modifier** ce que la section affiche déjà ;
+* **insérer** un élément dans ce que la section liste.
+
+Le choix entre les deux ne change pas la surface, seulement son titre et son
+bouton d’engagement. Ce qui compte est la **portée** : une modale ouverte depuis
+une section ne modifie que le sujet de cette section.
+
+Une modale est chère : elle impose un voile, un piège de focus, une gestion
+d’`Échap` et une restitution du focus. Ce prix se paie pour **recueillir une
+saisie**, pas pour afficher une information.
+
+Contrat, non négociable :
+
+* `dialog` natif ouvert par `showModal()`, ou à défaut `role="dialog"` avec
+  `aria-modal="true"` ;
+* le nom accessible de la modale est **le titre de la section** ;
+* à l’ouverture, le focus entre dans le premier contrôle ;
+* le focus reste dans la modale tant qu’elle est ouverte ;
+* `Échap` la ferme, et la fermeture équivaut à une annulation ;
+* à la fermeture, le focus revient à la commande qui l’a ouverte ;
+* l’arrière-plan est inerte et ne défile pas ;
+* une seule modale à la fois : une modale n’en ouvre pas une autre ;
+* la modale défile dans son propre conteneur ; sous 768 px elle occupe l’écran
+  entier, sans changer de contrat.
+
+Une modale a **un point d’engagement** : un bouton primaire qui nomme l’action.
+L’annulation est secondaire.
+
+Un refus du serveur s’affiche **dans la modale**, près du bouton d’engagement, et
+n’efface aucune saisie. Une modale qui se referme sur un refus ferait perdre le
+travail et cacherait la raison.
+
+Fermer une modale qui contient des modifications non enregistrées demande une
+confirmation, rendue **dans le flux de la modale** (§6.22) — pas dans une seconde
+modale.
+
+### Une action sensible se confirme, même dans une modale
+
+Une modale n’est pas une confirmation, et l’ouvrir n’en tient pas lieu : elle
+recueille une saisie, elle ne démontre pas une intention. Toute action sensible —
+au sens du §6.23 — demande donc sa confirmation explicite, y compris lorsqu’elle
+est engagée depuis une modale.
+
+Cette confirmation est rendue **dans le flux** de la surface qui l’a déclenchée
+(§6.22) : jamais une seconde modale par-dessus la première.
+
+### Ce qui ne prend pas de modale
+
+* un **champ autosauvegardé** (§6.11) — il n’a pas de point d’engagement à isoler ;
+* la **création d’un objet de premier plan** lorsqu’elle possède sa propre
+  destination : une création qui mérite une URL mérite un écran. Insérer un
+  élément **dans** une section reste une modale ;
+* l’**affichage** d’une information — si elle mérite d’être lue, elle mérite une
+  section de la fenêtre.
+
+### Articulation avec le §6.5
+
+Le §6.5 conserve son domaine : l’**en-tête d’une entité**, dont plusieurs valeurs
+s’éditent ensemble, bascule globalement entre lecture et édition sur place.
+
+Le §6.27 vaut pour les **sections** d’une fenêtre : chacune est un sujet distinct,
+avec son propre engagement, donc sa propre modale.
+
+Le critère : plusieurs valeurs d’une **même** identité éditées d’un geste → §6.5 ;
+une section autonome parmi d’autres → §6.27.
 
 ---
 
@@ -1026,7 +1417,9 @@ Cela inclut notamment :
 * tableaux interactifs ;
 * déplacements d’éléments ;
 * confirmations ;
-* actions contextuelles.
+* actions contextuelles ;
+* onglets — flèches, `Home`, `End` lorsque le patron `tablist` s’applique (§5.4) ;
+* modales — focus entrant, focus retenu, `Échap`, focus rendu au déclencheur (§6.27).
 
 ## 9.2 Structure sémantique
 
@@ -1451,25 +1844,19 @@ est fondamentale.
 
 ---
 
-# 15. Contrat d’extension par application
+# 15. Contrat du fichier jumelé `DESIGN_SYSTEM_APP.md`
 
-Cette référence reste volontairement générique.
-
-Chaque application peut créer un fichier complémentaire, par exemple :
+Cette référence est **strictement globale**. Dès qu’une application possède une règle, une référence, une terminologie, une preuve ou une exception propre au projet, celle-ci vit dans :
 
 ```text
 docs/DESIGN_SYSTEM_APP.md
 ```
 
-ou :
+Ce fichier est le **jumeau local** de `DESIGN_SYSTEM.md`. Il ne recopie pas la présente référence et la présente référence ne recopie pas son contenu.
 
-```text
-docs/design-system/APP_REFERENCE.md
-```
+`DESIGN_SYSTEM.md` ne doit jamais accueillir temporairement une information spécifique sous prétexte qu’elle a servi à découvrir une règle générique. La règle générique peut remonter ici après abstraction ; l’exemple, la mesure, la preuve, le nom métier et l’exception restent dans `DESIGN_SYSTEM_APP.md`.
 
-Ce fichier ne recopie pas la présente référence.
-
-Il contient uniquement ce qui est spécifique au produit.
+Tout élément nécessitant de connaître le projet pour être compris appartient à `DESIGN_SYSTEM_APP.md`.
 
 ## 15.1 Informations autorisées dans l’extension
 
@@ -1562,7 +1949,7 @@ Décision :
 
 # 16. Gestion des écarts
 
-Tout écart au design system commun est explicite.
+Tout écart au design system commun est explicite et documenté dans `DESIGN_SYSTEM_APP.md`.
 
 Il comporte au minimum :
 
