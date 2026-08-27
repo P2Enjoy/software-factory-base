@@ -16,6 +16,13 @@ seed, preuves —, la commande exacte est celle que le dépôt documente dans so
 son "Makefile" ou ses scripts. Tu la lis dans le dépôt ; tu ne la supposes pas, et tu ne
 reprends aucune commande d'un autre projet.
 
+Avec "CLAUDE.md" à la racine, ce document définit la MÉTHODE de travail de l'agent ; tous les
+autres fichiers du dépôt portent le contexte du projet courant. Ces deux documents ne sont
+modifiés que sur instruction explicite du responsable, et ils s'écrivent d'un seul trait : une
+règle y figure une fois, énoncée au présent, sans historique de ses versions ni mention annulant
+une règle antérieure. Une règle qui évolue est réécrite sur place ; la trace du changement va au
+journal du projet.
+
 ## 0. TU DOIS COMMITTER ET POUSSER, SINON TOUT EST PERDU
 
 LIS CECI EN PREMIER, C'EST LA RÈGLE QUI CONDITIONNE TOUTES LES AUTRES.
@@ -892,7 +899,8 @@ Ce registre sert à DEUX choses, et à deux choses uniquement :
 - vérifier si un défaut connu bloque l'unité que tu as choisie ;
 - y consigner ce que tu observes en travaillant.
 
-Une entrée qui attend un arbitrage du responsable ne se tranche JAMAIS toi-même.
+Une entrée laissée sans issue se tranche et se referme dans la session qui la rencontre, selon
+« Autonomie de décision » de "CLAUDE.md".
 
 ### 4.2. COMMENT CHOISIR L'UNITÉ DE LA SESSION — LE PRODUIT D'ABORD
 
@@ -915,6 +923,9 @@ Une entrée du registre ne devient l'objet d'une session QUE dans deux cas :
 - elle bloque concrètement l'unité produit choisie — alors tu la traites
   comme un préalable, dans la même session, et tu reviens à l'unité ;
 - le responsable a explicitement ordonné son traitement.
+
+Ces deux cas règlent la PRIORITÉ, jamais l'autorisation de trancher : une entrée rencontrée
+sur le chemin de l'unité, ou consignée en travaillant, reçoit son issue immédiatement.
 
 « Solder » une unité "[~]" dont le code est livré mais dont il ne manque que
 des preuves reste utile, mais ne prime plus sur la construction : une session
@@ -1011,7 +1022,7 @@ Il couvre l'INTÉGRALITÉ de la session, pas seulement son dernier geste. La HI�
 1. **Les fonctionnalités CODÉES, en tête et en détail** — écran, geste, règle métier, migration, API livrés ou modifiés. Pour CHACUNE, en langage clair et pas en jargon de commit : ce qu'elle fait pour l'utilisateur, et les CAPTURES produites conformément à "CLAUDE.md" section 16 — jointes au compte rendu quand l'outillage de la session le permet, sinon nommées explicitement par leur chemin sous "docs/captures/" pour qu'elles restent trouvables. C'est le cœur du compte rendu ; le reste n'est que son contexte.
 2. Les preuves réellement exécutées et leur résultat, avec les formulations du paragraphe 25 de "CLAUDE.md" — n'annonce jamais vérifié ce qui ne l'a pas été.
 3. Ce qui reste "[~]" ou "[ ]", et pourquoi.
-4. En bref, sans développer : les migrations, les entrées de "docs/INCONSISTENCY_REPORT.md" consignées, et tout arbitrage désormais attendu du responsable.
+4. En bref, sans développer : les migrations, les entrées de "docs/INCONSISTENCY_REPORT.md" consignées, les points que tu as tranchés avec leur motif, et tout arbitrage désormais attendu du responsable avec le cas dont il relève.
 5. Le commit final et la confirmation que "origin/main" le porte.
 
 Lorsque la session conclut à l'arrêt définitif de la boucle, ce compte rendu prend la
@@ -1033,10 +1044,11 @@ explicite que tu poses toi-même.
    terminée, et n'autorise donc pas l'arrêt à ce titre.
 2. **Tu n'as plus aucune option pour avancer** : tout ce qui reste est bloqué par
    quelque chose que la session ne peut pas fournir — un matériel absent, un
-   service extérieur indisponible, un arbitrage du responsable non rendu, un
-   accès manquant. « Difficile » n'est pas « bloqué » : avant de conclure à
-   l'arrêt, tu dois avoir vérifié une par une TOUTES les unités restantes et
-   nommé, pour chacune, ce qui l'empêche précisément.
+   service extérieur indisponible, un accès manquant, ou un arbitrage relevant
+   de « Demande d'arbitrage » de "CLAUDE.md" et non rendu. « Difficile » n'est
+   pas « bloqué », et « non tranché » non plus : avant de conclure à l'arrêt, tu
+   dois avoir vérifié une par une TOUTES les unités restantes et nommé, pour
+   chacune, ce qui l'empêche précisément.
 
 Tant que l'un des deux cas n'est pas ÉTABLI, tu ne t'arrêtes pas : tu choisis une
 unité et tu travailles, comme au §4.2.
@@ -1065,7 +1077,7 @@ unité et tu travailles, comme au §4.2.
    - ce qui RESTE en attente, unité par unité ;
    - ce qui a EMPÊCHÉ d'aller plus loin, précisément, pour chaque unité restante,
      et ce qu'il faudrait pour la débloquer — un matériel, un accès, un
-     arbitrage ;
+     arbitrage relevant de "CLAUDE.md" ;
    - le commit final et la confirmation que `origin/main` le porte.
 
 N'arrête JAMAIS la tâche en silence, et ne la laisse JAMAIS tourner sur un projet
