@@ -248,14 +248,3 @@ coverage/
 # poetry.lock
 # uv.lock
 # requirements*.txt
-
-# These are the methods itself generated files and they ARE to be ignored in the template repository, but they are NOT to be ignored in the generated project repository.
-docs/DESIGN_SYSTEM_APP.md
-docs/JOURNAL.md
-docs/AUTOMATION.md
-.gitignore
-CHANGELOG.md
-formation/DECISIONS.md
-formation/SPECIFICATION.md
-formation/atelier/commun/BACKLOG.md
-formation/atelier/commun/DAT.md
