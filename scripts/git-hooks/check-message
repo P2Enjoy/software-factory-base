@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#commit-message-hook
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+# shellcheck source=./lib.sh
+source "$script_dir/lib.sh"
+
+[[ "$#" -eq 1 ]] || factory_die "usage : scripts/git-hooks/check-message <fichier-message>"
+factory_check_message_file "$1"

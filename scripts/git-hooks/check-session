@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#session-guard
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+# shellcheck source=./lib.sh
+source "$script_dir/lib.sh"
+
+repo_root="$(factory_repo_root)"
+cd "$repo_root"
+
+violations=0
+
+report_violation() {
+  factory_error "$*"
+  violations=$((violations + 1))
+}
+
+branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+[[ "$branch" == "$FACTORY_WORKER_BRANCH" ]] ||
+  report_violation "HEAD doit être attaché à '$FACTORY_WORKER_BRANCH' ; état courant : '${branch:-HEAD détaché}'"
+
+hooks_path="$(git config --local --get core.hooksPath 2>/dev/null || true)"
+[[ "$hooks_path" == ".githooks" ]] ||
+  report_violation "core.hooksPath doit valoir '.githooks' ; lance scripts/git-hooks/install --worker"
+
+[[ "$(factory_hooks_mode)" == "worker" ]] ||
+  report_violation "factory.hooks.mode doit valoir 'worker'"
+
+git_dir="$(git rev-parse --git-dir)"
+for marker in MERGE_HEAD CHERRY_PICK_HEAD REVERT_HEAD BISECT_LOG; do
+  [[ ! -e "$git_dir/$marker" ]] || report_violation "opération Git inachevée détectée : $marker"
+done
+for directory in rebase-apply rebase-merge; do
+  [[ ! -d "$git_dir/$directory" ]] || report_violation "rebase inachevé détecté : $directory"
+done
+
+status="$(git status --porcelain=v1 --untracked-files=all)"
+[[ -z "$status" ]] || report_violation "le working tree ou l'index n'est pas propre :\n$status"
+
+if git show-ref --verify --quiet "refs/remotes/$FACTORY_WORKER_REMOTE/$FACTORY_WORKER_BRANCH"; then
+  head_oid="$(git rev-parse HEAD)"
+  remote_oid="$(git rev-parse "refs/remotes/$FACTORY_WORKER_REMOTE/$FACTORY_WORKER_BRANCH")"
+  [[ "$head_oid" == "$remote_oid" ]] ||
+    report_violation "HEAD et $FACTORY_WORKER_REMOTE/$FACTORY_WORKER_BRANCH diffèrent ; exécute fetch, puis synchronise et pousse"
+else
+  report_violation "la référence $FACTORY_WORKER_REMOTE/$FACTORY_WORKER_BRANCH est absente ; exécute git fetch $FACTORY_WORKER_REMOTE $FACTORY_WORKER_BRANCH"
+fi
+
+if git stash list --format='%gs' | grep -Fq 'sauvegarde-etat-initial-worker'; then
+  report_violation "une sauvegarde 'sauvegarde-etat-initial-worker' reste dans le stash"
+fi
+
+[[ "$violations" -eq 0 ]] || factory_die "$violations condition(s) de fin de session non satisfaite(s)"
+printf 'Garde de fin de session satisfaite.\n'

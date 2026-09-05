@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#pre-commit-hook
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+# shellcheck source=./lib.sh
+source "$script_dir/lib.sh"
+
+repo_root="$(factory_repo_root)"
+cd "$repo_root"
+
+git diff --cached --check
+factory_check_local_identity
+factory_check_effective_identity
+
+if factory_is_worker_mode; then
+  factory_require_worker_branch
+fi
+
+backlog_required=false
+if git cat-file -e ':docs/BACKLOG.md' 2>/dev/null; then
+  backlog_required=true
+fi
+
+violations=0
+while IFS= read -r -d '' path; do
+  if factory_is_forbidden_env_path "$path"; then
+    factory_error "fichier d'environnement sensible indexé : $path"
+    violations=$((violations + 1))
+  fi
+
+  while IFS= read -r line; do
+    case "$line" in
+      '+++ '*) continue ;;
+      +*)
+        added_line="${line:1}"
+        if factory_added_line_contains_secret "$added_line"; then
+          factory_error "secret probable ajouté dans $path"
+          violations=$((violations + 1))
+          break
+        fi
+        ;;
+    esac
+  done < <(git --literal-pathspecs diff --cached --no-color --no-textconv --no-ext-diff --unified=0 -- "$path")
+
+  if ! factory_is_code_path "$path"; then
+    continue
+  fi
+
+  header="$(git show ":$path" 2>/dev/null | sed -n '1,60p')"
+  if [[ "$backlog_required" == true ]]; then
+    if ! grep -Eq '@spec[[:space:]]+.*docs/BACKLOG\.md#[[:alnum:]_.-]+' <<<"$header"; then
+      factory_error "$path ne porte pas de @spec référençant docs/BACKLOG.md#identifiant dans ses 60 premières lignes"
+      violations=$((violations + 1))
+    fi
+  elif ! grep -Eq '@spec[[:space:]]+.*[[:alnum:]_/-]\.md#[^[:space:]|]+' <<<"$header"; then
+    factory_error "$path ne porte pas de @spec référençant un contrat documentaire stable (chemin.md#ancre) dans ses 60 premières lignes"
+    violations=$((violations + 1))
+  fi
+
+  if factory_is_test_path "$path"; then
+    if [[ "$backlog_required" == true ]]; then
+      if ! grep -Eq '@verifies[[:space:]]+.*docs/BACKLOG\.md#[[:alnum:]_.-]+' <<<"$header"; then
+        factory_error "$path ne porte pas de @verifies référençant docs/BACKLOG.md#identifiant dans ses 60 premières lignes"
+        violations=$((violations + 1))
+      fi
+    elif ! grep -Eq '@verifies[[:space:]]+.*[[:alnum:]_/-]\.md#[^[:space:]|]+' <<<"$header"; then
+      factory_error "$path ne porte pas de @verifies référençant un contrat documentaire stable (chemin.md#ancre) dans ses 60 premières lignes"
+      violations=$((violations + 1))
+    fi
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACMRT -z)
+
+[[ "$violations" -eq 0 ]] || factory_die "$violations violation(s) détectée(s) dans l'index"
+
+if [[ -e scripts/project-pre-commit ]]; then
+  [[ -x scripts/project-pre-commit ]] ||
+    factory_die "scripts/project-pre-commit existe mais n'est pas exécutable"
+  scripts/project-pre-commit
+fi

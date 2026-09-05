@@ -16,9 +16,10 @@ seed, preuves —, la commande exacte est celle que le dépôt documente dans so
 son "Makefile" ou ses scripts. Tu la lis dans le dépôt ; tu ne la supposes pas, et tu ne
 reprends aucune commande d'un autre projet.
 
-Avec "CLAUDE.md" à la racine, ce document définit la MÉTHODE de travail de l'agent ; tous les
-autres fichiers du dépôt portent le contexte du projet courant. Ces deux documents ne sont
-modifiés que sur instruction explicite du responsable, et ils s'écrivent d'un seul trait : une
+`CLAUDE.md` définit les règles générales de la MÉTHODE de travail de l'agent ; ce document ajoute
+uniquement le cycle propre au worker planifié, et `docs/AUTOMATION.md` décrit ses garde-fous
+exécutables. Tous les autres fichiers du dépôt portent le contexte du projet courant. Ces documents
+de méthode ne sont modifiés que sur instruction explicite du responsable, et ils s'écrivent d'un seul trait : une
 règle y figure une fois, énoncée au présent, sans historique de ses versions ni mention annulant
 une règle antérieure. Une règle qui évolue est réécrite sur place ; la trace du changement va au
 journal du projet.
@@ -35,23 +36,11 @@ En conséquence, et sans exception :
 - Ne termine JAMAIS ta session sur du travail non poussé.
 - Ne termine JAMAIS ta session sur une branche autre que "main".
 - Ne termine JAMAIS ta session en HEAD détaché.
-- Avant de conclure, exécute obligatoirement :
-
-```
-git branch --show-current
-git status --short
-git log origin/main..HEAD --oneline
-```
-
-La session ne peut être considérée comme terminée que si :
-
-```
-git branch --show-current  => main
-git status --short         => sortie vide
-git log origin/main..HEAD  => sortie vide
-```
-
-Si l'une de ces trois conditions est fausse, tu n'as PAS terminé. Corrige l'état Git, committe si nécessaire, pousse sur "origin/main", puis vérifie à nouveau.
+- Avant de conclure, attends tous les sous-agents éventuels puis exécute obligatoirement
+  `scripts/git-hooks/check-session`, selon la procédure du §1.7.
+- La session ne peut être considérée comme terminée que lorsque cette garde réussit. Elle exige
+  notamment un arbre propre et l'égalité exacte entre `HEAD` et `origin/main`, sans avance, retard
+  ni divergence.
 
 Si tu n'as pas le temps de finir une unité, ce n'est pas grave : committe et pousse l'état intermédiaire cohérent, mets à jour "docs/BACKLOG.md" pour dire exactement où tu en es et ce qui reste, et pousse. C'est la seule façon dont l'exécution suivante pourra reprendre là où tu t'es arrêté.
 
@@ -317,6 +306,9 @@ Une fois l'initialisation terminée :
 - INTERDIT de terminer sur une autre branche que "main".
 - INTERDIT de contourner un conflit en créant une autre branche.
 - INTERDIT de créer un worktree ou un environnement Git parallèle.
+- INTERDIT de lancer un sous-agent avant la récupération des commits, le rattachement à `main`, la
+  synchronisation et la restauration d'un éventuel stash. L'agent principal réalise seul toutes
+  ces opérations.
 
 Les commandes suivantes sont interdites lorsqu'elles servent à créer une branche parallèle :
 
@@ -329,69 +321,56 @@ git worktree add ...
 
 "git checkout -B main ..." est EXPRESSÉMENT autorisé, car il sert à rattacher ou repositionner la branche obligatoire "main".
 
-### 1.6. IDENTITÉ GIT
-
-Un crochet "pre-commit" REFUSE tout commit qui n'est pas au nom du responsable.
+### 1.6. IDENTITÉ GIT ET ACTIVATION DES GARDES
 
 Pose l'identité avant ton premier commit :
 
 ```
-git config user.name "P2Enjoy"
-git config user.email "contact@p2enjoy.studio"
+git config --local user.name "<nom du responsable>"
+git config --local user.email "<adresse du responsable>"
 ```
 
-N'ajoute JAMAIS de trailer :
+Ces deux valeurs sont posées dans la configuration locale du dépôt : les gardes refusent une
+identité absente et refusent une identité effective qui ne leur correspond pas exactement.
+
+Active ensuite les hooks versionnés en mode worker :
 
 ```
-Co-Authored-By
+scripts/git-hooks/install --worker
 ```
 
-ni de mention :
+Le `pre-commit` contrôle l'identité locale et effective, la forme de la traçabilité, le diff indexé
+et les secrets évidents. Le `commit-msg` refuse les attributions et signatures interdites. Le
+`pre-push` contrôle les commits sortants et réserve les pushes à `origin/main`. Le contrat exact et
+les limites de ces contrôles sont définis une seule fois dans `docs/AUTOMATION.md`.
 
-```
-Generated with
-```
-
-ni de signature d'outil.
-
-Les messages de commit sont en français et décrivent uniquement le changement.
+Les règles de message et d'attribution restent celles de `CLAUDE.md` §13. Les hooks sont des
+garde-fous mécaniques ; ils ne remplacent ni le jugement ni les preuves.
 
 ### 1.7. GARDE DE FIN DE SESSION OBLIGATOIRE
 
 Cette procédure est une CONDITION DE TERMINAISON, pas une recommandation.
 
-Juste avant toute réponse finale, toute conclusion ou toute fin d'exécution, exécute :
+Juste avant toute réponse finale, toute conclusion ou toute fin d'exécution, attends la fin de tous
+les sous-agents éventuels, examine leurs rapports et vérifie qu'aucune commande déléguée n'est
+encore active. Exécute ensuite :
 
 ```
-CURRENT_BRANCH="$(git branch --show-current)"
-
-if [ "$CURRENT_BRANCH" != "main" ]; then
-  git checkout main 2>/dev/null || git checkout -B main HEAD
-fi
-
 git fetch origin main
-
-if [ -n "$(git log origin/main..HEAD --oneline)" ]; then
-  git pull --rebase origin main
-  git push origin main
-fi
-
-git branch --show-current
-git status --short
-git log origin/main..HEAD --oneline
+git pull --rebase origin main
 ```
 
-La session ne peut être considérée comme terminée que si les trois conditions suivantes sont simultanément vraies :
+Si cette synchronisation change le code, rejoue les preuves affectées et la campagne finale
+avant de poursuivre. Corrige et persiste les écarts selon le cycle normal, puis termine par :
 
 ```
-git branch --show-current  => main
-git status --short         => sortie vide
-git log origin/main..HEAD  => sortie vide
+git push origin main
+git fetch origin main
+scripts/git-hooks/check-session
 ```
 
-Si une seule de ces conditions est fausse, TU N'AS PAS TERMINÉ.
-
-Corrige l'état Git avant de produire ta réponse finale.
+La garde est en lecture seule. Si elle échoue, corrige la cause indiquée, recommence la
+synchronisation si nécessaire, puis rejoue-la. Ne produis pas de réponse finale avant son succès.
 
 ## 2. TU ES ROOT, ET TU DOIS DÉMARRER DOCKER TOI-MÊME
 
@@ -623,7 +602,7 @@ Tu ne lances aucune preuve maintenant — voir le §2.3 juste en dessous, qui di
 
 ### 2.3. LA PILE EST DEBOUT — TU NE LANCES AUCUNE PREUVE MAINTENANT
 
-**RÈGLE DU RESPONSABLE, 2026-08-15, NON NÉGOCIABLE.** La pile montée et seedée, tu passes
+La pile montée et seedée, tu passes
 IMMÉDIATEMENT au §4 pour choisir ton unité, puis au §3.2 pour travailler. **Tu ne lances PAS la
 campagne de preuves à l'ouverture de la session.**
 
@@ -743,9 +722,15 @@ ainsi que les documents de "docs/" utiles à l'unité traitée.
 
 Objectif permanent : livrer les fonctionnalités du produit que "docs/BACKLOG.md" énumère, jusqu'à ce que chacune soit "[x]", sans exception à la Definition of Done et sans raccourci. Le backlog n'est que la LISTE ; la mesure du travail réel est le produit livré et prouvé, jamais l'état du fichier seul.
 
-Traite UNE unité cohérente à la fois, séquentiellement.
+Traite UNE unité cohérente à la fois. Tous les sous-agents éventuels servent cette même unité,
+conformément à `CLAUDE.md` §1 et `docs/AUTOMATION.md` §6.
 
-Ne délègue pas à des sous-agents.
+Ce worker partage un seul checkout et une seule branche `main`. L'agent principal est le seul à
+modifier les fichiers suivis, le journal et le backlog, et le seul à effectuer une opération Git
+modificatrice. Les consultations Git en lecture seule sont permises aux sous-agents. Il peut
+déléguer des explorations, analyses, revues ou vérifications ciblées indépendantes. Les sous-agents
+ne choisissent ni ne clôturent l'unité, ne tranchent aucune décision et ne modifient aucun fichier
+suivi. Leur indisponibilité ne bloque jamais la session.
 
 Éprouve les parcours comme un vrai utilisateur, au clavier et à la souris.
 
@@ -757,14 +742,9 @@ Toute décision, spécification ou arbitrage validé est écrit ET COMMITTÉ AVA
 
 Si le code n'est pas encore prêt, crée un commit documentaire dédié.
 
-Chaque fichier porte ses commentaires :
-
-```
-@spec
-@verifies
-```
-
-vers l'unité de backlog et les chapitres de spécification correspondants.
+Chaque fichier porte la traçabilité parseable définie par `CLAUDE.md` §5 vers l'unité de backlog
+et les chapitres de spécification correspondants. Le `pre-commit` en vérifie la forme ; tu restes
+responsable de sa pertinence.
 
 Une unité ne passe à "[x]" que si TOUTES ses preuves sont réellement exécutées et vertes.
 
@@ -805,7 +785,7 @@ Laisse le comportement inchangé plutôt que de corriger ce défaut au passage.
 
 ### 3.2. ORDRE DE TRAVAIL D'UNE SESSION — SPÉCIFIER, CODER, POUSSER, PUIS PROUVER
 
-**RÈGLE DU RESPONSABLE, 2026-08-15, NON NÉGOCIABLE.** Voici la séquence, et il n'y en a pas d'autre.
+Voici la séquence, et il n'y en a pas d'autre.
 Tu ne réordonnes rien, et tu ne remontes pas la campagne de preuves en tête de session.
 
 **1. Tu choisis ton unité** — §4.1 puis §4.2. Rien n'est écrit avant ce choix.
@@ -826,8 +806,11 @@ poussé. C'est `CLAUDE.md` §5, et c'est la règle qui protège le travail d'une
 > session en échec (§4.2 bis). Si en la lisant tu constates qu'elle est incomplète ou fausse sur le
 > reste à livrer, alors et alors seulement tu la complètes — sur ce point précis, pas en entier.
 
-**4. Tu codes.** Une unité cohérente à la fois, séquentiellement, avec ses commentaires `@spec` et
-`@verifies` écrits dans le même geste que le code.
+**4. Tu codes.** Avant l'écriture, tu peux confier à des sous-agents les lectures indépendantes qui
+réduisent l'incertitude, puis tu vérifies et synthétises leurs constats. Tu réalises ensuite seul les
+modifications, une unité cohérente à la fois, séquentiellement, avec les commentaires `@spec` du
+code et `@verifies` des tests écrits dans le même geste. Aucun sous-agent n'écrit dans les fichiers
+suivis.
 
 **5. Tu committes et tu pousses AU FIL DE L'EAU.** Dès qu'un morceau cohérent tient debout — une
 migration qui s'applique, un écran qui rend, un module qui compile —, tu committes et tu pousses.
@@ -904,10 +887,8 @@ Une entrée laissée sans issue se tranche et se referme dans la session qui la 
 
 ### 4.2. COMMENT CHOISIR L'UNITÉ DE LA SESSION — LE PRODUIT D'ABORD
 
-RÈGLE DU RESPONSABLE, 2026-08-14, non négociable : le registre d'incohérences
-N'EST PLUS une file de travail. Des dizaines de sessions l'ont traité comme
-telle, et le dépôt a reçu majoritairement des commits de documentation pendant
-que des écrans entiers du produit restaient non construits. C'est terminé.
+Le registre d'incohérences n'est pas une file de travail. La construction du produit reste
+prioritaire sur le traitement autonome de ce registre.
 
 L'unité de la session se choisit AINSI, dans cet ordre :
 
@@ -1002,7 +983,8 @@ restent à exécuter.
 
 **5. Committe ces mises à jour et pousse sur "origin/main".**
 
-**6. Exécute la garde Git finale** (§0 et §5).
+**6. Attends tous les sous-agents éventuels, examine leurs rapports, vérifie qu'aucune commande
+déléguée n'est encore active, puis exécute la garde Git finale** (§0, §1.7 et §5).
 
 **7. Rédige et publie le compte rendu complet du §4.4**, une fois la garde du point 6 satisfaite.
 
@@ -1086,40 +1068,10 @@ fin, l'autre en la répétant indéfiniment.
 
 ## 5. RÈGLE FINALE, AUCUNE EXCEPTION
 
-Rien de ce que tu fais n'existe durablement tant que ce n'est pas poussé sur :
+Rien de ce que tu fais n'existe durablement tant que ce n'est pas poussé sur `origin/main`.
 
-```
-origin/main
-```
+La session n'est terminée que lorsque `scripts/git-hooks/check-session` réussit après la
+synchronisation finale décrite au §1.7. Si la garde échoue, continue à travailler jusqu'à corriger
+chaque condition signalée.
 
-La session n'est terminée que lorsque :
-
-```
-git branch --show-current
-```
-
-renvoie :
-
-```
-main
-```
-
-ET que :
-
-```
-git status --short
-```
-
-ne renvoie rien,
-
-ET que :
-
-```
-git log origin/main..HEAD --oneline
-```
-
-ne renvoie rien.
-
-Si ce n'est pas le cas, continue à travailler sur l'état Git jusqu'à satisfaire ces trois conditions.
-
-NE PRODUIS PAS TA RÉPONSE FINALE AVANT CELA.
+NE PRODUIS PAS TA RÉPONSE FINALE AVANT LE SUCCÈS DE CETTE GARDE.

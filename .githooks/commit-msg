@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#commit-message-hook
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+exec "$repo_root/scripts/git-hooks/check-message" "$1"

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#pre-commit-hook
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+exec "$repo_root/scripts/git-hooks/check-staged"

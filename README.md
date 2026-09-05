@@ -2,7 +2,7 @@
 
 Reusable engineering baseline for P2Enjoy software projects.
 
-This repository is not an application starter and does not impose a product architecture. It provides the global engineering rules, documentation contracts, UI conventions, scheduled worker workflow and multi stack repository defaults used to bootstrap a reproducible software project.
+This repository is not an application starter and does not impose a product architecture. It provides the global engineering rules, documentation contracts, UI conventions, scheduled worker workflow, executable Git safeguards, bounded subagent roles and multi stack repository defaults used to bootstrap a reproducible software project.
 
 The factory is built around a strict separation:
 
@@ -13,17 +13,40 @@ The factory is built around a strict separation:
 
 ```text
 .
+├── .codex/
+│   ├── agents/
+│   │   ├── factory-explorer.toml
+│   │   ├── factory-reviewer.toml
+│   │   └── factory-verifier.toml
+│   └── config.toml
+├── .githooks/
+│   ├── commit-msg
+│   ├── pre-commit
+│   └── pre-push
 ├── .gitignore
+├── AGENTS.md
+├── CHANGELOG.md
 ├── CLAUDE.md
 ├── LICENSE
 ├── README.md
-└── docs/
-    ├── .routine
-    ├── CloudWorker.md
-    └── DESIGN_SYSTEM.md
+├── docs/
+│   ├── .routine
+│   ├── AUTOMATION.md
+│   ├── CloudWorker.md
+│   ├── DESIGN_SYSTEM.md
+│   └── JOURNAL.md
+├── scripts/git-hooks/
+│   ├── check-message
+│   ├── check-push
+│   ├── check-session
+│   ├── check-staged
+│   ├── install
+│   └── lib.sh
+└── tests/git-hooks/
+    └── test-hooks
 ```
 
-This base intentionally contains policy and orchestration documentation rather than application source code.
+This base intentionally contains policy and orchestration documentation plus small portable enforcement scripts rather than application source code.
 
 ## Core files
 
@@ -34,6 +57,7 @@ Global engineering contract for AI assisted development sessions.
 It defines reusable rules for:
 
 - repository analysis before modification;
+- single-writer ownership and bounded subagent delegation;
 - architecture and maintainability;
 - documentation and specification traceability;
 - Git discipline;
@@ -52,6 +76,36 @@ Any instruction that requires knowledge of the current repository belongs in the
 ```text
 CLAUDE_PROJECT.md
 ```
+
+### `AGENTS.md` and `.codex/agents/`
+
+`AGENTS.md` is the compact Codex adapter for the global method. It tells the primary agent to read the normative contracts and defines when the project-scoped custom agents are useful.
+
+The three custom agents have deliberately narrow roles:
+
+- `factory_explorer` maps contracts, dependencies and execution paths in read-only mode;
+- `factory_reviewer` reviews a stabilized change in read-only mode;
+- `factory_verifier` executes one documented, targeted proof and may write only its expected temporary artifacts.
+
+The primary agent remains the sole source editor, decision maker and operator of Git mutations. Subagents may inspect Git in read-only mode. They are optional and never become a completion dependency.
+
+### `docs/AUTOMATION.md`, `.githooks/` and `scripts/git-hooks/`
+
+`docs/AUTOMATION.md` is the contract for deterministic safeguards. The hooks are thin adapters over versioned scripts so the same checks can be reused by humans, scheduled workers and CI.
+
+Hooks are not activated automatically by Git. Enable the standard policy explicitly:
+
+```bash
+scripts/git-hooks/install
+```
+
+The scheduled worker uses:
+
+```bash
+scripts/git-hooks/install --worker
+```
+
+Worker mode additionally restricts branch and push operations to `origin/main`. Neither mode changes Git identity or performs automatic stash, rebase, commit or push operations.
 
 ### `docs/DESIGN_SYSTEM.md`
 
@@ -117,7 +171,8 @@ Important source configuration and lockfiles remain versionable.
 | --- | --- | --- |
 | `CLAUDE.md` | `CLAUDE_PROJECT.md` | Global engineering rules versus repository specific instructions |
 | `docs/DESIGN_SYSTEM.md` | `docs/DESIGN_SYSTEM_APP.md` | Shared UI system versus product specific UI decisions |
-| `docs/CloudWorker.md` | `README.md`, build files, scripts | Worker method versus executable project commands |
+| `docs/CloudWorker.md` | `README.md`, build files, scripts | Scheduled worker cycle versus executable project commands |
+| `docs/AUTOMATION.md` | project hooks and CI commands | Generic deterministic safeguards versus stack-specific checks |
 
 A rule belongs in a global file only when it can be understood and reused without knowing the current product.
 
@@ -141,6 +196,9 @@ Use this repository as the baseline for a new project, then add the specificatio
 ```bash
 git clone https://github.com/P2Enjoy/software-factory-base.git my-project
 cd my-project
+git config --local user.name "<maintainer name>"
+git config --local user.email "<maintainer email>"
+scripts/git-hooks/install
 ```
 
 The project should then establish its own operational documentation.
@@ -213,20 +271,37 @@ understand
     ↓
 specify
     ↓
-persist documentation
+persist specification (commit and push)
     ↓
 implement
     ↓
-run targeted tests
+run deterministic local guards
     ↓
-verify real behavior
+persist a coherent checkpoint
+    ↓
+run targeted proofs and verify real behavior
+    ↓
+correct and persist as needed
+    ↓
+run the final campaign
     ↓
 update documentation and backlog
     ↓
-commit and push
+final commit, push and session guard
 ```
 
 For scheduled ephemeral workers, `docs/CloudWorker.md` adds repository recovery, environment bootstrap, end of session verification and mandatory persistence through Git.
+
+The hooks and their tests require Bash, Git and the usual Unix tools (`grep`,
+`sed`, `mktemp`, `cp`). No package installation is needed. The harness creates
+and removes its own temporary repositories; test pushes stay on the local
+filesystem.
+
+Run the portable safeguard harness with:
+
+```bash
+tests/git-hooks/test-hooks
+```
 
 ## Verification model
 

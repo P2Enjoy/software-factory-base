@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#pre-push-hook
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+# shellcheck source=./lib.sh
+source "$script_dir/lib.sh"
+
+remote_name="${1:-}"
+[[ -n "$remote_name" ]] || factory_die "le nom du remote fourni par pre-push est absent"
+
+repo_root="$(factory_repo_root)"
+cd "$repo_root"
+factory_check_local_identity
+
+worker_mode=false
+if factory_is_worker_mode; then
+  worker_mode=true
+  factory_require_worker_branch
+  [[ "$remote_name" == "$FACTORY_WORKER_REMOTE" ]] ||
+    factory_die "le mode worker autorise uniquement le remote '$FACTORY_WORKER_REMOTE'"
+fi
+
+baseline="$(git config --local --get factory.hooks.baseline 2>/dev/null || true)"
+
+while read -r local_ref local_oid remote_ref remote_oid; do
+  [[ -n "${local_ref:-}" ]] || continue
+
+  if [[ "$worker_mode" == true ]]; then
+    [[ "$local_ref" == "refs/heads/$FACTORY_WORKER_BRANCH" ]] ||
+      factory_die "source de push interdite en mode worker : $local_ref"
+    [[ "$remote_ref" == "refs/heads/$FACTORY_WORKER_BRANCH" ]] ||
+      factory_die "destination de push interdite en mode worker : $remote_ref"
+    [[ ! "$local_oid" =~ ^0+$ ]] || factory_die "la suppression de '$remote_ref' est interdite en mode worker"
+
+    if [[ ! "$remote_oid" =~ ^0+$ ]]; then
+      git merge-base --is-ancestor "$remote_oid" "$local_oid" 2>/dev/null ||
+        factory_die "la mise à jour de '$remote_ref' n'est pas un fast-forward"
+    fi
+  fi
+
+  [[ ! "$local_oid" =~ ^0+$ ]] || continue
+  commit_oid="$(git rev-parse --verify "${local_oid}^{commit}" 2>/dev/null || true)"
+  [[ -n "$commit_oid" ]] || continue
+
+  if [[ ! "$remote_oid" =~ ^0+$ ]] && git cat-file -e "${remote_oid}^{commit}" 2>/dev/null; then
+    commit_range="$remote_oid..$commit_oid"
+    commits="$(git rev-list --reverse "$commit_range")" ||
+      factory_die "impossible de parcourir les commits sortants"
+  elif [[ -n "$baseline" ]] && git merge-base --is-ancestor "$baseline" "$commit_oid" 2>/dev/null; then
+    commits="$(git rev-list --reverse "$baseline..$commit_oid")" ||
+      factory_die "impossible de parcourir les commits depuis la baseline"
+  else
+    commits="$(git rev-list --reverse "$commit_oid" --not --remotes="$remote_name")" ||
+      factory_die "impossible de parcourir les commits sortants"
+  fi
+  while IFS= read -r commit; do
+    [[ -z "$commit" ]] || factory_check_commit "$commit"
+  done <<<"$commits"
+done

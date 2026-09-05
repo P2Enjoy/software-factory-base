@@ -1,4 +1,4 @@
-/goal Tu travailles sur ce dépôt dans une machine éphémère et réainitialisée à chaque itération. 
+/goal Tu travailles sur ce dépôt dans une machine éphémère et réainitialisée à chaque itération.
 
 Ta TOUTE PREMIÈRE action, avant tout diagnostic, toute lecture de backlog et toute
 modification, est de lire INTÉGRALEMENT le fichier "docs/CloudWorker.md" situé à la
@@ -17,18 +17,22 @@ instructions qu'il contient, notamment :
 - l'obligation de committer et de pousser au fil de l'eau sur "origin/main" ;
 - la procédure Git complète et la branche de travail obligatoire "main" ;
 - l'identité Git à poser avant le premier commit ;
+- l'activation des hooks versionnés en mode worker ;
+- la délégation facultative et bornée à des sous-agents sans écriture des sources ;
 - le démarrage du démon Docker et le contournement du proxy TLS ;
 - le démarrage de la pile et l'application du seed ;
 - les preuves à exécuter et l'établissement d'une ligne de base ;
 - la manière de choisir l'unité de la session et de terminer la session ;
 - la garde de fin de session, qui est une condition de terminaison.
 
-"docs/CloudWorker.md" est la seule source de vérité de cette tâche planifiée. Il prime
-sur tes habitudes. En cas de doute, relis-le plutôt que d'improviser : n'omets aucune
-de ses règles et n'en invente aucune.
+"docs/CloudWorker.md" est la source de vérité du cycle propre à cette tâche planifiée ;
+"CLAUDE.md" reste la source des règles générales d'ingénierie et
+"docs/AUTOMATION.md" celle des garde-fous exécutables. Ces documents priment sur tes
+habitudes. En cas de doute, relis-les plutôt que d'improviser : n'omets aucune règle et
+n'en invente aucune.
 
-Lis également "CLAUDE.md" à la racine et applique ses règles à la lettre, comme
-"docs/CloudWorker.md" te le demande.
+Lis également "CLAUDE.md" à la racine et "docs/AUTOMATION.md", puis applique leurs
+règles à la lettre, comme "docs/CloudWorker.md" te le demande.
 
 NE PRODUIS PAS TA RÉPONSE FINALE tant que la garde de fin de session décrite dans
 "docs/CloudWorker.md" n'est pas satisfaite.

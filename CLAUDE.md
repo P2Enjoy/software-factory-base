@@ -8,9 +8,9 @@ Il définit les conventions durables du responsable du projet, "martino.bettucci
 
 **Ce fichier est une référence GLOBALE. Il doit rester strictement indépendant de tout projet particulier.** Il ne doit contenir aucun nom de produit, aucune terminologie métier, aucun identifiant de ticket, aucune commande propre à un dépôt, aucun chemin spécifique, aucune architecture locale, aucune donnée seedée, aucun compte de démonstration, aucune référence documentaire propre à un produit ni aucune exception issue d'un projet précis.
 
-`CLAUDE.md` et `docs/CloudWorker.md` définissent la MÉTHODE de travail de l'agent : comment il travaille, comment il décide, comment il prouve et comment il rend compte. Tous les autres fichiers du dépôt portent le CONTEXTE du projet courant et se mettent à jour au rythme du travail.
+`CLAUDE.md` définit les règles générales de la MÉTHODE de travail de l'agent : comment il travaille, comment il décide, comment il prouve et comment il rend compte. `docs/CloudWorker.md` ajoute uniquement le cycle propre au worker planifié. `docs/AUTOMATION.md` décrit les garde-fous exécutables et l'orchestration optionnelle qui appliquent cette méthode. Tous les autres fichiers du dépôt portent le CONTEXTE du projet courant et se mettent à jour au rythme du travail.
 
-Ces deux fichiers ne sont modifiés que sur instruction explicite du responsable. Ils ne sont ni complétés au fil d'une tâche, ni ajustés pour accommoder une difficulté rencontrée.
+Ces documents de méthode ne sont modifiés que sur instruction explicite du responsable. Ils ne sont ni complétés au fil d'une tâche, ni ajustés pour accommoder une difficulté rencontrée.
 
 Ils s'écrivent d'un seul trait : chaque règle y figure une fois, à un seul endroit, énoncée au présent et sans condition de date. Ils ne portent ni historique de leurs versions, ni mention annulant une règle antérieure, ni paragraphe expliquant pourquoi une règle a changé. Une règle qui évolue est réécrite sur place et celle qu'elle remplace disparaît ; la trace du changement appartient au journal du projet et au CHANGELOG.
 
@@ -27,13 +27,33 @@ Les règles locales peuvent préciser le fonctionnement d'un projet, mais elles 
 - Ne pas modifier des éléments sans rapport avec la tâche.
 - Ne pas remplacer une solution existante fonctionnelle sans justification technique.
 - Préférer une solution simple, explicite, maintenable et testable.
-- Traiter une seule tâche cohérente à la fois.
-- Travailler séquentiellement.
-- Ne pas déléguer à des sous-agents.
+- Traiter une seule unité cohérente à la fois.
+- Conserver un seul agent principal responsable du travail et un seul flux de modification du dépôt.
+- Déléguer uniquement des missions indépendantes et bornées lorsque cela accélère l'exploration, l'analyse, la revue ou la vérification sans élargir l'unité.
 - Ne pas considérer une hypothèse comme un fait vérifié.
 - Signaler clairement toute limitation, incertitude ou vérification impossible.
 - Trancher les points laissés ouverts et n'en référer au responsable que dans les cas énumérés ci-dessous.
 - Ne jamais déclarer une tâche terminée sans preuve concrète de son fonctionnement.
+
+Orchestration des sous-agents
+
+L'agent principal est l'unique écrivain des fichiers suivis et le seul autorisé à modifier l'état Git. Il choisit l'unité, tranche les décisions, maintient la documentation, intègre les constats et reste responsable de la Definition of Done.
+
+Chaque mission déléguée nomme son objectif, son périmètre, les sources à examiner et le livrable attendu.
+
+Les sous-agents :
+
+- restent dans le périmètre de l'unité choisie ;
+- travaillent en lecture seule sur les sources et les fichiers suivis ;
+- ne modifient ni les fichiers suivis, ni l'index, ni la configuration, ni l'historique Git ;
+- ne créent ni branche ni worktree et n'exécutent ni stash, rebase, merge, commit ou push ;
+- ne prennent aucune décision produit ou architecturale et ne clôturent aucune unité ;
+- ne délèguent pas à leur tour ;
+- rendent des constats sourcés, leurs incertitudes et leurs recommandations à l'agent principal.
+
+Un sous-agent de vérification peut exécuter une preuve ciblée sur un état stabilisé lorsque l'outil produit uniquement des artefacts temporaires attendus. Il relève l'état Git avant et après l'exécution, ne nettoie rien et signale tout écart. Une commande susceptible de modifier un fichier suivi, un service partagé ou une donnée reste exécutée séquentiellement par l'agent principal.
+
+La délégation reste facultative. Elle n'est utilisée ni pour une tâche triviale, ni lorsqu'elle coûte plus de coordination qu'elle n'apporte de preuve ou de vitesse. L'indisponibilité des sous-agents ne bloque jamais une unité.
 
 Autonomie de décision
 
@@ -87,6 +107,7 @@ Avant toute modification significative :
 - identifier les commandes de lancement, de build et de test ;
 - lire les documents présents dans "docs/" et s'il n'existe pas l'initialiser puis le maintenir;
 - lire `CLAUDE_PROJECT.md` lorsqu'il existe ;
+- lire `docs/AUTOMATION.md` et `AGENTS.md` lorsqu'ils existent et que l'outillage automatisé ou les sous-agents sont concernés ;
 - identifier les conventions locales du projet sans les recopier dans ce fichier global ;
 - vérifier l'état Git courant ;
 - comprendre les composants, services, données et flux concernés par la demande.
@@ -233,7 +254,7 @@ Lorsqu'une interface publique ou éditoriale est composée de sections administr
 
 ## 5. Documentation obligatoire
 
-Les documents suivants doivent exister ou avoir un équivalent clairement identifié :
+Tout dépôt applicatif maintient les documents suivants ou un équivalent clairement identifié :
 
 - "README.md" ;
 - "CHANGELOG.md" ;
@@ -256,7 +277,8 @@ aux classes, fonctions, algorithmes, composants, routes API, migrations, scripts
 styles, générateurs et tests.
 
 - Chaque fichier de code commence par un commentaire de portée fichier au format
-  `@spec` qui nomme au minimum l'unité exacte de `docs/BACKLOG.md` ET le ou
+  `@spec docs/BACKLOG.md#identifiant | docs/DAT.md#section` qui nomme au minimum
+  l'unité exacte de `docs/BACKLOG.md` ET le ou
   les fichiers documentaires réellement pertinents avec leur chapitre ou section,
   par exemple `docs/DAT.md`, `docs/SCHEMA.md`, `docs/DESIGN_SYSTEM.md`,
   `docs/DESIGN_SYSTEM_APP.md` ou la documentation utilisateur du projet lorsqu'elle
@@ -267,7 +289,8 @@ styles, générateurs et tests.
   références. Lorsqu'un fichier met en œuvre plusieurs unités fonctionnelles,
   chaque classe, fonction publique ou bloc algorithmique concerné reçoit un
   commentaire `@spec` plus proche et limité à ses propres références.
-- Chaque fichier de test utilise `@verifies` et cite l'unité de backlog ainsi que
+- Chaque fichier de test utilise le même format avec `@verifies`, en plus de sa
+  portée `@spec`, et cite l'unité de backlog ainsi que
   les chapitres dont il prouve le contrat. Un test ne référence pas seulement le
   fichier de code testé.
 - Une migration cite `docs/SCHEMA.md` et l'unité fonctionnelle correspondante ;
@@ -285,6 +308,8 @@ styles, générateurs et tests.
   résoudre implicitement : la consigner dans `docs/INCONSISTENCY_REPORT.md` avec
   l'issue retenue, et laisser le comportement inchangé lorsque la correction dépasse
   la tâche en cours.
+
+Un dépôt de socle qui ne livre aucun produit et ne possède volontairement aucun backlog produit référence ses scripts de méthode au contrat normatif stable qui les définit, avec un chemin documentaire et une ancre. Cette exception ne s'applique pas au code d'un dépôt applicatif.
 
 Persistance immédiate des décisions (règle non négociable du responsable)
 
@@ -682,7 +707,7 @@ Commandes interdites sans instruction explicite du responsable :
 - "git worktree add" ;
 - toute stratégie d'isolation par branche ou worktree.
 
-Lorsque plusieurs développeurs ou agents travaillent sur la même branche, gérer les changements sur place.
+Lorsque plusieurs contributeurs travaillent sur la même branche, gérer les changements sur place.
 
 Ne pas contourner un conflit en créant une nouvelle branche.
 
@@ -697,12 +722,20 @@ Avant de tester définitivement ou de clore une tâche :
 
 Ne pas écraser les modifications d'un autre contributeur.
 
+Garde-fous exécutables
+
+Lorsqu'ils sont fournis, les hooks versionnés sont activés par la commande de bootstrap documentée. Ils appellent des scripts déterministes également utilisables par la CI et n'effectuent jamais automatiquement de stash, rebase, merge, commit ou push.
+
+Les hooks contrôlent uniquement ce que Git permet d'établir mécaniquement : identité, destination d'un push, forme de la traçabilité, signatures interdites, erreurs de diff et contrôles rapides documentés. Ils ne remplacent ni la revue, ni les preuves fonctionnelles, ni la vérification visuelle. Leur contournement local ne contourne pas les contrôles distants.
+
+L'agent principal réalise toutes les opérations Git modificatrices. Les sous-agents peuvent consulter Git en lecture seule ; seuls les artefacts temporaires de preuve décrits au §1 peuvent être produits dans le working tree.
+
 Commits
 
 - Les messages de commit sont rédigés en français.
 - Un commit correspond à un chunk cohérent.
 - Un commit ne doit contenir que des modifications liées.
-- Le code doit être vérifié avant le commit.
+- Les contrôles mécaniques et la vérification minimale adaptée au checkpoint doivent réussir avant le commit ; les preuves ciblées puis la campagne complète restent obligatoires avant de déclarer l'unité terminée.
 - La documentation associée doit faire partie du même commit.
 - Les tests associés doivent faire partie du même commit.
 - Pousser systématiquement après chaque commit validé, y compris pour les étapes intermédiaires cohérentes.
@@ -859,7 +892,7 @@ Ne jamais considérer qu'une interface fonctionne uniquement parce que le build 
 Les captures doivent représenter l'état réellement exécuté de l'application.
 
 **LA VERIFICATION VISUELLE SE FAIT DANS LA PEU DE L'UTILISATEUR FINAL** donc tu NE DOIT PAS prendre des raccourcis: tu te loggues depuis la home
-dans l'app avec les users seedés, tu cliques et tu saisies et tu screenshot et inspecte; **IL EST FORMELLEMENT INTERDIT DE ACCEDER DIRECTEMENT A 
+dans l'app avec les users seedés, tu cliques et tu saisies et tu screenshot et inspecte; **IL EST FORMELLEMENT INTERDIT DE ACCEDER DIRECTEMENT A
 LA FONCTIONNALITE A TESTER EN ALLANT DIRECTEMENT AU URL OU EN ENVOYANT UNE REQUETE DIRECTE API ETC ETC**.
 Si tu n'est pas capable de tester une fonctionnalité visuellement tout en étant dans la peu d'un user qui n'a que souris et clavier pour l'utiliser, alors c'EST UN ECHEC ET CELA DOIT ETRE FIX.
 Cette rigeur c'est ce qui permet de garantir que c'est usable depuis le parcours canonique et dans son entiereté.

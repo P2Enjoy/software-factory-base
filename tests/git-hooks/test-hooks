@@ -1,0 +1,322 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#local-guards
+# @verifies docs/AUTOMATION.md#hook-installation | docs/AUTOMATION.md#local-guards | docs/AUTOMATION.md#session-guard
+set -euo pipefail
+
+source_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+test_root="$(mktemp -d "${TMPDIR:-/tmp}/factory-hooks.XXXXXX")"
+output_file="$test_root/output"
+passes=0
+failures=0
+repo=""
+
+cleanup() {
+  rm -rf -- "$test_root"
+}
+trap cleanup EXIT
+
+pass() {
+  printf 'OK   %s\n' "$1"
+  passes=$((passes + 1))
+}
+
+fail() {
+  printf 'FAIL %s\n' "$1" >&2
+  if [[ -s "$output_file" ]]; then
+    sed 's/^/     /' "$output_file" >&2
+  fi
+  failures=$((failures + 1))
+}
+
+expect_success() {
+  local label="$1"
+  shift
+  : >"$output_file"
+  if "$@" >"$output_file" 2>&1; then
+    pass "$label"
+  else
+    fail "$label"
+  fi
+}
+
+expect_failure() {
+  local label="$1"
+  shift
+  : >"$output_file"
+  if "$@" >"$output_file" 2>&1; then
+    fail "$label (succès inattendu)"
+  else
+    pass "$label"
+  fi
+}
+
+new_repo() {
+  repo="$(mktemp -d "$test_root/repo.XXXXXX")"
+  git -C "$repo" init -q -b main
+  git -C "$repo" config --local user.name P2Enjoy
+  git -C "$repo" config --local user.email contact@p2enjoy.studio
+  printf '# Fixture\n' >"$repo/README.md"
+  git -C "$repo" add README.md
+  git -C "$repo" commit -q -m "Initialise la fixture"
+}
+
+run_staged() {
+  (cd "$repo" && "$source_root/scripts/git-hooks/check-staged")
+}
+
+run_staged_with_bad_author_override() {
+  (cd "$repo" && GIT_AUTHOR_NAME=Intrus GIT_AUTHOR_EMAIL=intrus@example.test \
+    "$source_root/scripts/git-hooks/check-staged")
+}
+
+run_message() {
+  "$source_root/scripts/git-hooks/check-message" "$1"
+}
+
+run_push() {
+  local remote="$1" update="$2"
+  printf '%s\n' "$update" |
+    (cd "$repo" && "$source_root/scripts/git-hooks/check-push" "$remote" example.invalid)
+}
+
+run_session() {
+  (cd "$repo" && "$source_root/scripts/git-hooks/check-session")
+}
+
+new_repo
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_success "pre-commit accepte identité et traçabilité valides" run_staged
+
+new_repo
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+git -C "$repo" config --local --unset-all user.name
+expect_failure "pre-commit refuse une identité locale absente" run_staged
+
+new_repo
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+git -C "$repo" config --local --unset-all user.email
+expect_failure "pre-commit refuse une adresse locale absente" run_staged
+
+new_repo
+git -C "$repo" config --local user.name "Autre Responsable"
+git -C "$repo" config --local user.email "autre@example.test"
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_success "pre-commit accepte toute identité locale déclarée" run_staged
+
+new_repo
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_failure "pre-commit détecte une surcharge d'auteur" run_staged_with_bad_author_override
+
+new_repo
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("index")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+printf 'print("working tree")\n' >"$repo/app.py"
+expect_success "pre-commit analyse le blob indexé et non le working tree" run_staged
+
+new_repo
+printf 'print("sans trace")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_failure "pre-commit refuse un fichier de code sans @spec" run_staged
+
+new_repo
+mkdir -p "$repo/tests"
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\ntrue\n' >"$repo/tests/example.sh"
+git -C "$repo" add tests/example.sh
+expect_failure "pre-commit refuse un test sans @verifies" run_staged
+
+new_repo
+mkdir -p "$repo/tests"
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\n# @verifies docs/AUTOMATION.md#pre-commit-hook\ntrue\n' >"$repo/tests/example.sh"
+git -C "$repo" add tests/example.sh
+expect_success "pre-commit accepte un test tracé" run_staged
+
+new_repo
+mkdir -p "$repo/docs"
+printf '# Backlog\n\n- [ ] Unité test\n' >"$repo/docs/BACKLOG.md"
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add docs/BACKLOG.md app.py
+expect_failure "pre-commit exige un identifiant de backlog quand le backlog existe" run_staged
+
+new_repo
+mkdir -p "$repo/docs"
+printf '# Backlog\n\n- [ ] Unité test\n' >"$repo/docs/BACKLOG.md"
+printf '# @spec docs/BACKLOG.md#unite-test | docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add docs/BACKLOG.md app.py
+expect_success "pre-commit accepte une référence de backlog stable" run_staged
+
+new_repo
+mkdir -p "$repo/formation"
+printf '# @spec formation/SPECIFICATION.md#atelier\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_success "pre-commit accepte un contrat documentaire hors docs/" run_staged
+
+new_repo
+printf '# @spec docs/AUTOMATION.md\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_failure "pre-commit refuse un marqueur sans ancre" run_staged
+
+new_repo
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/fichier avec espaces.py"
+git -C "$repo" add "fichier avec espaces.py"
+expect_success "pre-commit gère un chemin contenant des espaces" run_staged
+
+new_repo
+printf 'SECRET=exemple\n' >"$repo/.env.local"
+git -C "$repo" add -f .env.local
+expect_failure "pre-commit refuse un fichier .env sensible" run_staged
+
+new_repo
+secret="AKIA$(printf 'A%.0s' {1..16})"
+printf 'credential=%s\n' "$secret" >"$repo/notes.txt"
+git -C "$repo" add notes.txt
+expect_failure "pre-commit détecte un secret à forte confiance" run_staged
+
+git -C "$repo" config color.ui always
+expect_failure "pre-commit détecte un secret avec les couleurs forcées" run_staged
+
+new_repo
+ln -s README.md "$repo/notes.txt"
+git -C "$repo" add notes.txt
+git -C "$repo" commit -q -m "Ajoute un lien de fixture"
+rm "$repo/notes.txt"
+printf 'credential=%s\n' "$secret" >"$repo/notes.txt"
+git -C "$repo" add notes.txt
+expect_failure "pre-commit contrôle un changement de type de fichier" run_staged
+
+new_repo
+mkdir -p "$repo/tests/fixtures"
+printf '{"example": true}\n' >"$repo/tests/fixtures/example.json"
+git -C "$repo" add tests/fixtures/example.json
+expect_success "pre-commit accepte une fixture de données sans commentaire de code" run_staged
+
+message_file="$test_root/message"
+printf 'Ajoute les garde-fous Git\n' >"$message_file"
+expect_success "commit-msg accepte un message sans signature" run_message "$message_file"
+printf 'Ajoute les garde-fous\n\nCo-Authored-By: Robot <robot@example.test>\n' >"$message_file"
+expect_failure "commit-msg refuse Co-Authored-By" run_message "$message_file"
+printf 'Ajoute les garde-fous\n\nGenerated by Codex\n' >"$message_file"
+expect_failure "commit-msg refuse une signature d'assistant" run_message "$message_file"
+
+new_repo
+mkdir -p "$repo/subdir"
+cp -R "$source_root/.githooks" "$repo/.githooks"
+mkdir -p "$repo/scripts"
+cp -R "$source_root/scripts/git-hooks" "$repo/scripts/git-hooks"
+expect_success "install fonctionne depuis un sous-répertoire" \
+  bash -c 'cd "$1/subdir" && "$1/scripts/git-hooks/install" --worker' _ "$repo"
+expect_success "install est idempotent" \
+  bash -c 'cd "$1" && "$1/scripts/git-hooks/install" --worker' _ "$repo"
+[[ "$(git -C "$repo" config --local --get core.hooksPath)" == ".githooks" ]] || fail "install configure core.hooksPath"
+[[ "$(git -C "$repo" config --local --get factory.hooks.mode)" == "worker" ]] || fail "install configure le mode worker"
+git -C "$repo" config --local core.hooksPath custom-hooks
+expect_failure "install préserve un chemin de hooks préexistant" \
+  bash -c 'cd "$1" && "$1/scripts/git-hooks/install"' _ "$repo"
+[[ "$(git -C "$repo" config --local --get core.hooksPath)" == "custom-hooks" ]] || fail "install ne remplace pas les hooks existants"
+
+new_repo
+cp -R "$source_root/.githooks" "$repo/.githooks"
+mkdir -p "$repo/scripts"
+cp -R "$source_root/scripts/git-hooks" "$repo/scripts/git-hooks"
+(cd "$repo" && scripts/git-hooks/install --worker >/dev/null)
+printf '# @spec docs/AUTOMATION.md#pre-commit-hook\nprint("ok")\n' >"$repo/app.py"
+git -C "$repo" add app.py
+expect_success "les hooks installés acceptent un commit conforme" \
+  git -C "$repo" commit -q -m "Ajoute un fichier conforme"
+bare_remote="$test_root/remote.git"
+git init --bare -q "$bare_remote"
+git -C "$repo" remote add origin "$bare_remote"
+expect_success "le hook pre-push installé accepte un push réel vers un dépôt temporaire" \
+  git -C "$repo" push -q origin main
+expect_success "le hook pre-push installé accepte un push réel déjà à jour" \
+  git -C "$repo" push -q origin main
+printf 'suite\n' >>"$repo/README.md"
+git -C "$repo" add README.md
+expect_failure "le hook commit-msg installé refuse une signature" \
+  git -C "$repo" commit -q -m "Generated by Codex"
+git -C "$repo" -c core.hooksPath=/dev/null commit -q \
+  --author='Intrus <intrus@example.test>' -m "Crée une fixture non conforme"
+expect_failure "le hook pre-push installé bloque un commit non conforme" \
+  git -C "$repo" push -q origin main
+
+new_repo
+base_oid="$(git -C "$repo" rev-parse HEAD)"
+git -C "$repo" config --local factory.hooks.mode worker
+git -C "$repo" config --local factory.hooks.baseline "$base_oid"
+printf 'suite\n' >>"$repo/README.md"
+git -C "$repo" add README.md
+git -C "$repo" commit -q -m "Ajoute une évolution"
+head_oid="$(git -C "$repo" rev-parse HEAD)"
+update="refs/heads/main $head_oid refs/heads/main $base_oid"
+expect_success "pre-push accepte origin/main en fast-forward" run_push origin "$update"
+first_push_update="refs/heads/main $head_oid refs/heads/main $(printf '0%.0s' {1..40})"
+expect_success "pre-push utilise la baseline lors d'un premier push" run_push origin "$first_push_update"
+expect_success "pre-push accepte un push déjà à jour" run_push origin ""
+expect_failure "pre-push refuse un autre remote en mode worker" run_push miroir "$update"
+non_fast_forward="refs/heads/main $base_oid refs/heads/main $head_oid"
+expect_failure "pre-push refuse une mise à jour non fast-forward" run_push origin "$non_fast_forward"
+deletion="refs/heads/main $(printf '0%.0s' {1..40}) refs/heads/main $head_oid"
+expect_failure "pre-push refuse la suppression de main" run_push origin "$deletion"
+tag_update="refs/tags/v1 $head_oid refs/tags/v1 $(printf '0%.0s' {1..40})"
+expect_failure "pre-push refuse un tag en mode worker" run_push origin "$tag_update"
+
+new_repo
+base_oid="$(git -C "$repo" rev-parse HEAD)"
+git -C "$repo" config --local factory.hooks.mode worker
+git -C "$repo" config --local factory.hooks.baseline "$base_oid"
+printf 'suite\n' >>"$repo/README.md"
+git -C "$repo" add README.md
+git -C "$repo" commit -q -m "Ajoute une évolution"
+head_oid="$(git -C "$repo" rev-parse HEAD)"
+update="refs/heads/feature $head_oid refs/heads/feature $(printf '0%.0s' {1..40})"
+expect_failure "pre-push refuse une branche secondaire en mode worker" run_push origin "$update"
+
+new_repo
+base_oid="$(git -C "$repo" rev-parse HEAD)"
+git -C "$repo" config --local factory.hooks.mode worker
+git -C "$repo" config --local factory.hooks.baseline "$base_oid"
+printf 'suite\n' >>"$repo/README.md"
+git -C "$repo" add README.md
+git -C "$repo" commit -q --author='Intrus <intrus@example.test>' -m "Ajoute une évolution"
+head_oid="$(git -C "$repo" rev-parse HEAD)"
+update="refs/heads/main $head_oid refs/heads/main $base_oid"
+expect_failure "pre-push refuse l'auteur incorrect d'un commit sortant" run_push origin "$update"
+
+new_repo
+git -C "$repo" config --local core.hooksPath .githooks
+git -C "$repo" config --local factory.hooks.mode worker
+git -C "$repo" update-ref refs/remotes/origin/main HEAD
+expect_success "garde finale accepte un état strictement synchronisé" run_session
+printf 'sale\n' >"$repo/untracked.txt"
+expect_failure "garde finale refuse un fichier non suivi" run_session
+
+new_repo
+git -C "$repo" config --local core.hooksPath .githooks
+git -C "$repo" config --local factory.hooks.mode worker
+git -C "$repo" update-ref refs/remotes/origin/main HEAD
+printf 'suite\n' >>"$repo/README.md"
+git -C "$repo" add README.md
+git -C "$repo" commit -q -m "Crée une avance locale"
+expect_failure "garde finale refuse HEAD différent de origin/main" run_session
+ahead_oid="$(git -C "$repo" rev-parse HEAD)"
+git -C "$repo" update-ref refs/remotes/origin/main "$ahead_oid"
+git -C "$repo" checkout -q --detach HEAD~1
+expect_failure "garde finale refuse HEAD détaché" run_session
+git -C "$repo" update-ref refs/heads/main HEAD
+git -C "$repo" checkout -q main
+expect_failure "garde finale refuse un retard sur origin/main" run_session
+
+new_repo
+git -C "$repo" config --local core.hooksPath .githooks
+git -C "$repo" config --local factory.hooks.mode worker
+git -C "$repo" update-ref refs/remotes/origin/main HEAD
+printf 'temporaire\n' >>"$repo/README.md"
+git -C "$repo" stash push -q -m sauvegarde-etat-initial-worker
+expect_failure "garde finale refuse un stash temporaire oublié" run_session
+
+printf '\n%s succès, %s échec(s)\n' "$passes" "$failures"
+[[ "$failures" -eq 0 ]]

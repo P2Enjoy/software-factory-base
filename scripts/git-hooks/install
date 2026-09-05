@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# @spec docs/AUTOMATION.md#hook-installation
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+# shellcheck source=./lib.sh
+source "$script_dir/lib.sh"
+
+mode="standard"
+if [[ "${1:-}" == "--worker" ]]; then
+  mode="worker"
+  shift
+fi
+[[ "$#" -eq 0 ]] || factory_die "usage : scripts/git-hooks/install [--worker]"
+
+repo_root="$(factory_repo_root)"
+cd "$repo_root"
+
+for hook in pre-commit commit-msg pre-push; do
+  [[ -x ".githooks/$hook" ]] ||
+    factory_die ".githooks/$hook doit exister et être exécutable"
+done
+
+existing_hooks_path="$(git config --get core.hooksPath 2>/dev/null || true)"
+[[ -z "$existing_hooks_path" || "$existing_hooks_path" == ".githooks" ]] ||
+  factory_die "core.hooksPath vaut '$existing_hooks_path' ; intégrer les hooks existants avant d'activer ceux du socle"
+
+git config --local core.hooksPath .githooks
+git config --local factory.hooks.mode "$mode"
+
+if ! git config --local --get factory.hooks.baseline >/dev/null 2>&1; then
+  baseline="$(git rev-parse --verify HEAD 2>/dev/null || true)"
+  [[ -z "$baseline" ]] || git config --local factory.hooks.baseline "$baseline"
+fi
+
+printf 'Hooks activés : mode=%s, chemin=.githooks\n' "$mode"
+printf 'L’identité Git reste à configurer explicitement puis sera contrôlée au commit.\n'
