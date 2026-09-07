@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc"><title id="title">Un responsable, des missions bornées</title><desc id="desc">Le principal vérifie et décide ; les rôles auxiliaires rendent des constats. Principal: Seul éditeur et décideur; Explorer: Cartographier un flux; Reviewer: Relire un changement; Verifier: Exécuter une preuve ciblée. Le vérificateur compare l&#x27;état avant/après ; aucune édition concurrente.</desc>
+<rect width="1200" height="460" rx="14" fill="#F7F8FA"/><g font-family="Arial, sans-serif">
+<text x="32" y="44" font-size="24" fill="#4B5563" font-weight="400"><tspan x="32" dy="0">Le principal vérifie et décide ; les rôles auxiliaires rendent des constats.</tspan></text>
+<path d="M600 179 V210 H210 V238 M600 210 V238 M600 210 H990 V238" fill="none" stroke="#23468C" stroke-width="3"/>
+<rect x="400" y="83" width="400" height="96" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="418" y="101" width="5" height="60" rx="2" fill="#D9CF4A"/>
+<text x="437" y="120" font-size="25" fill="#23468C" font-weight="700"><tspan x="437" dy="0">Principal</tspan></text>
+<text x="437" y="152" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="437" dy="0">Seul éditeur et décideur</tspan></text>
+<rect x="32" y="238" width="356" height="111" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="50" y="256" width="5" height="75" rx="2" fill="#D9CF4A"/>
+<text x="69" y="275" font-size="25" fill="#23468C" font-weight="700"><tspan x="69" dy="0">Explorer</tspan></text>
+<text x="69" y="307" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="69" dy="0">Cartographier un flux</tspan></text>
+<rect x="422" y="238" width="356" height="111" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="440" y="256" width="5" height="75" rx="2" fill="#D9CF4A"/>
+<text x="459" y="275" font-size="25" fill="#23468C" font-weight="700"><tspan x="459" dy="0">Reviewer</tspan></text>
+<text x="459" y="307" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="459" dy="0">Relire un changement</tspan></text>
+<rect x="812" y="238" width="356" height="111" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="830" y="256" width="5" height="75" rx="2" fill="#D9CF4A"/>
+<text x="849" y="275" font-size="25" fill="#23468C" font-weight="700"><tspan x="849" dy="0">Verifier</tspan></text>
+<text x="849" y="307" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="849" dy="0">Exécuter une preuve ciblée</tspan></text>
+<path d="M32 391 H1168" stroke="#D9CF4A" stroke-width="4"/>
+<text x="32" y="423" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="32" dy="0">Le vérificateur compare l&#x27;état avant/après ; aucune édition concurrente.</tspan></text>
+</g></svg>

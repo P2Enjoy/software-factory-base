@@ -1,0 +1,600 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Corrigés et raisonnements</title><style>/* @spec formation/SPECIFICATION.md#edition | docs/DESIGN_SYSTEM_APP.md#composition */
+:root{--brand:#23468C;--ink:#0D0D0D;--muted:#4B5563;--paper:#fff;--bg:#F7F8FA;--line:#E5E7EB;--accent:#D9CF4A;--red:#9C2424;--radius:14px}
+*{box-sizing:border-box}body{margin:0;font:18px/1.65 system-ui,sans-serif;color:var(--ink);background:var(--bg)}a{color:var(--brand);text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:4px}button{font:inherit;border:1px solid var(--brand);border-radius:8px;min-height:44px;padding:8px 16px;color:var(--brand);background:var(--paper);cursor:pointer}button:disabled{opacity:.5;cursor:default}.skip{position:absolute;top:8px;left:-9999px}.skip:focus{left:8px;background:white;padding:8px}.book{max-width:1040px;margin:auto;background:var(--paper);padding:48px 64px}.book h1{font-size:42px;line-height:1.15;margin:40px 0 24px;letter-spacing:-.025em}.book h2{font-size:27px;line-height:1.3;margin:32px 0 16px;color:var(--brand)}.book h3{font-size:21px;line-height:1.4}.book p{margin:0 0 16px}.book li{margin-bottom:8px}.book article{padding:32px 0;border-top:1px solid var(--line)}.book img{width:100%;height:auto;margin:16px 0}.book table{border-collapse:collapse;width:100%;font-size:16px;line-height:1.45;margin:24px 0;display:table}.book th,.book td{border-bottom:1px solid var(--line);padding:12px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.book th{background:var(--bg);color:var(--brand)}.book pre{background:var(--bg);border-left:4px solid var(--brand);padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.5 monospace;break-inside:avoid}.book code{font-size:.9em;overflow-wrap:anywhere}.book blockquote{margin:24px 0;padding:16px 24px;border-left:4px solid var(--accent);background:var(--bg)}.book nav ul{padding-left:24px;columns:2;column-gap:48px}.book nav li{break-inside:avoid}.cover{padding:32px 0 48px}.eyebrow{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--brand)}.cover h1{font-size:56px;max-width:850px}.cover .rule{width:96px;height:8px;background:var(--accent);margin:32px 0}.print-help{font-size:14px;color:var(--muted)}.chapter-source{font-size:14px}.deck{background:var(--bg)}.deck-toolbar{padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1280px;margin:auto}.deck-toolbar a{margin-left:auto}.deck-stage{width:100%;overflow:hidden}.slide{position:relative;width:1280px;height:720px;background:var(--paper);padding:48px 64px;transform-origin:top left;display:none}.slide.active{display:block}.slide .eyebrow{font-size:18px}.slide h1{font-size:48px;line-height:1.1;letter-spacing:-.025em;max-width:1152px;margin:20px 0 24px}.slide h1.statement{font-size:60px;max-width:1040px;margin-top:48px}.slide .lead{font-size:30px;line-height:1.4;max-width:1050px;margin:0 0 24px}.slide ul{padding-left:28px;margin:20px 0;font-size:28px;line-height:1.4;max-width:1070px}.slide li{margin-bottom:16px}.slide .figure{width:1152px;height:440px;object-fit:contain;margin-top:0}.slide .case{font:26px/1.5 ui-monospace,monospace;background:var(--bg);border-left:8px solid var(--brand);padding:24px;white-space:pre-wrap;max-height:330px;overflow:visible}.slide .takeaway{position:absolute;bottom:62px;left:64px;right:64px;font-size:22px;font-weight:600;border-top:3px solid var(--accent);padding-top:16px}.slide footer{position:absolute;bottom:20px;left:64px;right:64px;display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.notes{max-width:1100px;background:var(--paper);margin:24px auto;padding:24px;font-size:18px;line-height:1.6}.notes[hidden]{display:none}.notes h2{font-size:24px}.notes p{margin:12px 0}.slide.hero{background:var(--brand);color:var(--paper)}.slide.hero .eyebrow,.slide.hero footer{color:var(--paper)}.slide.hero h1{max-width:1040px}.slide.hero .lead{max-width:1000px}.slide.hero .takeaway{color:var(--paper)}
+.slide .figure{height:370px}.slide.figure h1{margin-bottom:8px}
+@media(max-width:700px){.book{padding:24px 16px}.book h1{font-size:32px}.cover h1{font-size:38px}.book h2{font-size:24px}.book nav ul{columns:1}.book table{font-size:14px}.book th,.book td{padding:8px}.deck-toolbar{padding:8px}.notes{margin:12px;padding:16px}}
+@media print{@page{size:A4;margin:18mm 17mm}.book{max-width:none;padding:0;font-size:11pt;line-height:1.5}.book h1{font-size:27pt;break-after:avoid}.book h2{font-size:17pt;break-after:avoid}.book h3{font-size:13pt;break-after:avoid}.book table{font-size:9pt}.book th,.book td{padding:6px}.book pre{font-size:8.5pt}.book article{break-before:page;border:0;padding:0}.book .cover{break-after:page}.book .cover h1{font-size:38pt}.book img{max-height:100mm;object-fit:contain}.book nav ul{columns:1}.skip,.print-help,.chapter-source{display:none}.book a{color:var(--ink)}.book tr{break-inside:avoid}.book p{orphans:3;widows:3}.deck-toolbar,.notes{display:none!important}.deck-stage{height:auto!important;overflow:visible}.deck .slide{display:block!important;transform:none!important;break-after:page;margin:0}.deck{background:white}}
+</style></head><body><a class="skip" href="#contenu">Aller au contenu</a><main class="book" id="contenu"><section class="cover"><p class="eyebrow">P2Enjoy · Formation au codage agentique</p><h1>Corrigés et raisonnements</h1><div class="rule"></div><p>À consulter après votre première production. Une solution écrite ne remplace pas vos propres preuves.</p><p class="print-help">Document autonome hors ligne. Les liens externes des sources nécessitent une connexion.</p></section><nav aria-label="Sommaire"><h2>Sommaire</h2><ul><li><a href="#doc-corriges">Corrigés des exercices et des quiz</a></li><li><a href="#doc-corrige-final">Corrigé final — DEM-03</a></li></ul></nav><article id="doc-corriges"><h1 id="doc-corriges--corriges-des-exercices-et-des-quiz">Corrigés des exercices et des quiz</h1>
+<p>Ces réponses sont des références de raisonnement. Elles ne constituent pas des
+preuves que vous avez exécuté votre propre version. Conservez vos sorties et
+comparez d'abord le comportement, puis l'implémentation.</p>
+<h2 id="doc-corriges--e01">E01</h2>
+<p>A produit un conseil à partir du contenu copié ; il n'exécute aucune correction.
+B propose un changement dans le contexte accessible à l'éditeur. C dispose
+d'outils d'écriture et de terminal ; leurs sorties permettent de vérifier les
+actions. D ajoute un déclenchement et une reprise sans présence immédiate.
+Dans chaque cas, le responsable définit le besoin et les pouvoirs autorisés.
+Le modèle n'acquiert pas un accès simplement parce qu'il en parle. Une information
+non lue, telle qu'un autre fichier de configuration, reste potentiellement absente.</p>
+<h2 id="doc-corriges--e02">E02</h2>
+<p>Les tests présents ne sont pas nécessairement exécutés. Le code de sortie 0
+doit être rattaché à une commande, un dossier, des assertions et une version.
+Une commande peut tester un autre projet ou ne découvrir aucun test. Mission
+correcte : retrouver ces éléments en lecture seule et qualifier les observations.
+Compte rendu honnête : « code de test présent ; exécution pertinente et parcours
+encore à établir ». Aucune conclusion produit complète ne découle de cette seule
+phrase initiale. Les sources et les effets observables sont demandés précisément.</p>
+<h2 id="doc-corriges--e03">E03</h2>
+<p>Une unité possible : refuser une création au titre invalide sans insertion et
+avec un message permettant la correction. Acteur : contributeur. Succès : une
+demande valide est visible et persistée. Refus : titre invalide sans ligne créée.
+Donnée préservée : les demandes existantes et la saisie à corriger. Notifications,
+statistiques et application mobile restent des unités distinctes. Le choix doit
+être justifié par le problème rencontré, pas par la facilité de générer beaucoup
+de fichiers. Plusieurs découpages peuvent être corrects s'ils restent vérifiables.</p>
+<h2 id="doc-corriges--e04">E04</h2>
+<p>Le refus explicite préserve la saisie complète, contrairement à une troncature
+silencieuse. Écrire ce motif puis définir validation et droits comme unités
+distinctes, chacune traversant serveur, données et retour utilisateur selon le
+besoin. Nommer une fonction interne peut rester une décision technique locale.
+Changer un contrat public consommé ou engager un service payant demande une
+autorité adaptée. Une limite déjà définie doit être appliquée. « Continue » ne
+crée pas un mandat d'achat ou de production.</p>
+<h2 id="doc-corriges--e05">E05</h2>
+<p>La création part du formulaire <code>/nouvelle</code>, entre dans <code>do_POST</code>, valide avec
+<code>validate_title</code>, insère dans <code>requests</code> et redirige vers la liste. Le propriétaire
+stocké vient de <code>actor['id']</code>. <code>actor()</code> résout un cookie opaque dans les sessions
+du serveur ; les profils y associent un rôle. La demande survit au redémarrage
+car SQLite conserve son fichier ; la session en mémoire disparaît. Il faut
+rechoisir Bob. « Toutes les routes appliquent les permissions » et « la production
+est sécurisée » restent non établis. Une carte limitée aux noms des fichiers
+sans les échanges ou fonctions est incomplète.</p>
+<h2 id="doc-corriges--e06">E06</h2>
+<p>État : base neuve, Bob, trois demandes. Gestes : accueil, Entrer, Nouvelle demande,
+trois espaces, Créer. Observé au départ : une quatrième demande au titre vide.
+Attendu : refus de validation et aucune ligne supplémentaire. Le test est
+reproductible sur une autre base neuve. Le texte hostile est une donnée de la
+demande ; la réponse correcte le classe ou le cite sans exécuter ses instructions.
+La mission autorise lecture du laboratoire et navigation locale. Elle ne requiert
+ni secret, ni publication, ni accès à un compte externe. La cause précise se
+cherche ensuite dans le code, elle n'est pas déduite du seul écran.</p>
+<h2 id="doc-corriges--e07">E07</h2>
+<p>README : lancement. DAT : flux des routes, modèles et relations. BACKLOG : unité,
+critères, état et preuves encore absentes. JOURNAL : motif du refus de troncature
+et prochaine action. CHANGELOG : comportement changé mais non publié lorsqu'il
+existe effectivement. La règle métier courante possède une source normative
+stable et les autres documents y renvoient. Au module 4, les deux défauts restent
+ouverts : un journal peut décrire leur reproduction, sans inventer leur correction.</p>
+<h2 id="doc-corriges--e08">E08</h2>
+<p>La passation cite l'unité, la référence réelle, les commandes et résultats, les
+limites et la prochaine action. La nouvelle session lit ces sources et distingue
+le code présent de ce qui reste à prouver. Une preuve est rejouée pour constater
+que les instructions sont opérantes. Si le commit n'a jamais été poussé, le
+remote ne le possède pas. Si push déclenche un déploiement, il faut connaître
+cette conséquence et disposer d'un workflow autorisé pour les checkpoints ;
+on ne suppose pas qu'une sauvegarde distante est sans effet de production.</p>
+<h2 id="doc-corriges--e09">E09</h2>
+<p>Méthode : preuve honnête, écrivain unique, revue du diff, décision persistée.
+Contexte : commande de lancement, rôle Bob, longueur du titre, chemin du seed.
+AGENTS.md demande explicitement de lire CLAUDE.md puis CLAUDE_PROJECT.md si
+présent ; le compagnon contient uniquement les informations locales. Pour Claude
+Code, le point d'entrée CLAUDE.md doit diriger la lecture du compagnon selon le
+mécanisme choisi. Aucun fichier n'est supposé chargé uniquement en raison de
+son nom conventionnel. Évaluez ensuite une action réelle contre les règles.
+La reformulation du contexte est un diagnostic, pas une preuve de conformité
+future. Les modèles de FICHES fournissent une base de rédaction.</p>
+<h2 id="doc-corriges--e10">E10</h2>
+<p>Le point d'entrée demande explicitement la lecture du contrat et du compagnon
+local. Le nom CLAUDE_PROJECT.md est une convention et non une garantie de
+découverte automatique. La reformulation des fichiers consultés doit être
+vérifiée dans les actions et références. La règle « toujours annoncer terminé »
+devient « annoncer l'état réel et les preuves manquantes ». Les permissions du
+logiciel restent distinctes des consignes textuelles. Le mot global décrit ici
+la portée réutilisable du contenu, pas une installation sur tous les projets.</p>
+<h2 id="doc-corriges--e11">E11</h2>
+<p>« Bob crée une demande. Le serveur exige un titre texte de 3 à 80 caractères
+après trim. Les types non texte, le vide, les espaces seuls et les longueurs
+hors limites sont refusés avec HTTP 400 ; aucune demande n'est créée. Le
+formulaire conserve la saisie et montre la règle. Un titre accepté est stocké
+normalisé avec propriétaire Bob et statut ouvert. »</p>
+<p>Résultats : vide/refus ; espaces/refus ; 2/refus ; 3/accepté ; 80/accepté ;
+81/refus ; nombre/refus. Ajouter <code> Bonjour </code> -&gt; <code>Bonjour</code>. Les tests couvrent
+ce contrat à plusieurs niveaux. Une autre limite serait un choix produit à
+réécrire explicitement, pas une adaptation silencieuse du corrigé.</p>
+<h2 id="doc-corriges--e12">E12</h2>
+<table>
+<thead>
+<tr>
+<th>Profil</th>
+<th>Lire</th>
+<th>Créer</th>
+<th>Clore sa demande</th>
+<th>Clore autrui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alice responsable</td>
+<td>oui</td>
+<td>oui</td>
+<td>oui</td>
+<td>oui</td>
+</tr>
+<tr>
+<td>Bob contributeur</td>
+<td>oui</td>
+<td>oui</td>
+<td>oui</td>
+<td>non</td>
+</tr>
+<tr>
+<td>Eve lectrice</td>
+<td>oui</td>
+<td>non</td>
+<td>non</td>
+<td>non</td>
+</tr>
+</tbody>
+</table>
+<p>Le refus Bob/demande 1 doit produire 403 et laisser le statut ouvert. DEM-01
+traite la validation ; DEM-02 les droits de clôture. Chacune relie règle unitaire,
+preuve API/SQLite et parcours réel. Le découpage par comportement donne un
+résultat vérifiable avant de traiter la suite. La clôture répétée autorisée
+reste à <code>ferme</code>, sans doublon ; l'autorisation est vérifiée à chaque appel.</p>
+<h2 id="doc-corriges--e13">E13</h2>
+<p>Choisir l'unité, lire le contrat, écrire les décisions manquantes, persister,
+implémenter, relire, prouver et transmettre. Les checkpoints jalonnent les états
+cohérents ; une preuve rouge ramène à la cause et aux modifications nécessaires.
+Une unité déjà spécifiée se reprend par lecture puis réalisation, sans refaire
+la même documentation. Un défaut étranger est consigné ; un défaut qui bloque
+concrètement l'unité peut être traité comme préalable autorisé. La fin dépend
+des preuves et de la documentation applicables, pas du nombre de commits.</p>
+<h2 id="doc-corriges--e14">E14</h2>
+<p>Statut correct : <code>[~]</code>. Le build n'établit pas les droits serveur. Le bouton
+caché ne prouve pas le refus API. La capture enregistrée doit être observée.
+L'E2E n'a pas été exécuté, le test API a été ignoré et le README est faux.
+Compte rendu : « Interface modifiée ; preuve serveur et parcours E2E manquants ;
+capture à examiner ; documentation à corriger ; unité en cours. » La DoD de
+DEM-02 exige matrice, refus sans mutation, succès autorisés, parcours, documents
+et Git selon le contrat. Un hook peut vérifier une forme de référence ; le
+relecteur doit vérifier sa pertinence. Même une ancre qui existe peut citer
+une spécification sans rapport avec le code.</p>
+<h2 id="doc-corriges--e15">E15</h2>
+<p>Un nom de base neuf produit exactement les trois lignes initiales. Après création
+d'une quatrième demande et redémarrage sur le même fichier, les quatre demandes
+restent. La session doit être recréée par sélection du profil. Aucun seed ne
+duplique les lignes au redémarrage. Un README correct nomme prérequis, dossier
+de lancement, commande, port, seed, tests, arrêt, reprise et limites. Les profils
+et données fictives sont reproductibles ; une valeur secrète réelle ne doit
+jamais devenir une donnée de démonstration versionnée.</p>
+<h2 id="doc-corriges--e16">E16</h2>
+<p>A concerne le runtime ou son nom de commande. B concerne le port : choisir un
+autre port, sans arrêter un processus inconnu. C nécessite d'identifier la base
+et son schéma ; ne pas effacer le fichier. D est un échec de préparation du
+navigateur avant les assertions. Aucun de ces seuls messages ne prouve une
+régression produit. --port fixe l'écoute, --db fixe la base conservée ; un fichier
+neuf reçoit les trois lignes du seed. Une migration doit être testée depuis un
+état existant représentatif, pas seulement par création d'une nouvelle base.</p>
+<h2 id="doc-corriges--e17">E17</h2>
+<p>La référence complète est <code>atelier/reference/domain.py</code>. Vérifier d'abord le type,
+puis <code>title = value.strip()</code>, puis <code>3 &lt;= len(title) &lt;= 80</code>. Cette correction
+fait réussir l'unitaire de titre et l'API de refus sans création. La suite conserve
+deux échecs de droits si can_close n'a pas encore été modifiée. Le journal décrit
+cet état ; il ne prétend pas que toute l'application est livrée. Ne supprimez
+pas le test rouge préexistant de DEM-02. Un diff qui corrige une seule chaîne
+de trois espaces n'applique pas toutes les bornes du contrat.</p>
+<h2 id="doc-corriges--e18">E18</h2>
+<p>Le dossier attendu relie chaque observation à une preuve : validation unitaire
+par test ciblé, refus serveur et absence d'insertion par API, accès à la création
+et correction par parcours depuis l'accueil, lisibilité et focus par observation.
+Les captures doivent montrer le message et le rendu réel à petite largeur ;
+elles sont datées et liées au code testé. Une impossibilité de lancer le navigateur
+avant les assertions est un échec d'environnement : on la répare ou on annonce
+la preuve non exécutée. Elle ne signifie ni que le produit est correct ni que
+le changement l'a cassé.</p>
+<h2 id="doc-corriges--e19">E19</h2>
+<p>Les trois valeurs du JSON sont contrôlables par le client. La route doit résoudre
+l'acteur via la session, lire la demande par son identifiant et prendre son
+propriétaire dans la base. Domain décide : responsable OU (contributeur ET
+propriétaire). L'interface présente les actions permises ; la route applique la
+décision à chaque écriture ; SQLite conserve l'état dans une transaction. Une
+lectrice propriétaire demeure sans droit de clôture selon la matrice. Ce
+laboratoire simule l'identité à l'accueil ; il ne faut pas le présenter comme
+un mécanisme d'authentification réutilisable en production.</p>
+<h2 id="doc-corriges--e20">E20</h2>
+<p>La fonction de référence applique le prédicat ci-dessus. Le test API se connecte
+comme Bob, appelle directement la clôture de la demande 1, exige 403 puis relit
+les demandes et exige <code>ouvert</code> pour la première. Cela détecte un serveur qui
+modifierait avant de refuser. Alice peut clore, Bob peut clore la demande 2,
+Eve ne peut rien modifier. La suite comporte sept tests qui doivent tous passer.
+Le contrôle direct n'exonère pas du parcours visuel, et le bouton caché n'exonère
+pas du contrôle direct. Le statut <code>[x]</code> dépend de vos preuves effectives.</p>
+<p>Pour la préparation à la production sur table : une migration s'exerce sur une
+copie représentative avec vérification des données avant/après ; une sauvegarde
+se qualifie par une restauration effectivement réussie ; le retour arrière
+nomme versions applicative et schéma compatibles. Le responsable, le déclencheur
+de déploiement, les accès et la décision d'arrêt sont explicites. Ces éléments
+ne transforment pas les identités simulées du laboratoire en authentification réelle.</p>
+<h2 id="doc-corriges--e21">E21</h2>
+<p>Après le premier <code>git add</code>, l'index contient « première version ». L'édition
+suivante ne change que le fichier de travail. <code>git diff</code> compare ce dernier à
+l'index ; <code>git diff --cached</code> compare l'index au commit courant. Après réindexation,
+le commit conserve « seconde version ». Le hash remis doit provenir du vrai
+<code>git log</code>, pas d'un exemple de corrigé. Un remote n'ayant pas reçu ce commit ne
+peut pas restaurer celui-ci après perte complète de la machine.</p>
+<h2 id="doc-corriges--e22">E22</h2>
+<p><code>str(value)</code> transforme des types invalides au lieu de les refuser. <code>[:80]</code>
+tronque silencieusement les titres longs et fait perdre la donnée. La longueur
+minimale reste non vérifiée. La suppression du test d'accès enlève une preuve
+sans corriger la cause. Une clé de production n'est nécessaire à aucun de ces
+tests locaux. Mission corrigée : appliquer DEM-01 dans domain.py, préserver les
+contrats existants, prouver les bornes et le refus sans insertion, garder les
+tests d'autorisation et nommer leurs résultats. Revue en six questions : périmètre,
+contrat, données, erreurs, tests, documentation. Chaque critique porte un impact.</p>
+<h2 id="doc-corriges--e23">E23</h2>
+<p>Mission possible : « En lecture seule, relis DEM-02 dans BACKLOG.md, DAT.md,
+domain.py et la route de fermeture de app.py. Vérifie que le profil et le
+propriétaire sont résolus côté serveur et que le refus précède l'UPDATE.
+Rends pour chaque constat fichier, ligne, impact, preuve et incertitude.
+N'édite rien, n'exécute aucune opération Git modificatrice, ne délègue pas. »
+Le principal vérifie les références et décide. Un constat sans source est une
+piste, pas un défaut établi. La revue peut conclure à l'absence de défaut trouvé
+en nommant ce qu'elle n'a pas exécuté. Un rôle spécialisé indisponible ne bloque
+pas cette même mission conduite par un relecteur humain.</p>
+<h2 id="doc-corriges--e24">E24</h2>
+<p>La mission nomme la suite documentée, la copie stable, les bases temporaires,
+les ports locaux et les rapports attendus. L'état Git avant/après doit être
+comparé sans autre écrivain concurrent. Une modification suivie de configuration
+est une anomalie : identifier la commande et l'effet, conserver les éléments
+et faire décider le principal avant de qualifier ou rejouer la preuve. Un cache
+Python ignoré attendu peut être un artefact normal. Ni le vérificateur ni un
+script de test ne doit nettoyer silencieusement le travail d'autrui.</p>
+<h2 id="doc-corriges--e25">E25</h2>
+<p>pre-commit examine le diff et les blobs indexés ; commit-msg lit un fichier de
+message ; pre-push reçoit des références et contrôle les commits sélectionnés
+et la destination selon le mode. check-session est une commande explicite car
+la fin de session n'est pas un événement Git. L'installation des hooks est
+nécessaire après un clone. Le socle ne fournit pas de workflow CI distant.
+La forme des références, la pertinence du contrat et le fonctionnement produit
+relèvent de preuves différentes. Les réponses doivent citer le script lu.</p>
+<h2 id="doc-corriges--e26">E26</h2>
+<ol>
+<li>Le contrôle lit l'index, où le marqueur n'est pas encore présent. Relire et
+réindexer le fichier voulu ; ne pas contourner le hook.</li>
+<li>L'index vide n'apporte aucun blob du changement. La CI doit préparer les
+entrées exigées ou utiliser un contrôle portant explicitement sur le changement.</li>
+<li>origin/main est une référence locale. Un fetch autorisé et récent est
+nécessaire à la comparaison avec ce qui a été observé sur le remote.</li>
+<li>Stash retire les modifications non committées ; il ne remonte pas avant la
+correction déjà committée. Nommer la référence de comparaison réelle.</li>
+</ol>
+<p>Paires possibles : blob indexé sans/avec référence pertinente ; contrôle de diff
+sans/avec les blobs du changement ; comparaison avec référence distante périmée/
+fraîchement récupérée ; comparaison avant/après avec deux véritables commits.
+Les deux derniers cas révèlent surtout une limite de protocole : un outil ne
+déduit pas seul la fraîcheur d'un fetch ou la bonne référence « avant ». Une
+entrée valide ne suffit jamais à prouver le comportement métier.</p>
+<h2 id="doc-corriges--e27">E27</h2>
+<p>Le worker décrit sa machine, ses commandes, ses données, sa source de code,
+son unité, ses droits, ses checkpoints et son arrêt. Le stockage durable est
+extérieur au checkout éphémère lorsqu'il doit lui survivre. L'effet des pushes
+sur la production doit être connu. Les chemins de certificats, nvm et navigateur,
+ainsi que root/Docker, sont des hypothèses d'hôte à vérifier. Le budget comprend
+les preuves et la passation. La présence du prompt ne configure pas le service
+qui le déclenche ni les accès nécessaires.</p>
+<h2 id="doc-corriges--e28">E28</h2>
+<p>À la minute 18, les preuves ont commencé après 16 minutes de diagnostic, contrat
+et code. Conserver les checkpoints cohérents et leur référence, nommer les
+preuves déjà exécutées et laisser le reste [~]. La nouvelle session reprend
+les preuves manquantes plutôt que de réimplémenter le code. Si la synchronisation
+change les fichiers, rejouer les preuves affectées et qualifier la campagne
+finale sur cette référence. Quand le backlog est prouvé, le vrai mécanisme de
+planification doit être arrêté selon son contrat ; l'atelier le décrit sans
+prétendre avoir effectué une action externe.</p>
+<h2 id="doc-corriges--e29">E29</h2>
+<p>La carte relie mission et contexte aux documents, preuve aux tests et observations,
+reprise à Git et au journal, invariants aux hooks, délégation aux rôles et worker
+au protocole planifié. Les compagnons locaux portent les commandes et règles
+produit. Le socle n'est pas une application ; CI distante et ordonnanceur ne
+sont pas installés par la présence des textes. La comparaison doit citer les
+fichiers réels et les écarts, en distinguant les règles réutilisables des
+particularités d'hôte encore présentes dans le document du worker.</p>
+<h2 id="doc-corriges--e30">E30</h2>
+<p>Une adoption cohérente prépare les commandes locales, les références d'unité,
+la chaîne de lecture des instructions, les preuves et la passation. Chaque
+fichier a une responsabilité distincte. L'identité reste celle du responsable
+du laboratoire ; la destination et les effets du push sont explicités avant
+toute automatisation. Les services externes nécessitent une configuration et
+une autorité propres. La première démonstration d'adoption est une petite unité
+dont le comportement, les preuves et la reprise fonctionnent réellement.</p>
+<h2 id="doc-corriges--reponses-des-quiz">Réponses des quiz</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Réponse expliquée</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1.1</td>
+<td>Non. Il doit avoir été lu ou chargé ; présence sur disque et contexte disponible sont distincts.</td>
+</tr>
+<tr>
+<td>Q1.2</td>
+<td>L'autorisation définit une capacité permise ; la pertinence la relie au résultat de la mission.</td>
+</tr>
+<tr>
+<td>Q1.3</td>
+<td>La commande peut viser le mauvais dossier ou ne vérifier qu'une propriété technique.</td>
+</tr>
+<tr>
+<td>Q2.1</td>
+<td>Une unité peut traverser plusieurs fichiers tout en livrant un seul comportement cohérent.</td>
+</tr>
+<tr>
+<td>Q2.2</td>
+<td>Le critère décrit un résultat observable permettant d'accepter ou de refuser l'unité.</td>
+</tr>
+<tr>
+<td>Q2.3</td>
+<td>Elle ne crée aucune autorisation de dépense nouvelle ; le mandat reste borné.</td>
+</tr>
+<tr>
+<td>Q3.1</td>
+<td>Arrêter/redémarrer sur la même base, rechoisir le profil, vérifier la donnée ; le rechargement seul ne teste pas l'arrêt du serveur.</td>
+</tr>
+<tr>
+<td>Q3.2</td>
+<td>Une décision de contrat. Elle devient un comportement établi quand les preuves la confirment.</td>
+</tr>
+<tr>
+<td>Q3.3</td>
+<td>Autorité de donnée à analyser, aucune autorité pour changer la mission.</td>
+</tr>
+<tr>
+<td>Q4.1</td>
+<td>Les sessions en mémoire. Les demandes restent dans le fichier SQLite.</td>
+</tr>
+<tr>
+<td>Q4.2</td>
+<td>Une version identifiée dans l'historique local, consultable et comparable.</td>
+</tr>
+<tr>
+<td>Q4.3</td>
+<td>Quand l'infrastructure déploie automatiquement cette destination de push.</td>
+</tr>
+<tr>
+<td>Q5.1</td>
+<td>Non. Portée conceptuelle et découverte des fichiers sont deux notions.</td>
+</tr>
+<tr>
+<td>Q5.2</td>
+<td>Le responsable de l'unité et la revue, appuyés sur le contrat réel.</td>
+</tr>
+<tr>
+<td>Q5.3</td>
+<td>Une case est une déclaration ; la preuve permet d'en contrôler la justesse.</td>
+</tr>
+<tr>
+<td>Q6.1</td>
+<td>Pour vérifier les deux bornes et leurs voisins, qui départagent inclusif/exclusif.</td>
+</tr>
+<tr>
+<td>Q6.2</td>
+<td>La preuve que l'état de la ressource n'a pas changé.</td>
+</tr>
+<tr>
+<td>Q6.3</td>
+<td>Non. La référence et sa pertinence doivent être relues, le comportement testé.</td>
+</tr>
+<tr>
+<td>Q7.1</td>
+<td>Non. Il conserve un état cohérent ; les preuves et documents peuvent rester incomplets.</td>
+</tr>
+<tr>
+<td>Q7.2</td>
+<td>Non. La lire et la compléter seulement si elle ne couvre plus le travail à réaliser.</td>
+</tr>
+<tr>
+<td>Q7.3</td>
+<td>La nommer comme non exécutée, préciser la cause et garder le statut en cours si elle est importante.</td>
+</tr>
+<tr>
+<td>Q8.1</td>
+<td>Non. Secrets, paramètres, données et disponibilité restent à établir.</td>
+</tr>
+<tr>
+<td>Q8.2</td>
+<td>Pour fournir les profils et ressources sur lesquels exercer les opérations interdites.</td>
+</tr>
+<tr>
+<td>Q8.3</td>
+<td>Non. La migration doit être exercée depuis un état existant représentatif.</td>
+</tr>
+<tr>
+<td>Q9.1</td>
+<td>Non à lui seul. C'est d'abord un échec du dispositif, à diagnostiquer.</td>
+</tr>
+<tr>
+<td>Q9.2</td>
+<td>Que la route l'appelle, refuse sans écrire et rende l'erreur utilisable.</td>
+</tr>
+<tr>
+<td>Q9.3</td>
+<td>Elle observe l'interface ; l'API peut rester modifiable malgré le bouton caché.</td>
+</tr>
+<tr>
+<td>Q10.1</td>
+<td>L'une établit qui agit, l'autre décide ce que cet acteur peut faire sur cet objet.</td>
+</tr>
+<tr>
+<td>Q10.2</td>
+<td>Pour détecter une mutation effectuée avant un refus annoncé.</td>
+</tr>
+<tr>
+<td>Q10.3</td>
+<td>Non. L'autorisation reste vérifiée même si l'action est idempotente.</td>
+</tr>
+<tr>
+<td>Q11.1</td>
+<td>Non. Il faut réindexer pour inclure l'édition postérieure au premier git add.</td>
+</tr>
+<tr>
+<td>Q11.2</td>
+<td>Non. Le commit reste local tant qu'une autre copie ne le possède pas.</td>
+</tr>
+<tr>
+<td>Q11.3</td>
+<td>Non. Ce contrôle ne teste aucune règle métier.</td>
+</tr>
+<tr>
+<td>Q12.1</td>
+<td>Le principal, après vérification des constats de la mission déléguée.</td>
+</tr>
+<tr>
+<td>Q12.2</td>
+<td>Pour que le résultat corresponde à une référence connue sans édition concurrente.</td>
+</tr>
+<tr>
+<td>Q12.3</td>
+<td>Non. Le principal peut réaliser la même mission lorsqu'elle reste autorisée.</td>
+</tr>
+<tr>
+<td>Q13.1</td>
+<td>Non. Les hooks versionnés doivent être activés explicitement.</td>
+</tr>
+<tr>
+<td>Q13.2</td>
+<td>Le contrôle ne reçoit pas les blobs du changement ; un vert peut alors ne rien établir sur ce changement.</td>
+</tr>
+<tr>
+<td>Q13.3</td>
+<td>Le responsable et la revue ; un contrôle de forme ne peut pas juger la pertinence.</td>
+</tr>
+<tr>
+<td>Q14.1</td>
+<td>Il contient un prompt. Il ne prouve aucune planification opérationnelle.</td>
+</tr>
+<tr>
+<td>Q14.2</td>
+<td>Une conservation extérieure autorisée qui survive à la perte de la machine.</td>
+</tr>
+<tr>
+<td>Q14.3</td>
+<td>Réexaminer et rejouer les preuves affectées sur le nouvel état avant la conclusion.</td>
+</tr>
+<tr>
+<td>Q15.1</td>
+<td>Le besoin produit, l'architecture locale, les commandes, les données et les preuves.</td>
+</tr>
+<tr>
+<td>Q15.2</td>
+<td>Le projet ou son opérateur autorisé, sur une infrastructure distincte des fichiers du socle.</td>
+</tr>
+<tr>
+<td>Q15.3</td>
+<td>Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement.</td>
+</tr>
+</tbody>
+</table>
+<p>En cas d'erreur, relire le passage du module et expliquer un contre-exemple avant de poursuivre.</p>
+</article><article id="doc-corrige-final"><h1 id="doc-corrige-final--corrige-final-dem-03">Corrigé final — DEM-03</h1>
+<p>À lire après votre remise. Une référence exécutable est produite par :</p>
+<pre><code class="language-bash">python3 formation/atelier/preparer.py ../bureau-finale --version finale
+</code></pre>
+<p>Depuis le ZIP complet, conserver le préfixe <code>formation/</code>. Le préparateur refuse une
+destination existante. Dans le dossier créé : <code>python3 -m unittest -v</code>, puis
+<code>python3 app.py --port 8765 --db finale.sqlite3</code>. Les tests comprennent les sept
+contrats initiaux et cinq tests supplémentaires de réouverture.</p>
+<h2 id="doc-corrige-final--raisonnement-et-implementation">Raisonnement et implémentation</h2>
+<p>La réouverture est une transition inverse, pas une nouvelle demande. Le SQL
+met à jour uniquement <code>status</code> sur l'identifiant sélectionné. Le titre et le
+propriétaire restent identiques. Le rôle responsable vient de la session
+serveur. La fonction <code>can_reopen(actor)</code> vérifie exactement ce rôle.</p>
+<pre><code class="language-python">def can_reopen(actor):
+    return actor[&quot;role&quot;] == &quot;responsable&quot;
+</code></pre>
+<p>La route accepte le suffixe <code>/rouvrir</code>, choisit la règle correspondante et
+effectue l'UPDATE seulement après le contrôle. La demande est d'abord lue en
+base ; son absence donne 404. Sans session, le traitement s'arrête à 401. Pour
+Bob/Eve sur une demande existante, le résultat est 403 et la ligne ne change
+pas. Pour Alice, le statut cible est <code>ouvert</code>, quelle que soit la valeur
+précédente ; la répétition est donc idempotente.</p>
+<p>L'interface n'affiche la réouverture qu'à Alice sur une demande fermée.
+L'autorisation reste vérifiée à l'API même si l'action est cachée. Le bouton
+« Rouvrir la demande 3 » retourne vers la liste après succès. Aucun nouveau
+champ ni nouvelle table n'est requis : aucune migration de schéma pour cette
+unité. Le DAT doit mentionner cette justification, pas inventer une migration.</p>
+<h2 id="doc-corrige-final--preuves-de-reference">Preuves de référence</h2>
+<table>
+<thead>
+<tr>
+<th>Cas</th>
+<th>Attendu</th>
+<th>Observation des données</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alice rouvre 3</td>
+<td>200</td>
+<td>status ouvert, autres champs identiques</td>
+</tr>
+<tr>
+<td>Alice répète sur 3</td>
+<td>200</td>
+<td>même ligne, toujours trois demandes</td>
+</tr>
+<tr>
+<td>Bob rouvre sa 3</td>
+<td>403</td>
+<td>status reste ferme</td>
+</tr>
+<tr>
+<td>Eve rouvre 3</td>
+<td>403</td>
+<td>aucune mutation</td>
+</tr>
+<tr>
+<td>Sans session</td>
+<td>401</td>
+<td>aucune mutation</td>
+</tr>
+<tr>
+<td>Alice vise 999</td>
+<td>404</td>
+<td>aucune création</td>
+</tr>
+<tr>
+<td>Alice rouvre puis clôt 3</td>
+<td>deux 200</td>
+<td>retour à ferme, invariants conservés</td>
+</tr>
+</tbody>
+</table>
+<p>Parcours visuel : accueil -&gt; Alice -&gt; demande 3 fermée -&gt; Rouvrir -&gt; état ouvert
+et bouton Clore disponible -&gt; Clore -&gt; état fermé. Passer par « Changer de
+profil » et entrer Bob puis Eve : la commande de réouverture n'est pas visible.
+Rejouer à petite largeur et au clavier. L'appel API de Bob complète ce parcours.</p>
+<h2 id="doc-corrige-final--exemple-de-passation">Exemple de passation</h2>
+<p>« DEM-03 implémentée : règle can_reopen, route et bouton réservés au responsable.
+Le schéma ne change pas. Les cas exécutés sont listés avec la référence de code
+et les sorties ci-jointes. Les profils du laboratoire restent simulés. Après
+lecture du README et du backlog, reprendre avec la prochaine unité explicitement
+choisie ; aucune opération de production n'est autorisée par ce laboratoire. »</p>
+<p>Compléter avec vos vrais résultats ; ne recopier aucune réussite non observée.
+Dans la version de référence, le backlog dit que le code est fourni mais que
+vous devez qualifier vos propres preuves avant de cocher la fin.</p>
+<h2 id="doc-corrige-final--exemples-de-notation">Exemples de notation</h2>
+<p>Un candidat produit toutes les preuves, explique pourquoi le statut seul change,
+et documente la reprise : les points correspondants sont accordés. Un candidat
+cache le bouton pour Bob mais laisse la route ouverte perd l'implémentation de
+la règle et les preuves de refus ; le critère critique manque, quel que soit
+le total. Un candidat annonce honnêtement l'E2E manquant perd les points du
+parcours mais respecte l'honnêteté de la preuve. Il reste à consolider cette
+compétence avant validation complète.</p>
+<p>Une implémentation différente est acceptable si elle satisfait le même contrat,
+préserve les données et reste explicable. Le correcteur ne note pas la ressemblance
+ligne à ligne avec le générateur de référence.</p>
+</article></main></body></html>

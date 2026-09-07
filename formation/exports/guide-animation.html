@@ -1,0 +1,991 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Animer la formation</title><style>/* @spec formation/SPECIFICATION.md#edition | docs/DESIGN_SYSTEM_APP.md#composition */
+:root{--brand:#23468C;--ink:#0D0D0D;--muted:#4B5563;--paper:#fff;--bg:#F7F8FA;--line:#E5E7EB;--accent:#D9CF4A;--red:#9C2424;--radius:14px}
+*{box-sizing:border-box}body{margin:0;font:18px/1.65 system-ui,sans-serif;color:var(--ink);background:var(--bg)}a{color:var(--brand);text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:4px}button{font:inherit;border:1px solid var(--brand);border-radius:8px;min-height:44px;padding:8px 16px;color:var(--brand);background:var(--paper);cursor:pointer}button:disabled{opacity:.5;cursor:default}.skip{position:absolute;top:8px;left:-9999px}.skip:focus{left:8px;background:white;padding:8px}.book{max-width:1040px;margin:auto;background:var(--paper);padding:48px 64px}.book h1{font-size:42px;line-height:1.15;margin:40px 0 24px;letter-spacing:-.025em}.book h2{font-size:27px;line-height:1.3;margin:32px 0 16px;color:var(--brand)}.book h3{font-size:21px;line-height:1.4}.book p{margin:0 0 16px}.book li{margin-bottom:8px}.book article{padding:32px 0;border-top:1px solid var(--line)}.book img{width:100%;height:auto;margin:16px 0}.book table{border-collapse:collapse;width:100%;font-size:16px;line-height:1.45;margin:24px 0;display:table}.book th,.book td{border-bottom:1px solid var(--line);padding:12px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.book th{background:var(--bg);color:var(--brand)}.book pre{background:var(--bg);border-left:4px solid var(--brand);padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.5 monospace;break-inside:avoid}.book code{font-size:.9em;overflow-wrap:anywhere}.book blockquote{margin:24px 0;padding:16px 24px;border-left:4px solid var(--accent);background:var(--bg)}.book nav ul{padding-left:24px;columns:2;column-gap:48px}.book nav li{break-inside:avoid}.cover{padding:32px 0 48px}.eyebrow{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--brand)}.cover h1{font-size:56px;max-width:850px}.cover .rule{width:96px;height:8px;background:var(--accent);margin:32px 0}.print-help{font-size:14px;color:var(--muted)}.chapter-source{font-size:14px}.deck{background:var(--bg)}.deck-toolbar{padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1280px;margin:auto}.deck-toolbar a{margin-left:auto}.deck-stage{width:100%;overflow:hidden}.slide{position:relative;width:1280px;height:720px;background:var(--paper);padding:48px 64px;transform-origin:top left;display:none}.slide.active{display:block}.slide .eyebrow{font-size:18px}.slide h1{font-size:48px;line-height:1.1;letter-spacing:-.025em;max-width:1152px;margin:20px 0 24px}.slide h1.statement{font-size:60px;max-width:1040px;margin-top:48px}.slide .lead{font-size:30px;line-height:1.4;max-width:1050px;margin:0 0 24px}.slide ul{padding-left:28px;margin:20px 0;font-size:28px;line-height:1.4;max-width:1070px}.slide li{margin-bottom:16px}.slide .figure{width:1152px;height:440px;object-fit:contain;margin-top:0}.slide .case{font:26px/1.5 ui-monospace,monospace;background:var(--bg);border-left:8px solid var(--brand);padding:24px;white-space:pre-wrap;max-height:330px;overflow:visible}.slide .takeaway{position:absolute;bottom:62px;left:64px;right:64px;font-size:22px;font-weight:600;border-top:3px solid var(--accent);padding-top:16px}.slide footer{position:absolute;bottom:20px;left:64px;right:64px;display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}.notes{max-width:1100px;background:var(--paper);margin:24px auto;padding:24px;font-size:18px;line-height:1.6}.notes[hidden]{display:none}.notes h2{font-size:24px}.notes p{margin:12px 0}.slide.hero{background:var(--brand);color:var(--paper)}.slide.hero .eyebrow,.slide.hero footer{color:var(--paper)}.slide.hero h1{max-width:1040px}.slide.hero .lead{max-width:1000px}.slide.hero .takeaway{color:var(--paper)}
+.slide .figure{height:370px}.slide.figure h1{margin-bottom:8px}
+@media(max-width:700px){.book{padding:24px 16px}.book h1{font-size:32px}.cover h1{font-size:38px}.book h2{font-size:24px}.book nav ul{columns:1}.book table{font-size:14px}.book th,.book td{padding:8px}.deck-toolbar{padding:8px}.notes{margin:12px;padding:16px}}
+@media print{@page{size:A4;margin:18mm 17mm}.book{max-width:none;padding:0;font-size:11pt;line-height:1.5}.book h1{font-size:27pt;break-after:avoid}.book h2{font-size:17pt;break-after:avoid}.book h3{font-size:13pt;break-after:avoid}.book table{font-size:9pt}.book th,.book td{padding:6px}.book pre{font-size:8.5pt}.book article{break-before:page;border:0;padding:0}.book .cover{break-after:page}.book .cover h1{font-size:38pt}.book img{max-height:100mm;object-fit:contain}.book nav ul{columns:1}.skip,.print-help,.chapter-source{display:none}.book a{color:var(--ink)}.book tr{break-inside:avoid}.book p{orphans:3;widows:3}.deck-toolbar,.notes{display:none!important}.deck-stage{height:auto!important;overflow:visible}.deck .slide{display:block!important;transform:none!important;break-after:page;margin:0}.deck{background:white}}
+</style></head><body><a class="skip" href="#contenu">Aller au contenu</a><main class="book" id="contenu"><section class="cover"><p class="eyebrow">P2Enjoy · Formation au codage agentique</p><h1>Animer la formation</h1><div class="rule"></div><p>Déroulé premium sur six journées et notes des quatre-vingts diapositives.</p><p class="print-help">Document autonome hors ligne. Les liens externes des sources nécessitent une connexion.</p></section><nav aria-label="Sommaire"><h2>Sommaire</h2><ul><li><a href="#doc-animation">Guide d&#x27;animation premium</a></li><li><a href="#doc-exports-notes-slides">Notes par diapositive</a></li></ul></nav><article id="doc-animation"><h1 id="doc-animation--guide-d-animation-premium">Guide d'animation premium</h1>
+<p>Le cours autonome contient les explications, les manipulations et les corrigés.
+L'animation ajoute les démonstrations commentées, l'observation des stratégies
+et un retour individualisé. Elle ne retient aucune connaissance indispensable
+hors du support. Les notes détaillées des 80 diapositives sont disponibles dans
+<a href="#doc-exports-notes-slides">notes-slides</a> et dans le PowerPoint.</p>
+<h2 id="doc-animation--preparation-et-cadre">Préparation et cadre</h2>
+<p>Lire le syllabus, vérifier l'installation avant la première séance et préparer
+des copies distinctes du laboratoire : départ, référence et finale. Choisir une
+base neuve pour chaque démonstration ; conserver les travaux des participants.
+Ne pas afficher la solution finale avant la remise. Rejouer les tests et le
+scénario visuel. Garder le PDF et les corrigés disponibles hors ligne.</p>
+<p>Le diagnostic d'entrée n'est pas éliminatoire. Faire nommer une application déjà
+produite et une vérification réellement réalisée. Constituer des binômes
+complémentaires ; le pilote manipule et le relecteur prédit le contrôle suivant,
+puis ils échangent au second exercice. Chacun garde ses artefacts et explique
+ses propres décisions lors de l'évaluation finale.</p>
+<p>Cohorte conseillée pour ce scénario : jusqu'à huit personnes par évaluateur.
+Au-delà, prévoir des évaluateurs supplémentaires pour les restitutions finales,
+ou organiser un autre créneau explicitement ajouté au programme. Les 25 minutes
+de restitution permettent environ trois minutes par personne à huit, sans
+prétendre fournir un entretien individuel long.</p>
+<h2 id="doc-animation--minutage-et-decoupage">Minutage et découpage</h2>
+<p>Chaque module : 30 min de concepts, 25 min de démonstration, 25 min d'exercice
+impair, 45 min d'exercice pair, 15 min de débrief, 10 min de quiz et passation.
+Les cinq slides du module accompagnent ces phases ; elles n'ont pas une durée
+égale. Les deux slides d'accueil sont comprises dans M1. L'évaluation dure
+270 min. Total : 2 520 minutes, soit 42 heures, hors pauses.</p>
+<table>
+<thead>
+<tr>
+<th>Journée de 420 min</th>
+<th>Déroulement</th>
+<th>État à conserver le soir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J1</td>
+<td>M1, M2, 120 min de M3</td>
+<td>E06 en cours, fiche de reproduction provisoire</td>
+</tr>
+<tr>
+<td>J2</td>
+<td>30 min de M3, M4, M5, 90 min de M6</td>
+<td>E12 en cours, matrice de droits provisoire</td>
+</tr>
+<tr>
+<td>J3</td>
+<td>60 min de M6, M7, M8, 60 min de M9</td>
+<td>E17 commencé, commande et rouge initial</td>
+</tr>
+<tr>
+<td>J4</td>
+<td>90 min de M9, M10, M11, 30 min de M12</td>
+<td>Concepts de M12 ; mission de revue à venir</td>
+</tr>
+<tr>
+<td>J5</td>
+<td>120 min de M12, M13, M14</td>
+<td>Passation E28 et protocole d'arrêt</td>
+</tr>
+<tr>
+<td>J6</td>
+<td>M15 puis évaluation de 270 min</td>
+<td>Remise, retour et plan de transfert</td>
+</tr>
+</tbody>
+</table>
+<p>En début de journée, reprendre les artefacts dans le temps restant du module,
+sans rejouer toute la démonstration. Placer les pauses entre séquences quand
+possible ; elles allongent l'amplitude réelle de la journée. Si une coupure
+intervient pendant un exercice, conserver la commande, la référence et la
+prochaine action, sans déclarer l'exercice achevé.</p>
+<h2 id="doc-animation--utiliser-les-slides">Utiliser les slides</h2>
+<p>Ouvrir slides.html : boutons Précédent/Suivant, flèches, Page précédente/suivante,
+Home/End. N affiche les notes ; le bouton Notes est utilisable au clavier.
+Les notes sont sous la slide dans la même fenêtre : ne pas les montrer au public
+si elles révèlent un corrigé. Utiliser le PowerPoint et son mode présentateur
+pour une séparation des écrans, ou les notes PDF sur un second appareil.
+L'impression et le PDF des slides ne contiennent pas les notes.</p>
+<h2 id="doc-animation--m1-de-l-assistant-a-l-agent">M1 — De l'assistant à l'agent</h2>
+<p>Slides 3 à 7. Résultat : carte des pouvoirs, responsabilités et risques.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Une réponse convaincante n'est pas une action vérifiée. »
+Faire recueillir des interprétations avant de nommer les notions. Le modèle génère à partir d'un contexte limité. Les outils lisent, écrivent ou exécutent. Le responsable fixe les pouvoirs et vérifie les effets.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Comparer un conseil copié dans un chat avec une lecture de fichier puis une commande de test visible. Faire distinguer le texte produit de la sortie de l'outil. Ne jamais demander un secret pour démontrer un accès.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E01 (25 min),
+puis E02 (45 min). E01 · Classer quatre situations d'assistance. E02 · Auditer une affirmation de tests réussis.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes.
+Question à projeter : « Un fichier présent sur disque est-il forcément connu du modèle ? » Réponse attendue : Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Les participants attribuent au modèle des pouvoirs qu'aucun outil ne lui donne.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m2-transformer-une-demande-en-unite-de-travail">M2 — Transformer une demande en unité de travail</h2>
+<p>Slides 8 à 12. Résultat : une unité cohérente avec critères d'acceptation.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « « Améliore l'application » ne dit pas quand s'arrêter. »
+Faire recueillir des interprétations avant de nommer les notions. Nommer l'acteur et son résultat. Délimiter le changement et les exclusions. Décrire un succès, un refus et la donnée préservée.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Partir de la demande vague du sujet E03. Recueillir trois interprétations, choisir le refus d'un titre invalide et écrire les exclusions. Montrer qu'une unité cohérente traverse parfois plusieurs fichiers.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E03 (25 min),
+puis E04 (45 min). E03 · Découper une demande trop large. E04 · Décider sans élargir le mandat.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit.
+Question à projeter : « Une unité de travail correspond-elle à un fichier ? » Réponse attendue : Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Le découpage suit les composants techniques sans livrer de résultat utilisable.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m3-construire-le-contexte">M3 — Construire le contexte</h2>
+<p>Slides 13 à 17. Résultat : protocole d'exploration et hiérarchie des sources.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Une jolie interface peut masquer un fonctionnement inconnu. »
+Faire recueillir des interprétations avant de nommer les notions. Partir d'un geste réellement observé. Suivre routes, règles et données. Séparer faits, hypothèses et décisions.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Sur une base neuve du prototype, créer une demande puis redémarrer le serveur sur le même fichier. Rechoisir Bob. Ouvrir ensuite do_POST, validate_title et l'INSERT pour justifier les flèches, sans corriger maintenant.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E05 (25 min),
+puis E06 (45 min). E05 · Cartographier une création de bout en bout. E06 · Reproduire un défaut et traiter une donnée hostile.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction.
+Question à projeter : « Recharger la page prouve-t-il la survie après arrêt du serveur ? » Réponse attendue : Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Une hypothèse sur le stockage est présentée comme un fait sans lecture ni redémarrage.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m4-externaliser-la-memoire">M4 — Externaliser la mémoire</h2>
+<p>Slides 18 à 22. Résultat : readme, dat, journal, backlog et changelog articulés.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Une nouvelle session ne doit pas deviner la suite. »
+Faire recueillir des interprétations avant de nommer les notions. Donner une responsabilité à chaque document. Conserver la décision, son motif et l'état réel. Tester la passation sans historique de chat.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Afficher README, DAT, BACKLOG et une entrée JOURNAL. Fermer le chat, ouvrir une nouvelle session et donner uniquement les fichiers. Comparer sa prochaine action à celle prévue. Ne pas prétendre les défauts corrigés au module 4.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E07 (25 min),
+puis E08 (45 min). E07 · Répartir les informations entre documents. E08 · Faire reprendre le travail sans le chat.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information.
+Question à projeter : « Quel document explique pourquoi la troncature a été refusée ? » Réponse attendue : Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Les mêmes règles sont copiées dans tous les fichiers et deviennent contradictoires.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m5-separer-methode-globale-et-contexte-local">M5 — Séparer méthode globale et contexte local</h2>
+<p>Slides 23 à 27. Résultat : premier contrat global et compagnon local.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Une méthode réutilisable ne connaît pas votre port local. »
+Faire recueillir des interprétations avant de nommer les notions. Global : responsabilités et manière de travailler. Local : métier, commandes, données et contraintes. Le mécanisme de lecture doit être explicite.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Classer huit règles de E09 avant de montrer le routage des fichiers. Expliquer Codex/AGENTS et Claude Code/CLAUDE à partir des sources officielles. Vérifier les fichiers effectivement lus, pas seulement leur reformulation.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E09 (25 min),
+puis E10 (45 min). E09 · Classer la méthode et le contexte. E10 · Construire et contrôler le routage de lecture.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique.
+Question à projeter : « CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ? » Réponse attendue : Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : On copie le grand contrat du socle sans savoir quel problème chaque règle résout.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m6-specifier-avant-d-implementer">M6 — Spécifier avant d'implémenter</h2>
+<p>Slides 28 à 32. Résultat : spécification stable et chaîne de traçabilité.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « « Un titre propre » possède trop d'interprétations. »
+Faire recueillir des interprétations avant de nommer les notions. Écrire les règles avant leur réalisation. Utiliser les bornes et les refus comme exemples. Relier contrat, unité, code et preuve.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Remplir au tableau la table vide, espaces, 2, 3, 80, 81 et type non texte. Faire produire les résultats avant de regarder domain.py. Construire ensuite rôle ET propriété pour la clôture.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E11 (25 min),
+puis E12 (45 min). E11 · Rédiger le contrat des titres. E12 · Établir la matrice d'accès et la traçabilité.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires.
+Question à projeter : « Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ? » Réponse attendue : Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Un marqueur de référence est traité comme une preuve de pertinence du contrat cité.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m7-concevoir-la-boucle-d-execution">M7 — Concevoir la boucle d'exécution</h2>
+<p>Slides 33 à 37. Résultat : protocole de session et checkpoints cohérents.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Un checkpoint n'est pas une livraison. »
+Faire recueillir des interprétations avant de nommer les notions. Comprendre et persister avant d'implémenter. Vérifier puis corriger la cause du défaut. Transmettre l'état réel, y compris les preuves manquantes.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Réordonner les cartes d'une session. Montrer une spécification déjà écrite : la reprise la lit, elle ne la réécrit pas par rituel. Présenter une clôture fictive avec build vert mais preuve API absente.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E13 (25 min),
+puis E14 (45 min). E13 · Ordonner une session et ses checkpoints. E14 · Refuser une fausse clôture.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire.
+Question à projeter : « Une capture enregistrée mais jamais ouverte est-elle une observation ? » Réponse attendue : Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Le protocole est une liste de cases cochées indépendamment des résultats.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m8-rendre-l-environnement-reproductible">M8 — Rendre l'environnement reproductible</h2>
+<p>Slides 38 à 42. Résultat : bootstrap et contrat de seed rejouables.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « « Ça marche chez moi » décrit un poste, pas une procédure. »
+Faire recueillir des interprétations avant de nommer les notions. Nommer runtime et dépendances. Documenter configuration, services et données. Rejouer sans remplacer un état existant.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Préparer une copie de départ, choisir un fichier de base neuf, compter les trois demandes. Ajouter une demande, arrêter puis redémarrer sur le même fichier. Vérifier que le seed ne réinitialise pas l'état. Ne pas supprimer la base d'un apprenant.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E15 (25 min),
+puis E16 (45 min). E15 · Rejouer le bootstrap et la persistance. E16 · Diagnostiquer sans masquer la panne.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant.
+Question à projeter : « Un conteneur suffit-il à rendre tout l'environnement reproductible ? » Réponse attendue : Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Un défaut d'environnement est masqué en changeant le code ou en supprimant des données.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m9-construire-la-preuve">M9 — Construire la preuve</h2>
+<p>Slides 43 à 47. Résultat : matrice de preuves et correction dem-01.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Un seul voyant vert ne prouve pas toute l'application. »
+Faire recueillir des interprétations avant de nommer les notions. Unitaire : la règle isolée. API et base : la route et les effets. Parcours et observation : le résultat utilisable.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Lancer un test des bornes sur le prototype, lire l'assertion, corriger validate_title dans la copie de démonstration et rejouer. Montrer ensuite le test HTTP/SQLite puis le parcours depuis l'accueil. Conserver les rouges de DEM-02.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E17 (25 min),
+puis E18 (45 min). E17 · Corriger DEM-01 avec un rouge utile. E18 · Prouver le parcours et inspecter le rendu.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve.
+Question à projeter : « Un test rouge d'import démontre-t-il le défaut métier recherché ? » Réponse attendue : Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Des tests sont supprimés ou ignorés pour obtenir une sortie entièrement verte.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m10-encadrer-securite-et-production">M10 — Encadrer sécurité et production</h2>
+<p>Slides 48 à 52. Résultat : politique d'accès, correction dem-02 et préparation de retour arrière.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Cacher un bouton ne protège pas une écriture. »
+Faire recueillir des interprétations avant de nommer les notions. Résoudre l'acteur côté serveur. Croiser rôle et propriété de la demande. Refuser avant d'écrire ; relire l'état après refus.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Montrer sur le prototype l'appel direct qui permet à Bob de clore la demande d'Alice. Corriger le prédicat sur une copie. Rejouer le refus et vérifier la base. Insister : les identités de ce laboratoire sont simulées, pas prêtes pour la production.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E19 (25 min),
+puis E20 (45 min). E19 · Identifier les valeurs non fiables. E20 · Corriger DEM-02 et préparer le retour arrière.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière.
+Question à projeter : « Pourquoi lire la ressource après une réponse 403 ? » Réponse attendue : Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : La propriété suffit à autoriser Eve, ou le propriétaire envoyé par le client est cru.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m11-utiliser-git-comme-memoire-durable">M11 — Utiliser Git comme mémoire durable</h2>
+<p>Slides 53 à 57. Résultat : discipline de commit, push et récupération.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Le fichier ouvert n'est pas forcément le prochain commit. »
+Faire recueillir des interprétations avant de nommer les notions. Travail, index, commit et remote sont distincts. Relire la sélection avant de la conserver. Fetch observe ; l'intégration modifie ; push transmet.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Faire prédire le contenu de chaque diff avant de l'afficher. Réindexer seulement après lecture. Puis dessiner A–B local et A–C distant : fetch révèle C mais n'intègre pas C. Montrer que --ff-only refuse une divergence.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E21 (25 min),
+puis E22 (45 min). E21 · Observer l'index et créer un checkpoint. E22 · Relire un changement qui dépasse la mission.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves.
+Question à projeter : « Un commit local protège-t-il de la perte complète de la machine ? » Réponse attendue : Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : Un push rejeté conduit à forcer, ou stash est présenté comme un retour avant un commit.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m12-orchestrer-plusieurs-agents">M12 — Orchestrer plusieurs agents</h2>
+<p>Slides 58 à 62. Résultat : rôles explorer, reviewer et verifier avec contrats.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Plusieurs agents ne créent pas plusieurs responsables. »
+Faire recueillir des interprétations avant de nommer les notions. Le principal décide et reste seul éditeur. Une mission déléguée est indépendante et bornée. Un résultat doit être vérifié avant synthèse.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Lire une mission de revue avec objectif, périmètre, sources et livrable. Montrer un constat avec fichier/impact/preuve puis une opinion sans source. Préparer la vérification sur un arbre stable sans édition concurrente.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E23 (25 min),
+puis E24 (45 min). E23 · Rédiger une mission de revue bornée. E24 · Vérifier sans édition concurrente.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue.
+Question à projeter : « Qui tranche si le reviewer propose un autre choix produit ? » Réponse attendue : Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : On délègue une tâche triviale ou on laisse plusieurs écrivains modifier la même unité.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m13-automatiser-les-invariants">M13 — Automatiser les invariants</h2>
+<p>Slides 63 à 67. Résultat : cartographie des hooks et de leurs entrées.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Un contrôle mécanique ne connaît pas votre intention. »
+Faire recueillir des interprétations avant de nommer les notions. Identifier l'événement qui déclenche le contrôle. Lire les entrées réellement examinées. Distinguer forme, sens et comportement.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Lire AUTOMATION puis le hook correspondant sans l'installer sur le laboratoire. Montrer que commit-msg reçoit un message et pre-commit la sélection. Expliquer qu'un clone ne prouve pas l'activation et que la CI distante reste à configurer.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E25 (25 min),
+puis E26 (45 min). E25 · Cartographier les hooks et leurs limites. E26 · Analyser quatre incidents d'automatisation.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve.
+Question à projeter : « Une CI verte sur un index vide a-t-elle vérifié le changement ? » Réponse attendue : Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : La présence des scripts est confondue avec leur activation, ou le vert de forme avec la qualité métier.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m14-passer-au-worker-autonome">M14 — Passer au worker autonome</h2>
+<p>Slides 68 à 72. Résultat : cycle planifié et protocole de reprise.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Une session autonome doit pouvoir être interrompue. »
+Faire recueillir des interprétations avant de nommer les notions. Récupérer un état durable connu. Borner budget, pouvoirs et destination. Laisser une passation et une condition d'arrêt.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Utiliser une carte d'interruption, pas un ordonnanceur réel. À la minute fictive 18, recueillir code/specification/preuves manquantes. Donner la passation à un autre binôme. Lire ensuite les hypothèses d'hôte de CloudWorker comme hypothèses à vérifier.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E27 (25 min),
+puis E28 (45 min). E27 · Spécifier le worker sur table. E28 · Interrompre, transmettre puis reprendre.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées.
+Question à projeter : « Le fichier docs/.routine installe-t-il une tâche planifiée ? » Réponse attendue : Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : La commande d'un hôte particulier est copiée ailleurs, ou un checkpoint local est supposé survivre à une machine éphémère.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--m15-assembler-la-software-factory">M15 — Assembler la software factory</h2>
+<p>Slides 73 à 77. Résultat : assemblage puis comparaison avec le dépôt.</p>
+<p><strong>Ouverture, 0–30 min.</strong> Partir de cette situation : « Le socle final répond aux problèmes rencontrés avant lui. »
+Faire recueillir des interprétations avant de nommer les notions. Assembler méthode, contexte, mémoire et preuves. Ajouter les contrôles utiles et les rôles bornés. Qualifier l'adoption sur une petite unité réelle.
+Le schéma sert à expliquer une relation : demander au groupe de la reformuler
+avec une situation du laboratoire.</p>
+<p><strong>Démonstration, 30–55 min.</strong> Faire reconstruire la carte de mémoire sans ouvrir le README du socle. Comparer ensuite aux vrais fichiers et noter ce qu'ils ne fournissent pas : produit, commandes de stack, CI distante, ordonnanceur et accès effectifs.</p>
+<p><strong>Pratique, 55–125 min.</strong> Afficher les consignes de E29 (25 min),
+puis E30 (45 min). E29 · Reconstruire puis comparer l'assemblage. E30 · Préparer une adoption justifiée.
+Faire nommer le livrable avant de commencer. Circuler en demandant une source
+ou une observation ; ne pas remplacer la production par une longue discussion
+de vocabulaire. Les plus rapides explicitent un contre-exemple ; les autres
+utilisent les indices, sans retirer un critère de sécurité.</p>
+<p><strong>Débrief et quiz, 125–150 min.</strong> Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution.
+Question à projeter : « Quelle première preuve montre une adoption utile de la méthode ? » Réponse attendue : Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.
+Traiter ensuite les trois quiz du chapitre et consulter leurs réponses après
+le vote individuel. Vigilance : La configuration est présentée comme un produit fini ou comme une garantie automatique de qualité.
+Avant de poursuivre, conserver le livrable et la prochaine action. Une réponse
+incorrecte entraîne une reprise du passage concerné et un exemple expliqué,
+pas une simple recopie du corrigé.</p>
+<h2 id="doc-animation--evaluation-finale-270-minutes">Évaluation finale — 270 minutes</h2>
+<p>Le sujet et son barème sont dans <a href="../EVALUATION.md">EVALUATION</a>, le corrigé dans
+<a href="../CORRIGE_FINAL.md">CORRIGE_FINAL</a>. Les slides 78–80 accompagnent le lancement,
+les jalons et la remise. L'agent est autorisé ; la personne reste responsable
+des choix et des preuves qu'elle présente.</p>
+<p>0–25 : prise en main de la référence ; 25–60 : contrat et plan ; 60–160 :
+réalisation ; 160–215 : preuves ; 215–245 : documentation et remise ; 245–270 :
+restitution. Annoncer les jalons sans dicter la solution. Une panne du poste
+se consigne ; distinguer capacité démontrée et preuve qui n'a pas pu être faite.</p>
+<p>Noter les critères observables du barème et les fautes critiques définies au
+sujet. Le nombre de tests n'est pas une note : une suite peut être nombreuse et
+ne pas couvrir les refus. Accepter les implémentations différentes qui respectent
+le contrat et ses preuves. En cas de preuve manquante, demander un compte rendu
+honnête plutôt qu'une déclaration de réussite.</p>
+<p>Retour individuel : un comportement démontré, une limite précise, un exercice
+de remédiation. Les erreurs de contrat renvoient à M2/M6 ; l'exploration à M3 ;
+la reprise à M4/M7 ; les pannes à M8 ; les preuves à M9 ; les accès à M10 ;
+la sélection et la synchronisation à M11. Faire rédiger une petite unité de
+transfert sur le projet personnel. La réussite pédagogique ne certifie pas
+l'aptitude du laboratoire à la production.</p>
+<h2 id="doc-animation--pannes-accessibilite-et-heterogeneite">Pannes, accessibilité et hétérogénéité</h2>
+<p>Agent ou réseau indisponible : utiliser les sources, HTML et PDF locaux ; travailler
+manuellement ou en binôme, puis rejouer les missions d'agent plus tard. Sans Python,
+l'analyse documentaire reste possible ; rejoindre une machine équipée pour les
+preuves et nommer celles non exécutées individuellement.</p>
+<p>Ne pas transmettre de secret, donnée personnelle ou accès de production au
+laboratoire. Tous les exemples utilisent des données fictives. L'absence d'une
+capacité technique n'est pas une raison de contourner une permission.</p>
+<p>Les figures disposent d'équivalents textuels. Ne jamais faire reposer un résultat
+sur la couleur seule ; lire les libellés et les états. Autoriser la lecture du
+cours à la place de la projection pour les personnes qui en ont besoin. Donner
+les consignes écrites avant le chronomètre. En binôme, alterner réellement les
+rôles ; personne ne doit rester spectateur pendant toute la manipulation.</p>
+<h2 id="doc-animation--maintenance-de-l-animation">Maintenance de l'animation</h2>
+<p>Après une première session réelle, relever les durées observées, questions
+récurrentes et exercices qui nécessitent trop d'aide. Modifier alors les exemples
+et indices sans déplacer les quinze modules du syllabus. Aucune séance
+avec apprenants n'est présentée comme déjà effectuée dans cette édition.
+Les changements d'interface de Codex ou Claude Code se vérifient dans les sources
+officielles avant la prochaine animation.</p>
+</article><article id="doc-exports-notes-slides"><h1 id="doc-exports-notes-slides--notes-par-diapositive">Notes par diapositive</h1>
+<p>80 diapositives. Les durées se rattachent aux phases du module, sans s’ajouter
+au programme de 42 heures. Les deux ouvertures sont comprises dans M1.</p>
+<h2 id="doc-exports-notes-slides--s01-coder-avec-un-agent">S01 — Coder avec un agent</h2>
+<p><strong>Minutage.</strong> Accueil intégré aux 15 premières minutes du module 1.</p>
+<p><strong>Intention.</strong> Poser le résultat du parcours sans présenter l'usine comme point de départ.</p>
+<p><strong>Explication / démonstration.</strong> Le groupe sait déjà obtenir de petites applications. Le cours ajoute les réflexes pour cadrer, comprendre, vérifier et transmettre. Les quinze modules conservent la progression des bases à l'assemblage final.</p>
+<p><strong>Question.</strong> Qu'avez-vous déjà créé avec une IA, et qu'avez-vous réellement vérifié ?</p>
+<p><strong>Réponse attendue.</strong> Un exemple vécu et une incertitude sont suffisants ; il ne s'agit pas d'un concours de niveau.</p>
+<p><strong>Transition.</strong> Présenter le laboratoire et les modalités de travail.</p>
+<h2 id="doc-exports-notes-slides--s02-un-parcours-deux-usages">S02 — Un parcours, deux usages</h2>
+<p><strong>Minutage.</strong> Inclus dans l'accueil du module 1, aucun temps ajouté au total.</p>
+<p><strong>Intention.</strong> Rendre l'apprenant autonome dans l'usage des supports.</p>
+<p><strong>Explication / démonstration.</strong> Présenter INSTALLATION, les chapitres, EXERCICES et les corrigés séparés. Vérifier le premier repère Git et les quatre échecs pédagogiques du prototype. Les pauses ne comptent pas dans les 42 heures.</p>
+<p><strong>Question.</strong> Que faire si l'agent ou le réseau est indisponible ?</p>
+<p><strong>Réponse attendue.</strong> Utiliser les supports et le code locaux, avancer manuellement puis reprendre l'assistance ; nommer les preuves non exécutées.</p>
+<p><strong>Transition.</strong> Entrer dans la distinction assistant/agent.</p>
+<h2 id="doc-exports-notes-slides--s03-de-l-assistant-a-l-agent">S03 — De l'assistant à l'agent</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Une réponse convaincante n'est pas une action vérifiée. Comparer un conseil copié dans un chat avec une lecture de fichier puis une commande de test visible. Faire distinguer le texte produit de la sortie de l'outil. Ne jamais demander un secret pour démontrer un accès.</p>
+<p><strong>Question.</strong> Un fichier présent sur disque est-il forcément connu du modèle ?</p>
+<p><strong>Réponse attendue.</strong> Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s04-l-agent-agit-dans-un-environnement">S04 — L'agent agit dans un environnement</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Mission : Résultat et limites. Modèle : Propose l'action. Outil : Exécute dans sa portée. Observation : Informe la suite. Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Carte des pouvoirs, responsabilités et risques. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s05-un-exemple-a-examiner">S05 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Comparer un conseil copié dans un chat avec une lecture de fichier puis une commande de test visible. Faire distinguer le texte produit de la sortie de l'outil. Ne jamais demander un secret pour démontrer un accès. Vigilance : Les participants attribuent au modèle des pouvoirs qu'aucun outil ne lui donne.</p>
+<p><strong>Question.</strong> Un fichier présent sur disque est-il forcément connu du modèle ?</p>
+<p><strong>Réponse attendue.</strong> Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s06-a-vous-de-produire">S06 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E01 pendant 25 minutes puis E02 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Carte des pouvoirs, responsabilités et risques. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s07-verifier-votre-comprehension">S07 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes. Erreur fréquente : Les participants attribuent au modèle des pouvoirs qu'aucun outil ne lui donne. Faire ensuite traiter Q1.1 à Q1.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Un fichier présent sur disque est-il forcément connu du modèle ?</p>
+<p><strong>Réponse attendue.</strong> Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.</p>
+<p><strong>Transition.</strong> Annoncer le module 2 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s08-transformer-une-demande-en-unite-de-travail">S08 — Transformer une demande en unité de travail</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> « Améliore l'application » ne dit pas quand s'arrêter. Partir de la demande vague du sujet E03. Recueillir trois interprétations, choisir le refus d'un titre invalide et écrire les exclusions. Montrer qu'une unité cohérente traverse parfois plusieurs fichiers.</p>
+<p><strong>Question.</strong> Une unité de travail correspond-elle à un fichier ?</p>
+<p><strong>Réponse attendue.</strong> Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s09-passer-de-l-ambition-a-une-unite">S09 — Passer de l'ambition à une unité</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Acteur : Qui a le besoin ?. Résultat : Que doit-il obtenir ?. Périmètre : Quel changement cohérent ?. Acceptation : Comment le constater ?. Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Une unité cohérente avec critères d'acceptation. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s10-un-exemple-a-examiner">S10 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Partir de la demande vague du sujet E03. Recueillir trois interprétations, choisir le refus d'un titre invalide et écrire les exclusions. Montrer qu'une unité cohérente traverse parfois plusieurs fichiers. Vigilance : Le découpage suit les composants techniques sans livrer de résultat utilisable.</p>
+<p><strong>Question.</strong> Une unité de travail correspond-elle à un fichier ?</p>
+<p><strong>Réponse attendue.</strong> Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s11-a-vous-de-produire">S11 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E03 pendant 25 minutes puis E04 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Une unité cohérente avec critères d'acceptation. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s12-verifier-votre-comprehension">S12 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit. Erreur fréquente : Le découpage suit les composants techniques sans livrer de résultat utilisable. Faire ensuite traiter Q2.1 à Q2.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Une unité de travail correspond-elle à un fichier ?</p>
+<p><strong>Réponse attendue.</strong> Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.</p>
+<p><strong>Transition.</strong> Annoncer le module 3 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s13-construire-le-contexte">S13 — Construire le contexte</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Une jolie interface peut masquer un fonctionnement inconnu. Sur une base neuve du prototype, créer une demande puis redémarrer le serveur sur le même fichier. Rechoisir Bob. Ouvrir ensuite do_POST, validate_title et l'INSERT pour justifier les flèches, sans corriger maintenant.</p>
+<p><strong>Question.</strong> Recharger la page prouve-t-il la survie après arrêt du serveur ?</p>
+<p><strong>Réponse attendue.</strong> Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s14-suivre-un-geste-de-bout-en-bout">S14 — Suivre un geste de bout en bout</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Navigateur : Saisir et envoyer. Route HTTP : Recevoir la demande. Règle serveur : Valider et autoriser. SQLite : Conserver la donnée. Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Protocole d'exploration et hiérarchie des sources. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s15-un-exemple-a-examiner">S15 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Sur une base neuve du prototype, créer une demande puis redémarrer le serveur sur le même fichier. Rechoisir Bob. Ouvrir ensuite do_POST, validate_title et l'INSERT pour justifier les flèches, sans corriger maintenant. Vigilance : Une hypothèse sur le stockage est présentée comme un fait sans lecture ni redémarrage.</p>
+<p><strong>Question.</strong> Recharger la page prouve-t-il la survie après arrêt du serveur ?</p>
+<p><strong>Réponse attendue.</strong> Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s16-a-vous-de-produire">S16 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E05 pendant 25 minutes puis E06 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Protocole d'exploration et hiérarchie des sources. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s17-verifier-votre-comprehension">S17 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction. Erreur fréquente : Une hypothèse sur le stockage est présentée comme un fait sans lecture ni redémarrage. Faire ensuite traiter Q3.1 à Q3.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Recharger la page prouve-t-il la survie après arrêt du serveur ?</p>
+<p><strong>Réponse attendue.</strong> Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.</p>
+<p><strong>Transition.</strong> Annoncer le module 4 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s18-externaliser-la-memoire">S18 — Externaliser la mémoire</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Une nouvelle session ne doit pas deviner la suite. Afficher README, DAT, BACKLOG et une entrée JOURNAL. Fermer le chat, ouvrir une nouvelle session et donner uniquement les fichiers. Comparer sa prochaine action à celle prévue. Ne pas prétendre les défauts corrigés au module 4.</p>
+<p><strong>Question.</strong> Quel document explique pourquoi la troncature a été refusée ?</p>
+<p><strong>Réponse attendue.</strong> Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s19-la-memoire-appartient-au-projet">S19 — La mémoire appartient au projet</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> README : Comment exécuter ?. DAT : Comment cela fonctionne ?. BACKLOG : Que reste-t-il à faire ?. JOURNAL : Pourquoi et où reprendre ?. Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> README, DAT, JOURNAL, BACKLOG et CHANGELOG articulés. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s20-un-exemple-a-examiner">S20 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Afficher README, DAT, BACKLOG et une entrée JOURNAL. Fermer le chat, ouvrir une nouvelle session et donner uniquement les fichiers. Comparer sa prochaine action à celle prévue. Ne pas prétendre les défauts corrigés au module 4. Vigilance : Les mêmes règles sont copiées dans tous les fichiers et deviennent contradictoires.</p>
+<p><strong>Question.</strong> Quel document explique pourquoi la troncature a été refusée ?</p>
+<p><strong>Réponse attendue.</strong> Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s21-a-vous-de-produire">S21 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E07 pendant 25 minutes puis E08 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> README, DAT, JOURNAL, BACKLOG et CHANGELOG articulés. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s22-verifier-votre-comprehension">S22 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information. Erreur fréquente : Les mêmes règles sont copiées dans tous les fichiers et deviennent contradictoires. Faire ensuite traiter Q4.1 à Q4.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Quel document explique pourquoi la troncature a été refusée ?</p>
+<p><strong>Réponse attendue.</strong> Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.</p>
+<p><strong>Transition.</strong> Annoncer le module 5 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s23-separer-methode-globale-et-contexte-local">S23 — Séparer méthode globale et contexte local</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Une méthode réutilisable ne connaît pas votre port local. Classer huit règles de E09 avant de montrer le routage des fichiers. Expliquer Codex/AGENTS et Claude Code/CLAUDE à partir des sources officielles. Vérifier les fichiers effectivement lus, pas seulement leur reformulation.</p>
+<p><strong>Question.</strong> CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?</p>
+<p><strong>Réponse attendue.</strong> Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s24-methode-partagee-contexte-local">S24 — Méthode partagée, contexte local</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Global : Décider, prouver, rendre compte. Local : Données, commandes et métier. Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Premier contrat global et compagnon local. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s25-un-exemple-a-examiner">S25 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Classer huit règles de E09 avant de montrer le routage des fichiers. Expliquer Codex/AGENTS et Claude Code/CLAUDE à partir des sources officielles. Vérifier les fichiers effectivement lus, pas seulement leur reformulation. Vigilance : On copie le grand contrat du socle sans savoir quel problème chaque règle résout.</p>
+<p><strong>Question.</strong> CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?</p>
+<p><strong>Réponse attendue.</strong> Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s26-a-vous-de-produire">S26 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E09 pendant 25 minutes puis E10 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Premier contrat global et compagnon local. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s27-verifier-votre-comprehension">S27 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique. Erreur fréquente : On copie le grand contrat du socle sans savoir quel problème chaque règle résout. Faire ensuite traiter Q5.1 à Q5.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?</p>
+<p><strong>Réponse attendue.</strong> Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.</p>
+<p><strong>Transition.</strong> Annoncer le module 6 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s28-specifier-avant-d-implementer">S28 — Spécifier avant d'implémenter</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> « Un titre propre » possède trop d'interprétations. Remplir au tableau la table vide, espaces, 2, 3, 80, 81 et type non texte. Faire produire les résultats avant de regarder domain.py. Construire ensuite rôle ET propriété pour la clôture.</p>
+<p><strong>Question.</strong> Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?</p>
+<p><strong>Réponse attendue.</strong> Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s29-relier-besoin-code-et-preuve">S29 — Relier besoin, code et preuve</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Besoin : Résultat utilisateur. Contrat : Exemples et refus. Implémentation : Règle appliquée. Preuves : Contrat vérifié. Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Spécification stable et chaîne de traçabilité. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s30-un-exemple-a-examiner">S30 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Remplir au tableau la table vide, espaces, 2, 3, 80, 81 et type non texte. Faire produire les résultats avant de regarder domain.py. Construire ensuite rôle ET propriété pour la clôture. Vigilance : Un marqueur de référence est traité comme une preuve de pertinence du contrat cité.</p>
+<p><strong>Question.</strong> Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?</p>
+<p><strong>Réponse attendue.</strong> Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s31-a-vous-de-produire">S31 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E11 pendant 25 minutes puis E12 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Spécification stable et chaîne de traçabilité. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s32-verifier-votre-comprehension">S32 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires. Erreur fréquente : Un marqueur de référence est traité comme une preuve de pertinence du contrat cité. Faire ensuite traiter Q6.1 à Q6.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?</p>
+<p><strong>Réponse attendue.</strong> Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.</p>
+<p><strong>Transition.</strong> Annoncer le module 7 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s33-concevoir-la-boucle-d-execution">S33 — Concevoir la boucle d'exécution</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Un checkpoint n'est pas une livraison. Réordonner les cartes d'une session. Montrer une spécification déjà écrite : la reprise la lit, elle ne la réécrit pas par rituel. Présenter une clôture fictive avec build vert mais preuve API absente.</p>
+<p><strong>Question.</strong> Une capture enregistrée mais jamais ouverte est-elle une observation ?</p>
+<p><strong>Réponse attendue.</strong> Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s34-la-boucle-d-execution-d-une-unite">S34 — La boucle d'exécution d'une unité</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Comprendre : Lire et spécifier. Persister : Décisions et références. Implémenter : Modifier dans le périmètre. Vérifier : Prouver et transmettre. Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Protocole de session et checkpoints cohérents. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s35-un-exemple-a-examiner">S35 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Réordonner les cartes d'une session. Montrer une spécification déjà écrite : la reprise la lit, elle ne la réécrit pas par rituel. Présenter une clôture fictive avec build vert mais preuve API absente. Vigilance : Le protocole est une liste de cases cochées indépendamment des résultats.</p>
+<p><strong>Question.</strong> Une capture enregistrée mais jamais ouverte est-elle une observation ?</p>
+<p><strong>Réponse attendue.</strong> Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s36-a-vous-de-produire">S36 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E13 pendant 25 minutes puis E14 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Protocole de session et checkpoints cohérents. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s37-verifier-votre-comprehension">S37 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire. Erreur fréquente : Le protocole est une liste de cases cochées indépendamment des résultats. Faire ensuite traiter Q7.1 à Q7.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Une capture enregistrée mais jamais ouverte est-elle une observation ?</p>
+<p><strong>Réponse attendue.</strong> Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.</p>
+<p><strong>Transition.</strong> Annoncer le module 8 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s38-rendre-l-environnement-reproductible">S38 — Rendre l'environnement reproductible</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> « Ça marche chez moi » décrit un poste, pas une procédure. Préparer une copie de départ, choisir un fichier de base neuf, compter les trois demandes. Ajouter une demande, arrêter puis redémarrer sur le même fichier. Vérifier que le seed ne réinitialise pas l'état. Ne pas supprimer la base d'un apprenant.</p>
+<p><strong>Question.</strong> Un conteneur suffit-il à rendre tout l'environnement reproductible ?</p>
+<p><strong>Réponse attendue.</strong> Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s39-ce-qu-il-faut-pour-reproduire">S39 — Ce qu'il faut pour reproduire</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Runtime : Version et dépendances. Configuration : Paramètres documentés. Services : Démarrage et disponibilité. Données : Schéma, seed et état initial. Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Bootstrap et contrat de seed rejouables. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s40-un-exemple-a-examiner">S40 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Préparer une copie de départ, choisir un fichier de base neuf, compter les trois demandes. Ajouter une demande, arrêter puis redémarrer sur le même fichier. Vérifier que le seed ne réinitialise pas l'état. Ne pas supprimer la base d'un apprenant. Vigilance : Un défaut d'environnement est masqué en changeant le code ou en supprimant des données.</p>
+<p><strong>Question.</strong> Un conteneur suffit-il à rendre tout l'environnement reproductible ?</p>
+<p><strong>Réponse attendue.</strong> Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s41-a-vous-de-produire">S41 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E15 pendant 25 minutes puis E16 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Bootstrap et contrat de seed rejouables. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s42-verifier-votre-comprehension">S42 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant. Erreur fréquente : Un défaut d'environnement est masqué en changeant le code ou en supprimant des données. Faire ensuite traiter Q8.1 à Q8.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Un conteneur suffit-il à rendre tout l'environnement reproductible ?</p>
+<p><strong>Réponse attendue.</strong> Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.</p>
+<p><strong>Transition.</strong> Annoncer le module 9 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s43-construire-la-preuve">S43 — Construire la preuve</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Un seul voyant vert ne prouve pas toute l'application. Lancer un test des bornes sur le prototype, lire l'assertion, corriger validate_title dans la copie de démonstration et rejouer. Montrer ensuite le test HTTP/SQLite puis le parcours depuis l'accueil. Conserver les rouges de DEM-02.</p>
+<p><strong>Question.</strong> Un test rouge d'import démontre-t-il le défaut métier recherché ?</p>
+<p><strong>Réponse attendue.</strong> Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s44-une-regle-plusieurs-regards">S44 — Une règle, plusieurs regards</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Unitaire : La règle calcule juste. API + base : Le serveur refuse sans écrire. Parcours E2E : L'utilisateur atteint le résultat. Observation : Le rendu reste utilisable. Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Matrice de preuves et correction DEM-01. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s45-un-exemple-a-examiner">S45 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Lancer un test des bornes sur le prototype, lire l'assertion, corriger validate_title dans la copie de démonstration et rejouer. Montrer ensuite le test HTTP/SQLite puis le parcours depuis l'accueil. Conserver les rouges de DEM-02. Vigilance : Des tests sont supprimés ou ignorés pour obtenir une sortie entièrement verte.</p>
+<p><strong>Question.</strong> Un test rouge d'import démontre-t-il le défaut métier recherché ?</p>
+<p><strong>Réponse attendue.</strong> Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s46-a-vous-de-produire">S46 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E17 pendant 25 minutes puis E18 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Matrice de preuves et correction DEM-01. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s47-verifier-votre-comprehension">S47 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve. Erreur fréquente : Des tests sont supprimés ou ignorés pour obtenir une sortie entièrement verte. Faire ensuite traiter Q9.1 à Q9.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Un test rouge d'import démontre-t-il le défaut métier recherché ?</p>
+<p><strong>Réponse attendue.</strong> Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.</p>
+<p><strong>Transition.</strong> Annoncer le module 10 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s48-encadrer-securite-et-production">S48 — Encadrer sécurité et production</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Cacher un bouton ne protège pas une écriture. Montrer sur le prototype l'appel direct qui permet à Bob de clore la demande d'Alice. Corriger le prédicat sur une copie. Rejouer le refus et vérifier la base. Insister : les identités de ce laboratoire sont simulées, pas prêtes pour la production.</p>
+<p><strong>Question.</strong> Pourquoi lire la ressource après une réponse 403 ?</p>
+<p><strong>Réponse attendue.</strong> Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s49-qui-peut-clore-cette-demande">S49 — Qui peut clore cette demande ?</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Alice : Responsable : toute demande. Bob : Contributeur : ses demandes. Eve : Lectrice : aucune écriture. Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Politique d'accès, correction DEM-02 et préparation de retour arrière. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s50-un-exemple-a-examiner">S50 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Montrer sur le prototype l'appel direct qui permet à Bob de clore la demande d'Alice. Corriger le prédicat sur une copie. Rejouer le refus et vérifier la base. Insister : les identités de ce laboratoire sont simulées, pas prêtes pour la production. Vigilance : La propriété suffit à autoriser Eve, ou le propriétaire envoyé par le client est cru.</p>
+<p><strong>Question.</strong> Pourquoi lire la ressource après une réponse 403 ?</p>
+<p><strong>Réponse attendue.</strong> Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s51-a-vous-de-produire">S51 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E19 pendant 25 minutes puis E20 pendant 45 minutes. Pilote et relecteur échangent les rôles. Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Politique d'accès, correction DEM-02 et préparation de retour arrière. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s52-verifier-votre-comprehension">S52 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière. Erreur fréquente : La propriété suffit à autoriser Eve, ou le propriétaire envoyé par le client est cru. Faire ensuite traiter Q10.1 à Q10.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Pourquoi lire la ressource après une réponse 403 ?</p>
+<p><strong>Réponse attendue.</strong> Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.</p>
+<p><strong>Transition.</strong> Annoncer le module 11 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s53-utiliser-git-comme-memoire-durable">S53 — Utiliser Git comme mémoire durable</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Le fichier ouvert n'est pas forcément le prochain commit. Faire prédire le contenu de chaque diff avant de l'afficher. Réindexer seulement après lecture. Puis dessiner A–B local et A–C distant : fetch révèle C mais n'intègre pas C. Montrer que --ff-only refuse une divergence.</p>
+<p><strong>Question.</strong> Un commit local protège-t-il de la perte complète de la machine ?</p>
+<p><strong>Réponse attendue.</strong> Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s54-quatre-lieux-quatre-etats">S54 — Quatre lieux, quatre états</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Fichier : État de travail. Index : Sélection par git add. Commit : Instantané local. Remote : Commits transmis. Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Discipline de commit, push et récupération. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s55-un-exemple-a-examiner">S55 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Faire prédire le contenu de chaque diff avant de l'afficher. Réindexer seulement après lecture. Puis dessiner A–B local et A–C distant : fetch révèle C mais n'intègre pas C. Montrer que --ff-only refuse une divergence. Vigilance : Un push rejeté conduit à forcer, ou stash est présenté comme un retour avant un commit.</p>
+<p><strong>Question.</strong> Un commit local protège-t-il de la perte complète de la machine ?</p>
+<p><strong>Réponse attendue.</strong> Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s56-a-vous-de-produire">S56 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E21 pendant 25 minutes puis E22 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Discipline de commit, push et récupération. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s57-verifier-votre-comprehension">S57 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves. Erreur fréquente : Un push rejeté conduit à forcer, ou stash est présenté comme un retour avant un commit. Faire ensuite traiter Q11.1 à Q11.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Un commit local protège-t-il de la perte complète de la machine ?</p>
+<p><strong>Réponse attendue.</strong> Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.</p>
+<p><strong>Transition.</strong> Annoncer le module 12 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s58-orchestrer-plusieurs-agents">S58 — Orchestrer plusieurs agents</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Plusieurs agents ne créent pas plusieurs responsables. Lire une mission de revue avec objectif, périmètre, sources et livrable. Montrer un constat avec fichier/impact/preuve puis une opinion sans source. Préparer la vérification sur un arbre stable sans édition concurrente.</p>
+<p><strong>Question.</strong> Qui tranche si le reviewer propose un autre choix produit ?</p>
+<p><strong>Réponse attendue.</strong> Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s59-un-responsable-des-missions-bornees">S59 — Un responsable, des missions bornées</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Principal : Seul éditeur et décideur. Explorer : Cartographier un flux. Reviewer : Relire un changement. Verifier : Exécuter une preuve ciblée. Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Rôles explorer, reviewer et verifier avec contrats. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s60-un-exemple-a-examiner">S60 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Lire une mission de revue avec objectif, périmètre, sources et livrable. Montrer un constat avec fichier/impact/preuve puis une opinion sans source. Préparer la vérification sur un arbre stable sans édition concurrente. Vigilance : On délègue une tâche triviale ou on laisse plusieurs écrivains modifier la même unité.</p>
+<p><strong>Question.</strong> Qui tranche si le reviewer propose un autre choix produit ?</p>
+<p><strong>Réponse attendue.</strong> Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s61-a-vous-de-produire">S61 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E23 pendant 25 minutes puis E24 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Rôles explorer, reviewer et verifier avec contrats. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s62-verifier-votre-comprehension">S62 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue. Erreur fréquente : On délègue une tâche triviale ou on laisse plusieurs écrivains modifier la même unité. Faire ensuite traiter Q12.1 à Q12.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Qui tranche si le reviewer propose un autre choix produit ?</p>
+<p><strong>Réponse attendue.</strong> Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.</p>
+<p><strong>Transition.</strong> Annoncer le module 13 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s63-automatiser-les-invariants">S63 — Automatiser les invariants</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Un contrôle mécanique ne connaît pas votre intention. Lire AUTOMATION puis le hook correspondant sans l'installer sur le laboratoire. Montrer que commit-msg reçoit un message et pre-commit la sélection. Expliquer qu'un clone ne prouve pas l'activation et que la CI distante reste à configurer.</p>
+<p><strong>Question.</strong> Une CI verte sur un index vide a-t-elle vérifié le changement ?</p>
+<p><strong>Réponse attendue.</strong> Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s64-ce-que-chaque-controle-etablit">S64 — Ce que chaque contrôle établit</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Instruction : Fixe la règle. Hook / CI : Calcule un invariant. Revue : Examine la pertinence. Exécution : Éprouve le comportement. Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Cartographie des hooks et de leurs entrées. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s65-un-exemple-a-examiner">S65 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Lire AUTOMATION puis le hook correspondant sans l'installer sur le laboratoire. Montrer que commit-msg reçoit un message et pre-commit la sélection. Expliquer qu'un clone ne prouve pas l'activation et que la CI distante reste à configurer. Vigilance : La présence des scripts est confondue avec leur activation, ou le vert de forme avec la qualité métier.</p>
+<p><strong>Question.</strong> Une CI verte sur un index vide a-t-elle vérifié le changement ?</p>
+<p><strong>Réponse attendue.</strong> Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s66-a-vous-de-produire">S66 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E25 pendant 25 minutes puis E26 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Cartographie des hooks et de leurs entrées. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s67-verifier-votre-comprehension">S67 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve. Erreur fréquente : La présence des scripts est confondue avec leur activation, ou le vert de forme avec la qualité métier. Faire ensuite traiter Q13.1 à Q13.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Une CI verte sur un index vide a-t-elle vérifié le changement ?</p>
+<p><strong>Réponse attendue.</strong> Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.</p>
+<p><strong>Transition.</strong> Annoncer le module 14 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s68-passer-au-worker-autonome">S68 — Passer au worker autonome</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Une session autonome doit pouvoir être interrompue. Utiliser une carte d'interruption, pas un ordonnanceur réel. À la minute fictive 18, recueillir code/specification/preuves manquantes. Donner la passation à un autre binôme. Lire ensuite les hypothèses d'hôte de CloudWorker comme hypothèses à vérifier.</p>
+<p><strong>Question.</strong> Le fichier docs/.routine installe-t-il une tâche planifiée ?</p>
+<p><strong>Réponse attendue.</strong> Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s69-une-session-qui-laisse-une-reprise">S69 — Une session qui laisse une reprise</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Récupérer : Code et contexte. Réaliser : Une unité cohérente. Prouver : Résultats et limites. Transmettre : Checkpoint et passation. Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Cycle planifié et protocole de reprise. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s70-un-exemple-a-examiner">S70 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Utiliser une carte d'interruption, pas un ordonnanceur réel. À la minute fictive 18, recueillir code/specification/preuves manquantes. Donner la passation à un autre binôme. Lire ensuite les hypothèses d'hôte de CloudWorker comme hypothèses à vérifier. Vigilance : La commande d'un hôte particulier est copiée ailleurs, ou un checkpoint local est supposé survivre à une machine éphémère.</p>
+<p><strong>Question.</strong> Le fichier docs/.routine installe-t-il une tâche planifiée ?</p>
+<p><strong>Réponse attendue.</strong> Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s71-a-vous-de-produire">S71 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E27 pendant 25 minutes puis E28 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Cycle planifié et protocole de reprise. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s72-verifier-votre-comprehension">S72 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées. Erreur fréquente : La commande d'un hôte particulier est copiée ailleurs, ou un checkpoint local est supposé survivre à une machine éphémère. Faire ensuite traiter Q14.1 à Q14.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Le fichier docs/.routine installe-t-il une tâche planifiée ?</p>
+<p><strong>Réponse attendue.</strong> Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.</p>
+<p><strong>Transition.</strong> Annoncer le module 15 et repartir de l'artefact conservé.</p>
+<h2 id="doc-exports-notes-slides--s73-assembler-la-software-factory">S73 — Assembler la software factory</h2>
+<p><strong>Minutage.</strong> 0–15 min : situation et premières notions ; accueil compris pour M1.</p>
+<p><strong>Intention.</strong> Faire apparaître le problème avant le vocabulaire.</p>
+<p><strong>Explication / démonstration.</strong> Le socle final répond aux problèmes rencontrés avant lui. Faire reconstruire la carte de mémoire sans ouvrir le README du socle. Comparer ensuite aux vrais fichiers et noter ce qu'ils ne fournissent pas : produit, commandes de stack, CI distante, ordonnanceur et accès effectifs.</p>
+<p><strong>Question.</strong> Quelle première preuve montre une adoption utile de la méthode ?</p>
+<p><strong>Réponse attendue.</strong> Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.</p>
+<p><strong>Transition.</strong> Utiliser le schéma pour nommer les relations.</p>
+<h2 id="doc-exports-notes-slides--s74-l-usine-assemble-les-acquis">S74 — L'usine assemble les acquis</h2>
+<p><strong>Minutage.</strong> 15–30 min : concepts et reformulation.</p>
+<p><strong>Intention.</strong> Faire expliquer la relation représentée, pas mémoriser des boîtes.</p>
+<p><strong>Explication / démonstration.</strong> Méthode : Décisions et responsabilités. Contexte produit : Contrats et commandes. Qualité : Preuves et documentation. Automatisation : Gardes, rôles et worker. Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution.</p>
+<p><strong>Question.</strong> Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?</p>
+<p><strong>Réponse attendue.</strong> Assemblage puis comparaison avec le dépôt. Demander une source ou une observation pour justifier le lien.</p>
+<p><strong>Transition.</strong> Passer à l'exemple commenté et faire prédire son résultat.</p>
+<h2 id="doc-exports-notes-slides--s75-un-exemple-a-examiner">S75 — Un exemple à examiner</h2>
+<p><strong>Minutage.</strong> 30–55 min : démonstration commentée.</p>
+<p><strong>Intention.</strong> Modéliser un raisonnement observable devant le groupe.</p>
+<p><strong>Explication / démonstration.</strong> Faire reconstruire la carte de mémoire sans ouvrir le README du socle. Comparer ensuite aux vrais fichiers et noter ce qu'ils ne fournissent pas : produit, commandes de stack, CI distante, ordonnanceur et accès effectifs. Vigilance : La configuration est présentée comme un produit fini ou comme une garantie automatique de qualité.</p>
+<p><strong>Question.</strong> Quelle première preuve montre une adoption utile de la méthode ?</p>
+<p><strong>Réponse attendue.</strong> Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.</p>
+<p><strong>Transition.</strong> Afficher les deux missions. Faire lire les livrables avant de commencer.</p>
+<h2 id="doc-exports-notes-slides--s76-a-vous-de-produire">S76 — À vous de produire</h2>
+<p><strong>Minutage.</strong> 55–80 min : exercice impair ; 80–125 min : exercice pair.</p>
+<p><strong>Intention.</strong> Passer du vocabulaire à une production vérifiable.</p>
+<p><strong>Explication / démonstration.</strong> Lancer E29 pendant 25 minutes puis E30 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.</p>
+<p><strong>Question.</strong> Quelle preuve ou quel livrable allez-vous remettre ?</p>
+<p><strong>Réponse attendue.</strong> Assemblage puis comparaison avec le dépôt. Faire présenter une source réelle, pas seulement une affirmation.</p>
+<p><strong>Transition.</strong> Comparer les productions, puis répondre aux trois questions du chapitre.</p>
+<h2 id="doc-exports-notes-slides--s77-verifier-votre-comprehension">S77 — Vérifier votre compréhension</h2>
+<p><strong>Minutage.</strong> 125–140 min : débrief ; 140–150 min : quiz et passation.</p>
+<p><strong>Intention.</strong> Qualifier le point de sortie et organiser une remédiation ciblée.</p>
+<p><strong>Explication / démonstration.</strong> Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution. Erreur fréquente : La configuration est présentée comme un produit fini ou comme une garantie automatique de qualité. Faire ensuite traiter Q15.1 à Q15.3 dans le chapitre, sans les réduire à la seule question projetée.</p>
+<p><strong>Question.</strong> Quelle première preuve montre une adoption utile de la méthode ?</p>
+<p><strong>Réponse attendue.</strong> Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.</p>
+<p><strong>Transition.</strong> Distribuer EVALUATION sans montrer CORRIGE_FINAL.</p>
+<h2 id="doc-exports-notes-slides--s78-demontrer-votre-autonomie">S78 — Démontrer votre autonomie</h2>
+<p><strong>Minutage.</strong> 0–25 min : prise en main ; 25–60 min : contrat et plan.</p>
+<p><strong>Intention.</strong> Présenter l'évaluation comme une nouvelle unité et non un test de mémoire.</p>
+<p><strong>Explication / démonstration.</strong> Distribuer EVALUATION. Le responsable peut rouvrir, les autres sont refusés sans mutation. Le titre, le propriétaire et l'identifiant restent inchangés. Refaire l'action ne duplique rien. Ne pas ouvrir le corrigé pendant l'évaluation.</p>
+<p><strong>Question.</strong> Qu'est-ce qui change et qu'est-ce qui doit rester intact ?</p>
+<p><strong>Réponse attendue.</strong> La transition fermé vers ouvert est nouvelle ; les données, la validation et les droits existants restent protégés.</p>
+<p><strong>Transition.</strong> Faire établir contrat et plan avant de coder.</p>
+<h2 id="doc-exports-notes-slides--s79-prouver-les-succes-et-les-refus">S79 — Prouver les succès et les refus</h2>
+<p><strong>Minutage.</strong> 60–160 min : réalisation ; 160–215 min : preuves.</p>
+<p><strong>Intention.</strong> Garder visible la couverture attendue sans dicter l'implémentation.</p>
+<p><strong>Explication / démonstration.</strong> Au jalon 160 minutes, demander un état du code et les preuves restant à produire. Les tests doivent qualifier les cas de leur version. Le corrigé peut utiliser une autre structure. L'inspection du parcours et des captures complète l'exécution HTTP.</p>
+<p><strong>Question.</strong> Une réponse 403 suffit-elle à accepter le cas interdit ?</p>
+<p><strong>Réponse attendue.</strong> Non : il faut constater la ressource inchangée, puis vérifier que les cas autorisés et les règles précédentes restent corrects.</p>
+<p><strong>Transition.</strong> Faire préparer une remise traçable, même si une preuve manque.</p>
+<h2 id="doc-exports-notes-slides--s80-rendre-un-etat-defendable">S80 — Rendre un état défendable</h2>
+<p><strong>Minutage.</strong> 215–245 min : documentation/remise ; 245–270 min : restitution et bilan.</p>
+<p><strong>Intention.</strong> Conclure par une évaluation explicable et un transfert concret.</p>
+<p><strong>Explication / démonstration.</strong> Utiliser le barème détaillé d'EVALUATION ; une preuve inventée ou une autorisation contournée est critique. Chaque personne explique une décision et une preuve. Retour en trois phrases : comportement démontré, limite, exercice de remédiation. Prévoir un second évaluateur si la cohorte dépasse la capacité des restitutions.</p>
+<p><strong>Question.</strong> Quelle petite unité de votre projet permettrait de réutiliser ces gestes ?</p>
+<p><strong>Réponse attendue.</strong> Une unité bornée avec acteur, critère, risque, preuve et condition de reprise ; pas un objectif vague d'industrialisation.</p>
+<p><strong>Transition.</strong> Proposer le corrigé final après remise et conserver le plan de transfert.</p>
+</article></main></body></html>

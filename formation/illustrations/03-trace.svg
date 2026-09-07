@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc"><title id="title">Relier besoin, code et preuve</title><desc id="desc">Une référence stable permet la relecture. Besoin: Résultat utilisateur; Contrat: Exemples et refus; Implémentation: Règle appliquée; Preuves: Contrat vérifié. La documentation suit le comportement ; les références doivent rester pertinentes.</desc>
+<rect width="1200" height="460" rx="14" fill="#F7F8FA"/><g font-family="Arial, sans-serif">
+<text x="32" y="44" font-size="24" fill="#4B5563" font-weight="400"><tspan x="32" dy="0">Une référence stable permet la relecture.</tspan></text>
+<path d="M288 226 H317 m-9 -8 9 8 -9 8" fill="none" stroke="#23468C" stroke-width="3"/>
+<path d="M583 226 H612 m-9 -8 9 8 -9 8" fill="none" stroke="#23468C" stroke-width="3"/>
+<path d="M878 226 H907 m-9 -8 9 8 -9 8" fill="none" stroke="#23468C" stroke-width="3"/>
+<rect x="32" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="50" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="69" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="69" dy="0">Besoin</tspan></text>
+<text x="69" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="69" dy="0">Résultat</tspan><tspan x="69" dy="26.25">utilisateur</tspan></text>
+<rect x="327" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="345" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="364" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="364" dy="0">Contrat</tspan></text>
+<text x="364" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="364" dy="0">Exemples et refus</tspan></text>
+<rect x="622" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="640" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="659" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="659" dy="0">Implémentation</tspan></text>
+<text x="659" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="659" dy="0">Règle appliquée</tspan></text>
+<rect x="917" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="935" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="954" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="954" dy="0">Preuves</tspan></text>
+<text x="954" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="954" dy="0">Contrat vérifié</tspan></text>
+<path d="M32 391 H1168" stroke="#D9CF4A" stroke-width="4"/>
+<text x="32" y="423" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="32" dy="0">La documentation suit le comportement ; les références doivent rester pertinentes.</tspan></text>
+</g></svg>

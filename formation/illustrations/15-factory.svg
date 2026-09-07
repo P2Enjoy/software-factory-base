@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc"><title id="title">L&#x27;usine assemble les acquis</title><desc id="desc">Le socle final relie les gestes appris pendant le cours. Méthode: Décisions et responsabilités; Contexte produit: Contrats et commandes; Qualité: Preuves et documentation; Automatisation: Gardes, rôles et worker. Le projet ajoute sa stack, ses données, ses accès et ses services réels.</desc>
+<rect width="1200" height="460" rx="14" fill="#F7F8FA"/><g font-family="Arial, sans-serif">
+<text x="32" y="44" font-size="24" fill="#4B5563" font-weight="400"><tspan x="32" dy="0">Le socle final relie les gestes appris pendant le cours.</tspan></text>
+<rect x="32" y="106" width="552" height="116" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="50" y="124" width="5" height="80" rx="2" fill="#D9CF4A"/>
+<text x="69" y="143" font-size="25" fill="#23468C" font-weight="700"><tspan x="69" dy="0">Méthode</tspan></text>
+<text x="69" y="175" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="69" dy="0">Décisions et responsabilités</tspan></text>
+<rect x="614" y="106" width="552" height="116" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="632" y="124" width="5" height="80" rx="2" fill="#D9CF4A"/>
+<text x="651" y="143" font-size="25" fill="#23468C" font-weight="700"><tspan x="651" dy="0">Contexte produit</tspan></text>
+<text x="651" y="175" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="651" dy="0">Contrats et commandes</tspan></text>
+<rect x="32" y="239" width="552" height="116" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="50" y="257" width="5" height="80" rx="2" fill="#D9CF4A"/>
+<text x="69" y="276" font-size="25" fill="#23468C" font-weight="700"><tspan x="69" dy="0">Qualité</tspan></text>
+<text x="69" y="308" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="69" dy="0">Preuves et documentation</tspan></text>
+<rect x="614" y="239" width="552" height="116" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="632" y="257" width="5" height="80" rx="2" fill="#D9CF4A"/>
+<text x="651" y="276" font-size="25" fill="#23468C" font-weight="700"><tspan x="651" dy="0">Automatisation</tspan></text>
+<text x="651" y="308" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="651" dy="0">Gardes, rôles et worker</tspan></text>
+<path d="M32 391 H1168" stroke="#D9CF4A" stroke-width="4"/>
+<text x="32" y="423" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="32" dy="0">Le projet ajoute sa stack, ses données, ses accès et ses services réels.</tspan></text>
+</g></svg>

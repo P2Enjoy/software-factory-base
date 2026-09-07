@@ -1,0 +1,1492 @@
+[
+  {
+    "module": 0,
+    "type": "hero",
+    "title": "Coder avec un agent",
+    "lead": "Les bases, la méthode, puis l'usine.",
+    "points": [
+      "Syllabus · 15 modules · 42 heures",
+      "Cours autonome + animation premium"
+    ],
+    "takeaway": "Comprendre ce qui change. Prouver ce qui marche. Savoir reprendre.",
+    "notes": {
+      "intention": "Poser le résultat du parcours sans présenter l'usine comme point de départ.",
+      "explication": "Le groupe sait déjà obtenir de petites applications. Le cours ajoute les réflexes pour cadrer, comprendre, vérifier et transmettre. Les quinze modules conservent la progression des bases à l'assemblage final.",
+      "question": "Qu'avez-vous déjà créé avec une IA, et qu'avez-vous réellement vérifié ?",
+      "attendu": "Un exemple vécu et une incertitude sont suffisants ; il ne s'agit pas d'un concours de niveau.",
+      "transition": "Présenter le laboratoire et les modalités de travail.",
+      "minutage": "Accueil intégré aux 15 premières minutes du module 1."
+    }
+  },
+  {
+    "module": 0,
+    "type": "content",
+    "title": "Un parcours, deux usages",
+    "points": [
+      "Seul : lire, essayer, conserver ses preuves, comparer au corrigé.",
+      "En groupe : démonstrations, binômes et retours individualisés.",
+      "Même exigence : aucun résultat annoncé sans observation."
+    ],
+    "takeaway": "Le laboratoire est local, avec données fictives et identités simulées.",
+    "notes": {
+      "intention": "Rendre l'apprenant autonome dans l'usage des supports.",
+      "explication": "Présenter INSTALLATION, les chapitres, EXERCICES et les corrigés séparés. Vérifier le premier repère Git et les quatre échecs pédagogiques du prototype. Les pauses ne comptent pas dans les 42 heures.",
+      "question": "Que faire si l'agent ou le réseau est indisponible ?",
+      "attendu": "Utiliser les supports et le code locaux, avancer manuellement puis reprendre l'assistance ; nommer les preuves non exécutées.",
+      "transition": "Entrer dans la distinction assistant/agent.",
+      "minutage": "Inclus dans l'accueil du module 1, aucun temps ajouté au total."
+    }
+  },
+  {
+    "module": 1,
+    "type": "content",
+    "title": "De l'assistant à l'agent",
+    "lead": "Une réponse convaincante n'est pas une action vérifiée.",
+    "points": [
+      "Le modèle génère à partir d'un contexte limité.",
+      "Les outils lisent, écrivent ou exécutent.",
+      "Le responsable fixe les pouvoirs et vérifie les effets."
+    ],
+    "takeaway": "Distinguer génération, outils, contexte, autonomie et responsabilité.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Une réponse convaincante n'est pas une action vérifiée. Comparer un conseil copié dans un chat avec une lecture de fichier puis une commande de test visible. Faire distinguer le texte produit de la sortie de l'outil. Ne jamais demander un secret pour démontrer un accès.",
+      "question": "Un fichier présent sur disque est-il forcément connu du modèle ?",
+      "attendu": "Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "11-agent"
+  },
+  {
+    "module": 1,
+    "type": "figure",
+    "title": "L'agent agit dans un environnement",
+    "figure": "11-agent",
+    "takeaway": "Une capacité technique ne remplace ni l'autorisation ni la pertinence de l'action.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Mission : Résultat et limites. Modèle : Propose l'action. Outil : Exécute dans sa portée. Observation : Informe la suite. Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Carte des pouvoirs, responsabilités et risques. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 1,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "« Les tests passent. »\nQuelle commande ? Dans quel dossier ?\nQuel résultat ? Sur quel état du code ?",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Comparer un conseil copié dans un chat avec une lecture de fichier puis une commande de test visible. Faire distinguer le texte produit de la sortie de l'outil. Ne jamais demander un secret pour démontrer un accès. Vigilance : Les participants attribuent au modèle des pouvoirs qu'aucun outil ne lui donne.",
+      "question": "Un fichier présent sur disque est-il forcément connu du modèle ?",
+      "attendu": "Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "11-agent"
+  },
+  {
+    "module": 1,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E01 · Classer quatre situations d'assistance.",
+      "E02 · Auditer une affirmation de tests réussis.",
+      "Rendre une carte des pouvoirs et les observations manquantes."
+    ],
+    "takeaway": "E01 + E02 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E01 pendant 25 minutes puis E02 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Carte des pouvoirs, responsabilités et risques. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "11-agent"
+  },
+  {
+    "module": 1,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Un fichier présent sur disque est-il forcément connu du modèle ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire nommer une capacité, une autorisation et une action pertinente : ce sont trois notions distinctes. Erreur fréquente : Les participants attribuent au modèle des pouvoirs qu'aucun outil ne lui donne. Faire ensuite traiter Q1.1 à Q1.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Un fichier présent sur disque est-il forcément connu du modèle ?",
+      "attendu": "Non : il doit être chargé ou lu. Les limites de contexte obligent à sélectionner les sources utiles.",
+      "transition": "Annoncer le module 2 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "11-agent"
+  },
+  {
+    "module": 2,
+    "type": "content",
+    "title": "Transformer une demande en unité de travail",
+    "lead": "« Améliore l'application » ne dit pas quand s'arrêter.",
+    "points": [
+      "Nommer l'acteur et son résultat.",
+      "Délimiter le changement et les exclusions.",
+      "Décrire un succès, un refus et la donnée préservée."
+    ],
+    "takeaway": "Délimiter un résultat utile, observable et réalisable.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "« Améliore l'application » ne dit pas quand s'arrêter. Partir de la demande vague du sujet E03. Recueillir trois interprétations, choisir le refus d'un titre invalide et écrire les exclusions. Montrer qu'une unité cohérente traverse parfois plusieurs fichiers.",
+      "question": "Une unité de travail correspond-elle à un fichier ?",
+      "attendu": "Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "12-unite"
+  },
+  {
+    "module": 2,
+    "type": "figure",
+    "title": "Passer de l'ambition à une unité",
+    "figure": "12-unite",
+    "takeaway": "Une inconnue produit devient une décision explicite avant l'implémentation.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Acteur : Qui a le besoin ?. Résultat : Que doit-il obtenir ?. Périmètre : Quel changement cohérent ?. Acceptation : Comment le constater ?. Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Une unité cohérente avec critères d'acceptation. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 2,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Bob crée une demande.\nTitre invalide → refus, aucune insertion.\nTitre valide → visible et conservé.\nHors périmètre : notifications et statistiques.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Partir de la demande vague du sujet E03. Recueillir trois interprétations, choisir le refus d'un titre invalide et écrire les exclusions. Montrer qu'une unité cohérente traverse parfois plusieurs fichiers. Vigilance : Le découpage suit les composants techniques sans livrer de résultat utilisable.",
+      "question": "Une unité de travail correspond-elle à un fichier ?",
+      "attendu": "Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "12-unite"
+  },
+  {
+    "module": 2,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E03 · Découper une demande trop large.",
+      "E04 · Décider sans élargir le mandat.",
+      "Rendre une unité et un relevé de décisions explicites."
+    ],
+    "takeaway": "E03 + E04 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E03 pendant 25 minutes puis E04 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Une unité cohérente avec critères d'acceptation. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "12-unite"
+  },
+  {
+    "module": 2,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Une unité de travail correspond-elle à un fichier ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander quel critère ferait refuser la livraison et qui doit trancher une inconnue produit. Erreur fréquente : Le découpage suit les composants techniques sans livrer de résultat utilisable. Faire ensuite traiter Q2.1 à Q2.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Une unité de travail correspond-elle à un fichier ?",
+      "attendu": "Non : elle correspond à un comportement vérifiable. Elle peut traverser interface, serveur et stockage.",
+      "transition": "Annoncer le module 3 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "12-unite"
+  },
+  {
+    "module": 3,
+    "type": "content",
+    "title": "Construire le contexte",
+    "lead": "Une jolie interface peut masquer un fonctionnement inconnu.",
+    "points": [
+      "Partir d'un geste réellement observé.",
+      "Suivre routes, règles et données.",
+      "Séparer faits, hypothèses et décisions."
+    ],
+    "takeaway": "Explorer les sources et suivre le fonctionnement réel.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Une jolie interface peut masquer un fonctionnement inconnu. Sur une base neuve du prototype, créer une demande puis redémarrer le serveur sur le même fichier. Rechoisir Bob. Ouvrir ensuite do_POST, validate_title et l'INSERT pour justifier les flèches, sans corriger maintenant.",
+      "question": "Recharger la page prouve-t-il la survie après arrêt du serveur ?",
+      "attendu": "Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "01-flux"
+  },
+  {
+    "module": 3,
+    "type": "figure",
+    "title": "Suivre un geste de bout en bout",
+    "figure": "01-flux",
+    "takeaway": "Le retour visible doit correspondre à l'état réellement conservé.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Navigateur : Saisir et envoyer. Route HTTP : Recevoir la demande. Règle serveur : Valider et autoriser. SQLite : Conserver la donnée. Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Protocole d'exploration et hiérarchie des sources. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 3,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Accueil → Bob → Nouvelle demande\nTitre : trois espaces → Créer\nAttendu : refus sans nouvelle ligne.\nDépart : un titre vide est conservé.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Sur une base neuve du prototype, créer une demande puis redémarrer le serveur sur le même fichier. Rechoisir Bob. Ouvrir ensuite do_POST, validate_title et l'INSERT pour justifier les flèches, sans corriger maintenant. Vigilance : Une hypothèse sur le stockage est présentée comme un fait sans lecture ni redémarrage.",
+      "question": "Recharger la page prouve-t-il la survie après arrêt du serveur ?",
+      "attendu": "Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "01-flux"
+  },
+  {
+    "module": 3,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E05 · Cartographier une création de bout en bout.",
+      "E06 · Reproduire un défaut et traiter une donnée hostile.",
+      "Rendre une carte sourcée et une fiche rejouable."
+    ],
+    "takeaway": "E05 + E06 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E05 pendant 25 minutes puis E06 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Protocole d'exploration et hiérarchie des sources. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "01-flux"
+  },
+  {
+    "module": 3,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Recharger la page prouve-t-il la survie après arrêt du serveur ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire échanger une fiche de reproduction, sans aide orale. Classer le contenu hostile comme donnée et non comme instruction. Erreur fréquente : Une hypothèse sur le stockage est présentée comme un fait sans lecture ni redémarrage. Faire ensuite traiter Q3.1 à Q3.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Recharger la page prouve-t-il la survie après arrêt du serveur ?",
+      "attendu": "Non. Il faut arrêter, redémarrer sur la même base puis retrouver la donnée ; la session simulée doit être recréée.",
+      "transition": "Annoncer le module 4 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "01-flux"
+  },
+  {
+    "module": 4,
+    "type": "content",
+    "title": "Externaliser la mémoire",
+    "lead": "Une nouvelle session ne doit pas deviner la suite.",
+    "points": [
+      "Donner une responsabilité à chaque document.",
+      "Conserver la décision, son motif et l'état réel.",
+      "Tester la passation sans historique de chat."
+    ],
+    "takeaway": "Conserver les décisions et permettre la reprise d'une session.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Une nouvelle session ne doit pas deviner la suite. Afficher README, DAT, BACKLOG et une entrée JOURNAL. Fermer le chat, ouvrir une nouvelle session et donner uniquement les fichiers. Comparer sa prochaine action à celle prévue. Ne pas prétendre les défauts corrigés au module 4.",
+      "question": "Quel document explique pourquoi la troncature a été refusée ?",
+      "attendu": "Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "06-memoire"
+  },
+  {
+    "module": 4,
+    "type": "figure",
+    "title": "La mémoire appartient au projet",
+    "figure": "06-memoire",
+    "takeaway": "Le CHANGELOG distingue changement présent et publication effectivement vérifiée.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "README : Comment exécuter ?. DAT : Comment cela fonctionne ?. BACKLOG : Que reste-t-il à faire ?. JOURNAL : Pourquoi et où reprendre ?. Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "README, DAT, JOURNAL, BACKLOG et CHANGELOG articulés. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 4,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Unité : DEM-01 · état : en cours\nRéférence : votre vrai commit de départ\nObservé : titre vide encore accepté\nSuite : préciser le contrat, puis corriger",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Afficher README, DAT, BACKLOG et une entrée JOURNAL. Fermer le chat, ouvrir une nouvelle session et donner uniquement les fichiers. Comparer sa prochaine action à celle prévue. Ne pas prétendre les défauts corrigés au module 4. Vigilance : Les mêmes règles sont copiées dans tous les fichiers et deviennent contradictoires.",
+      "question": "Quel document explique pourquoi la troncature a été refusée ?",
+      "attendu": "Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "06-memoire"
+  },
+  {
+    "module": 4,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E07 · Répartir les informations entre documents.",
+      "E08 · Faire reprendre le travail sans le chat.",
+      "Rendre les fichiers et une passation liée à un vrai état Git."
+    ],
+    "takeaway": "E07 + E08 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E07 pendant 25 minutes puis E08 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "README, DAT, JOURNAL, BACKLOG et CHANGELOG articulés. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "06-memoire"
+  },
+  {
+    "module": 4,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Quel document explique pourquoi la troncature a été refusée ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander ce que le repreneur a dû deviner, puis corriger le document responsable de cette information. Erreur fréquente : Les mêmes règles sont copiées dans tous les fichiers et deviennent contradictoires. Faire ensuite traiter Q4.1 à Q4.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Quel document explique pourquoi la troncature a été refusée ?",
+      "attendu": "Le journal conserve la décision et son motif ; la règle courante possède ensuite une référence normative stable.",
+      "transition": "Annoncer le module 5 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "06-memoire"
+  },
+  {
+    "module": 5,
+    "type": "content",
+    "title": "Séparer méthode globale et contexte local",
+    "lead": "Une méthode réutilisable ne connaît pas votre port local.",
+    "points": [
+      "Global : responsabilités et manière de travailler.",
+      "Local : métier, commandes, données et contraintes.",
+      "Le mécanisme de lecture doit être explicite."
+    ],
+    "takeaway": "Classer les règles et faire lire les bonnes sources.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Une méthode réutilisable ne connaît pas votre port local. Classer huit règles de E09 avant de montrer le routage des fichiers. Expliquer Codex/AGENTS et Claude Code/CLAUDE à partir des sources officielles. Vérifier les fichiers effectivement lus, pas seulement leur reformulation.",
+      "question": "CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?",
+      "attendu": "Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "07-global-local"
+  },
+  {
+    "module": 5,
+    "type": "figure",
+    "title": "Méthode partagée, contexte local",
+    "figure": "07-global-local",
+    "takeaway": "CLAUDE.md / CLAUDE_PROJECT.md · DESIGN_SYSTEM / DESIGN_SYSTEM_APP",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Global : Décider, prouver, rendre compte. Local : Données, commandes et métier. Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Premier contrat global et compagnon local. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 5,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "AGENTS.md → lire CLAUDE.md\nPuis CLAUDE_PROJECT.md, s'il existe.\nGlobal ≠ installation globale du logiciel.\nUn nom conventionnel ne garantit pas la lecture.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Classer huit règles de E09 avant de montrer le routage des fichiers. Expliquer Codex/AGENTS et Claude Code/CLAUDE à partir des sources officielles. Vérifier les fichiers effectivement lus, pas seulement leur reformulation. Vigilance : On copie le grand contrat du socle sans savoir quel problème chaque règle résout.",
+      "question": "CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?",
+      "attendu": "Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "07-global-local"
+  },
+  {
+    "module": 5,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E09 · Classer la méthode et le contexte.",
+      "E10 · Construire et contrôler le routage de lecture.",
+      "Rendre un contrat court et son compagnon local."
+    ],
+    "takeaway": "E09 + E10 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E09 pendant 25 minutes puis E10 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Premier contrat global et compagnon local. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "07-global-local"
+  },
+  {
+    "module": 5,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire corriger une règle mensongère de clôture et distinguer consigne textuelle et permission technique. Erreur fréquente : On copie le grand contrat du socle sans savoir quel problème chaque règle résout. Faire ensuite traiter Q5.1 à Q5.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "CLAUDE_PROJECT.md est-il automatiquement découvert par son nom ?",
+      "attendu": "Ce cours ne le suppose pas. La lecture de ce compagnon est demandée explicitement dans le point d'entrée adapté à l'outil.",
+      "transition": "Annoncer le module 6 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "07-global-local"
+  },
+  {
+    "module": 6,
+    "type": "content",
+    "title": "Spécifier avant d'implémenter",
+    "lead": "« Un titre propre » possède trop d'interprétations.",
+    "points": [
+      "Écrire les règles avant leur réalisation.",
+      "Utiliser les bornes et les refus comme exemples.",
+      "Relier contrat, unité, code et preuve."
+    ],
+    "takeaway": "Relier besoin, exemples, backlog, code et tests.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "« Un titre propre » possède trop d'interprétations. Remplir au tableau la table vide, espaces, 2, 3, 80, 81 et type non texte. Faire produire les résultats avant de regarder domain.py. Construire ensuite rôle ET propriété pour la clôture.",
+      "question": "Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?",
+      "attendu": "Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "03-trace"
+  },
+  {
+    "module": 6,
+    "type": "figure",
+    "title": "Relier besoin, code et preuve",
+    "figure": "03-trace",
+    "takeaway": "La documentation suit le comportement ; les références doivent rester pertinentes.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Besoin : Résultat utilisateur. Contrat : Exemples et refus. Implémentation : Règle appliquée. Preuves : Contrat vérifié. Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Spécification stable et chaîne de traçabilité. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 6,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Titre texte, espaces de bord retirés.\nLongueur autorisée : 3 à 80 inclus.\n2 → refus · 3 → accepté\n80 → accepté · 81 → refus",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Remplir au tableau la table vide, espaces, 2, 3, 80, 81 et type non texte. Faire produire les résultats avant de regarder domain.py. Construire ensuite rôle ET propriété pour la clôture. Vigilance : Un marqueur de référence est traité comme une preuve de pertinence du contrat cité.",
+      "question": "Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?",
+      "attendu": "Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "03-trace"
+  },
+  {
+    "module": 6,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E11 · Rédiger le contrat des titres.",
+      "E12 · Établir la matrice d'accès et la traçabilité.",
+      "Rendre deux unités verticales avec leurs preuves attendues."
+    ],
+    "takeaway": "E11 + E12 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E11 pendant 25 minutes puis E12 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Spécification stable et chaîne de traçabilité. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "03-trace"
+  },
+  {
+    "module": 6,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander la réponse attendue et l'état de la base après chaque refus : les deux sont nécessaires. Erreur fréquente : Un marqueur de référence est traité comme une preuve de pertinence du contrat cité. Faire ensuite traiter Q6.1 à Q6.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Pourquoi tester 2, 3, 80 et 81 plutôt que seulement 20 ?",
+      "attendu": "Ces cas distinguent les bornes inclusives de leurs voisins refusés. Un cas au milieu ne détecte pas une borne erronée.",
+      "transition": "Annoncer le module 7 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "03-trace"
+  },
+  {
+    "module": 7,
+    "type": "content",
+    "title": "Concevoir la boucle d'exécution",
+    "lead": "Un checkpoint n'est pas une livraison.",
+    "points": [
+      "Comprendre et persister avant d'implémenter.",
+      "Vérifier puis corriger la cause du défaut.",
+      "Transmettre l'état réel, y compris les preuves manquantes."
+    ],
+    "takeaway": "Ordonner l'exploration, la décision, l'implémentation et les preuves.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Un checkpoint n'est pas une livraison. Réordonner les cartes d'une session. Montrer une spécification déjà écrite : la reprise la lit, elle ne la réécrit pas par rituel. Présenter une clôture fictive avec build vert mais preuve API absente.",
+      "question": "Une capture enregistrée mais jamais ouverte est-elle une observation ?",
+      "attendu": "Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "13-boucle"
+  },
+  {
+    "module": 7,
+    "type": "figure",
+    "title": "La boucle d'exécution d'une unité",
+    "figure": "13-boucle",
+    "takeaway": "Un défaut renvoie à sa cause ; un checkpoint ne signifie pas unité terminée.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Comprendre : Lire et spécifier. Persister : Décisions et références. Implémenter : Modifier dans le périmètre. Vérifier : Prouver et transmettre. Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Protocole de session et checkpoints cohérents. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 7,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Lire → décider → conserver\nImplémenter → relire → prouver\nDéfaut → retour à la cause\nFin → preuves + documents + état durable",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Réordonner les cartes d'une session. Montrer une spécification déjà écrite : la reprise la lit, elle ne la réécrit pas par rituel. Présenter une clôture fictive avec build vert mais preuve API absente. Vigilance : Le protocole est une liste de cases cochées indépendamment des résultats.",
+      "question": "Une capture enregistrée mais jamais ouverte est-elle une observation ?",
+      "attendu": "Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "13-boucle"
+  },
+  {
+    "module": 7,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E13 · Ordonner une session et ses checkpoints.",
+      "E14 · Refuser une fausse clôture.",
+      "Rendre un protocole et une définition de fin vérifiable."
+    ],
+    "takeaway": "E13 + E14 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E13 pendant 25 minutes puis E14 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Protocole de session et checkpoints cohérents. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "13-boucle"
+  },
+  {
+    "module": 7,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Une capture enregistrée mais jamais ouverte est-elle une observation ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire remplacer « terminé » par un compte rendu précis de ce qui existe, a été exécuté et reste à faire. Erreur fréquente : Le protocole est une liste de cases cochées indépendamment des résultats. Faire ensuite traiter Q7.1 à Q7.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Une capture enregistrée mais jamais ouverte est-elle une observation ?",
+      "attendu": "Non : sa production est établie, pas son contenu ni sa conformité. L'unité reste en cours si cette preuve importante manque.",
+      "transition": "Annoncer le module 8 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "13-boucle"
+  },
+  {
+    "module": 8,
+    "type": "content",
+    "title": "Rendre l'environnement reproductible",
+    "lead": "« Ça marche chez moi » décrit un poste, pas une procédure.",
+    "points": [
+      "Nommer runtime et dépendances.",
+      "Documenter configuration, services et données.",
+      "Rejouer sans remplacer un état existant."
+    ],
+    "takeaway": "Préparer runtime, configuration, services et données déterministes.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "« Ça marche chez moi » décrit un poste, pas une procédure. Préparer une copie de départ, choisir un fichier de base neuf, compter les trois demandes. Ajouter une demande, arrêter puis redémarrer sur le même fichier. Vérifier que le seed ne réinitialise pas l'état. Ne pas supprimer la base d'un apprenant.",
+      "question": "Un conteneur suffit-il à rendre tout l'environnement reproductible ?",
+      "attendu": "Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "14-environnement"
+  },
+  {
+    "module": 8,
+    "type": "figure",
+    "title": "Ce qu'il faut pour reproduire",
+    "figure": "14-environnement",
+    "takeaway": "Une procédure importante doit être rejouable depuis le README.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Runtime : Version et dépendances. Configuration : Paramètres documentés. Services : Démarrage et disponibilité. Données : Schéma, seed et état initial. Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Bootstrap et contrat de seed rejouables. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 8,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Code + Python + paramètres\nBase neuve → schéma + trois demandes\nMême base → données conservées\nNouveau nom → autre expérience isolée",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Préparer une copie de départ, choisir un fichier de base neuf, compter les trois demandes. Ajouter une demande, arrêter puis redémarrer sur le même fichier. Vérifier que le seed ne réinitialise pas l'état. Ne pas supprimer la base d'un apprenant. Vigilance : Un défaut d'environnement est masqué en changeant le code ou en supprimant des données.",
+      "question": "Un conteneur suffit-il à rendre tout l'environnement reproductible ?",
+      "attendu": "Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "14-environnement"
+  },
+  {
+    "module": 8,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E15 · Rejouer le bootstrap et la persistance.",
+      "E16 · Diagnostiquer sans masquer la panne.",
+      "Rendre un README rejouable et un diagnostic par couche."
+    ],
+    "takeaway": "E15 + E16 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E15 pendant 25 minutes puis E16 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Bootstrap et contrat de seed rejouables. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "14-environnement"
+  },
+  {
+    "module": 8,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Un conteneur suffit-il à rendre tout l'environnement reproductible ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire classer port occupé, runtime absent et défaut de validation par couche ; une migration se prouve depuis un état existant. Erreur fréquente : Un défaut d'environnement est masqué en changeant le code ou en supprimant des données. Faire ensuite traiter Q8.1 à Q8.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Un conteneur suffit-il à rendre tout l'environnement reproductible ?",
+      "attendu": "Non. Il reste les paramètres, accès, données, versions et services nécessaires ; leur contrat doit être documenté et vérifié.",
+      "transition": "Annoncer le module 9 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "14-environnement"
+  },
+  {
+    "module": 9,
+    "type": "content",
+    "title": "Construire la preuve",
+    "lead": "Un seul voyant vert ne prouve pas toute l'application.",
+    "points": [
+      "Unitaire : la règle isolée.",
+      "API et base : la route et les effets.",
+      "Parcours et observation : le résultat utilisable."
+    ],
+    "takeaway": "Produire et interpréter les tests et observations utiles.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Un seul voyant vert ne prouve pas toute l'application. Lancer un test des bornes sur le prototype, lire l'assertion, corriger validate_title dans la copie de démonstration et rejouer. Montrer ensuite le test HTTP/SQLite puis le parcours depuis l'accueil. Conserver les rouges de DEM-02.",
+      "question": "Un test rouge d'import démontre-t-il le défaut métier recherché ?",
+      "attendu": "Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "04-preuves"
+  },
+  {
+    "module": 9,
+    "type": "figure",
+    "title": "Une règle, plusieurs regards",
+    "figure": "04-preuves",
+    "takeaway": "Un succès à un niveau ne dispense pas des autres preuves applicables.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Unitaire : La règle calcule juste. API + base : Le serveur refuse sans écrire. Parcours E2E : L'utilisateur atteint le résultat. Observation : Le rendu reste utilisable. Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Matrice de preuves et correction DEM-01. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 9,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Avant DEM-01 : quatre tests rouges.\nCorriger uniquement le contrat des titres.\nAprès : ses preuves passent.\nLes défauts de droits restent visibles.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Lancer un test des bornes sur le prototype, lire l'assertion, corriger validate_title dans la copie de démonstration et rejouer. Montrer ensuite le test HTTP/SQLite puis le parcours depuis l'accueil. Conserver les rouges de DEM-02. Vigilance : Des tests sont supprimés ou ignorés pour obtenir une sortie entièrement verte.",
+      "question": "Un test rouge d'import démontre-t-il le défaut métier recherché ?",
+      "attendu": "Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "04-preuves"
+  },
+  {
+    "module": 9,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E17 · Corriger DEM-01 avec un rouge utile.",
+      "E18 · Prouver le parcours et inspecter le rendu.",
+      "Rendre les résultats, captures observées et limites."
+    ],
+    "takeaway": "E17 + E18 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E17 pendant 25 minutes puis E18 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Matrice de preuves et correction DEM-01. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "04-preuves"
+  },
+  {
+    "module": 9,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Un test rouge d'import démontre-t-il le défaut métier recherché ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander commande, état, assertion et portée. Faire ouvrir les captures et nommer une limite de chaque preuve. Erreur fréquente : Des tests sont supprimés ou ignorés pour obtenir une sortie entièrement verte. Faire ensuite traiter Q9.1 à Q9.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Un test rouge d'import démontre-t-il le défaut métier recherché ?",
+      "attendu": "Non. Le dispositif doit d'abord fonctionner. Le rouge utile échoue sur le comportement que la correction doit changer.",
+      "transition": "Annoncer le module 10 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "04-preuves"
+  },
+  {
+    "module": 10,
+    "type": "content",
+    "title": "Encadrer sécurité et production",
+    "lead": "Cacher un bouton ne protège pas une écriture.",
+    "points": [
+      "Résoudre l'acteur côté serveur.",
+      "Croiser rôle et propriété de la demande.",
+      "Refuser avant d'écrire ; relire l'état après refus."
+    ],
+    "takeaway": "Appliquer les droits serveur et encadrer les opérations sensibles.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Cacher un bouton ne protège pas une écriture. Montrer sur le prototype l'appel direct qui permet à Bob de clore la demande d'Alice. Corriger le prédicat sur une copie. Rejouer le refus et vérifier la base. Insister : les identités de ce laboratoire sont simulées, pas prêtes pour la production.",
+      "question": "Pourquoi lire la ressource après une réponse 403 ?",
+      "attendu": "Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "05-droits"
+  },
+  {
+    "module": 10,
+    "type": "figure",
+    "title": "Qui peut clore cette demande ?",
+    "figure": "05-droits",
+    "takeaway": "Un refus est prouvé par sa réponse ET par l'absence de mutation.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Alice : Responsable : toute demande. Bob : Contributeur : ses demandes. Eve : Lectrice : aucune écriture. Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Politique d'accès, correction DEM-02 et préparation de retour arrière. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 10,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Alice : peut clore toute demande.\nBob : peut clore uniquement les siennes.\nEve : aucune écriture.\nBob → demande d'Alice : 403 ET état inchangé.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Montrer sur le prototype l'appel direct qui permet à Bob de clore la demande d'Alice. Corriger le prédicat sur une copie. Rejouer le refus et vérifier la base. Insister : les identités de ce laboratoire sont simulées, pas prêtes pour la production. Vigilance : La propriété suffit à autoriser Eve, ou le propriétaire envoyé par le client est cru.",
+      "question": "Pourquoi lire la ressource après une réponse 403 ?",
+      "attendu": "Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "05-droits"
+  },
+  {
+    "module": 10,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E19 · Identifier les valeurs non fiables.",
+      "E20 · Corriger DEM-02 et préparer le retour arrière.",
+      "Rendre les sept tests verts et le parcours multi-profils."
+    ],
+    "takeaway": "E19 + E20 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E19 pendant 25 minutes puis E20 pendant 45 minutes. Pilote et relecteur échangent les rôles. Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Politique d'accès, correction DEM-02 et préparation de retour arrière. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "05-droits"
+  },
+  {
+    "module": 10,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Pourquoi lire la ressource après une réponse 403 ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Comparer UI, appel direct et données. Sur table, demander comment prouver une restauration et la compatibilité d'un retour arrière. Erreur fréquente : La propriété suffit à autoriser Eve, ou le propriétaire envoyé par le client est cru. Faire ensuite traiter Q10.1 à Q10.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Pourquoi lire la ressource après une réponse 403 ?",
+      "attendu": "Pour détecter un serveur qui aurait écrit avant de refuser. La réponse seule ne prouve pas l'absence de mutation.",
+      "transition": "Annoncer le module 11 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "05-droits"
+  },
+  {
+    "module": 11,
+    "type": "content",
+    "title": "Utiliser Git comme mémoire durable",
+    "lead": "Le fichier ouvert n'est pas forcément le prochain commit.",
+    "points": [
+      "Travail, index, commit et remote sont distincts.",
+      "Relire la sélection avant de la conserver.",
+      "Fetch observe ; l'intégration modifie ; push transmet."
+    ],
+    "takeaway": "Lire, conserver, synchroniser et récupérer un changement.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Le fichier ouvert n'est pas forcément le prochain commit. Faire prédire le contenu de chaque diff avant de l'afficher. Réindexer seulement après lecture. Puis dessiner A–B local et A–C distant : fetch révèle C mais n'intègre pas C. Montrer que --ff-only refuse une divergence.",
+      "question": "Un commit local protège-t-il de la perte complète de la machine ?",
+      "attendu": "Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "02-git"
+  },
+  {
+    "module": 11,
+    "type": "figure",
+    "title": "Quatre lieux, quatre états",
+    "figure": "02-git",
+    "takeaway": "git diff examine le travail ; git diff --cached examine la sélection.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Fichier : État de travail. Index : Sélection par git add. Commit : Instantané local. Remote : Commits transmis. Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Discipline de commit, push et récupération. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 11,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Écrire « v1 » → git add\nÉcrire « v2 » → git diff\nLe prochain commit contient encore « v1 ».\ngit diff --cached montre la sélection.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Faire prédire le contenu de chaque diff avant de l'afficher. Réindexer seulement après lecture. Puis dessiner A–B local et A–C distant : fetch révèle C mais n'intègre pas C. Montrer que --ff-only refuse une divergence. Vigilance : Un push rejeté conduit à forcer, ou stash est présenté comme un retour avant un commit.",
+      "question": "Un commit local protège-t-il de la perte complète de la machine ?",
+      "attendu": "Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "02-git"
+  },
+  {
+    "module": 11,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E21 · Observer l'index et créer un checkpoint.",
+      "E22 · Relire un changement qui dépasse la mission.",
+      "Rendre le vrai hash, le diff retenu et les refus argumentés."
+    ],
+    "takeaway": "E21 + E22 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E21 pendant 25 minutes puis E22 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Discipline de commit, push et récupération. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "02-git"
+  },
+  {
+    "module": 11,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Un commit local protège-t-il de la perte complète de la machine ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander la référence exacte de comparaison. Une synchronisation qui change le code impose de réexaminer les preuves. Erreur fréquente : Un push rejeté conduit à forcer, ou stash est présenté comme un retour avant un commit. Faire ensuite traiter Q11.1 à Q11.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Un commit local protège-t-il de la perte complète de la machine ?",
+      "attendu": "Non. Une autre copie autorisée doit posséder ce commit. Il faut aussi connaître l'effet d'un push, parfois couplé à un déploiement.",
+      "transition": "Annoncer le module 12 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "02-git"
+  },
+  {
+    "module": 12,
+    "type": "content",
+    "title": "Orchestrer plusieurs agents",
+    "lead": "Plusieurs agents ne créent pas plusieurs responsables.",
+    "points": [
+      "Le principal décide et reste seul éditeur.",
+      "Une mission déléguée est indépendante et bornée.",
+      "Un résultat doit être vérifié avant synthèse."
+    ],
+    "takeaway": "Attribuer des missions bornées avec une responsabilité unique.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Plusieurs agents ne créent pas plusieurs responsables. Lire une mission de revue avec objectif, périmètre, sources et livrable. Montrer un constat avec fichier/impact/preuve puis une opinion sans source. Préparer la vérification sur un arbre stable sans édition concurrente.",
+      "question": "Qui tranche si le reviewer propose un autre choix produit ?",
+      "attendu": "Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "09-roles"
+  },
+  {
+    "module": 12,
+    "type": "figure",
+    "title": "Un responsable, des missions bornées",
+    "figure": "09-roles",
+    "takeaway": "Le vérificateur compare l'état avant/après ; aucune édition concurrente.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Principal : Seul éditeur et décideur. Explorer : Cartographier un flux. Reviewer : Relire un changement. Verifier : Exécuter une preuve ciblée. Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Rôles explorer, reviewer et verifier avec contrats. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 12,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Explorer : quel est le flux réel ?\nReviewer : quel défaut contre le contrat ?\nVerifier : quelle preuve sur quel état ?\nPrincipal : vérifier, décider, intégrer.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Lire une mission de revue avec objectif, périmètre, sources et livrable. Montrer un constat avec fichier/impact/preuve puis une opinion sans source. Préparer la vérification sur un arbre stable sans édition concurrente. Vigilance : On délègue une tâche triviale ou on laisse plusieurs écrivains modifier la même unité.",
+      "question": "Qui tranche si le reviewer propose un autre choix produit ?",
+      "attendu": "Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "09-roles"
+  },
+  {
+    "module": 12,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E23 · Rédiger une mission de revue bornée.",
+      "E24 · Vérifier sans édition concurrente.",
+      "Rendre contrat, observations et traitement d'une anomalie."
+    ],
+    "takeaway": "E23 + E24 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E23 pendant 25 minutes puis E24 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Rôles explorer, reviewer et verifier avec contrats. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "09-roles"
+  },
+  {
+    "module": 12,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Qui tranche si le reviewer propose un autre choix produit ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire comparer l'état avant/après vérification et distinguer cache attendu et modification suivie inattendue. Erreur fréquente : On délègue une tâche triviale ou on laisse plusieurs écrivains modifier la même unité. Faire ensuite traiter Q12.1 à Q12.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Qui tranche si le reviewer propose un autre choix produit ?",
+      "attendu": "Le principal ou le responsable autorisé du produit. Le rôle auxiliaire rend des constats et ne reçoit pas implicitement cette autorité.",
+      "transition": "Annoncer le module 13 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "09-roles"
+  },
+  {
+    "module": 13,
+    "type": "content",
+    "title": "Automatiser les invariants",
+    "lead": "Un contrôle mécanique ne connaît pas votre intention.",
+    "points": [
+      "Identifier l'événement qui déclenche le contrôle.",
+      "Lire les entrées réellement examinées.",
+      "Distinguer forme, sens et comportement."
+    ],
+    "takeaway": "Distinguer contrôles mécaniques, CI, preuves et jugement.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Un contrôle mécanique ne connaît pas votre intention. Lire AUTOMATION puis le hook correspondant sans l'installer sur le laboratoire. Montrer que commit-msg reçoit un message et pre-commit la sélection. Expliquer qu'un clone ne prouve pas l'activation et que la CI distante reste à configurer.",
+      "question": "Une CI verte sur un index vide a-t-elle vérifié le changement ?",
+      "attendu": "Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "08-gardes"
+  },
+  {
+    "module": 13,
+    "type": "figure",
+    "title": "Ce que chaque contrôle établit",
+    "figure": "08-gardes",
+    "takeaway": "Les entrées du contrôle déterminent la portée de son résultat.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Instruction : Fixe la règle. Hook / CI : Calcule un invariant. Revue : Examine la pertinence. Exécution : Éprouve le comportement. Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Cartographie des hooks et de leurs entrées. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 13,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Marqueur ajouté après git add :\nle fichier le contient, l'index non.\nHook rouge : examiner le blob indexé.\nNe pas désactiver le contrôle pour passer.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Lire AUTOMATION puis le hook correspondant sans l'installer sur le laboratoire. Montrer que commit-msg reçoit un message et pre-commit la sélection. Expliquer qu'un clone ne prouve pas l'activation et que la CI distante reste à configurer. Vigilance : La présence des scripts est confondue avec leur activation, ou le vert de forme avec la qualité métier.",
+      "question": "Une CI verte sur un index vide a-t-elle vérifié le changement ?",
+      "attendu": "Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "08-gardes"
+  },
+  {
+    "module": 13,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E25 · Cartographier les hooks et leurs limites.",
+      "E26 · Analyser quatre incidents d'automatisation.",
+      "Rendre événements, entrées, refus et paires de cas."
+    ],
+    "takeaway": "E25 + E26 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E25 pendant 25 minutes puis E26 pendant 45 minutes. Pilote et relecteur échangent les rôles. Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Cartographie des hooks et de leurs entrées. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "08-gardes"
+  },
+  {
+    "module": 13,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Une CI verte sur un index vide a-t-elle vérifié le changement ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Faire nommer, pour chacun des quatre incidents, l'entrée manquante et la conclusion qui dépasse la preuve. Erreur fréquente : La présence des scripts est confondue avec leur activation, ou le vert de forme avec la qualité métier. Faire ensuite traiter Q13.1 à Q13.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Une CI verte sur un index vide a-t-elle vérifié le changement ?",
+      "attendu": "Pas si le contrôle attend les blobs indexés et ne les reçoit pas. Le dispositif doit préparer les bonnes entrées ou choisir une autre portée explicite.",
+      "transition": "Annoncer le module 14 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "08-gardes"
+  },
+  {
+    "module": 14,
+    "type": "content",
+    "title": "Passer au worker autonome",
+    "lead": "Une session autonome doit pouvoir être interrompue.",
+    "points": [
+      "Récupérer un état durable connu.",
+      "Borner budget, pouvoirs et destination.",
+      "Laisser une passation et une condition d'arrêt."
+    ],
+    "takeaway": "Construire une reprise après interruption avec limites et arrêt.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Une session autonome doit pouvoir être interrompue. Utiliser une carte d'interruption, pas un ordonnanceur réel. À la minute fictive 18, recueillir code/specification/preuves manquantes. Donner la passation à un autre binôme. Lire ensuite les hypothèses d'hôte de CloudWorker comme hypothèses à vérifier.",
+      "question": "Le fichier docs/.routine installe-t-il une tâche planifiée ?",
+      "attendu": "Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "10-worker"
+  },
+  {
+    "module": 14,
+    "type": "figure",
+    "title": "Une session qui laisse une reprise",
+    "figure": "10-worker",
+    "takeaway": "Budget, autorité, destination et condition d'arrêt sont explicites.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Récupérer : Code et contexte. Réaliser : Une unité cohérente. Prouver : Résultats et limites. Transmettre : Checkpoint et passation. Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Cycle planifié et protocole de reprise. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 14,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Budget fictif : 30 minutes.\nCode cohérent à la minute 16.\nInterruption à 18 : preuves commencées.\nCheckpoint conservé ; unité encore en cours.",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Utiliser une carte d'interruption, pas un ordonnanceur réel. À la minute fictive 18, recueillir code/specification/preuves manquantes. Donner la passation à un autre binôme. Lire ensuite les hypothèses d'hôte de CloudWorker comme hypothèses à vérifier. Vigilance : La commande d'un hôte particulier est copiée ailleurs, ou un checkpoint local est supposé survivre à une machine éphémère.",
+      "question": "Le fichier docs/.routine installe-t-il une tâche planifiée ?",
+      "attendu": "Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "10-worker"
+  },
+  {
+    "module": 14,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E27 · Spécifier le worker sur table.",
+      "E28 · Interrompre, transmettre puis reprendre.",
+      "Rendre budget, passation et arrêt sans faux effet externe."
+    ],
+    "takeaway": "E27 + E28 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E27 pendant 25 minutes puis E28 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Cycle planifié et protocole de reprise. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "10-worker"
+  },
+  {
+    "module": 14,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Le fichier docs/.routine installe-t-il une tâche planifiée ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "La reprise suivante s'appuie sur ce résultat conservé.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander ce qui subsiste si le poste disparaît. Si une synchronisation change le code, rejouer les preuves concernées. Erreur fréquente : La commande d'un hôte particulier est copiée ailleurs, ou un checkpoint local est supposé survivre à une machine éphémère. Faire ensuite traiter Q14.1 à Q14.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Le fichier docs/.routine installe-t-il une tâche planifiée ?",
+      "attendu": "Non. C'est un prompt de déclenchement ; un mécanisme externe, ses accès, sa destination et son arrêt doivent exister réellement.",
+      "transition": "Annoncer le module 15 et repartir de l'artefact conservé.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "10-worker"
+  },
+  {
+    "module": 15,
+    "type": "content",
+    "title": "Assembler la software factory",
+    "lead": "Le socle final répond aux problèmes rencontrés avant lui.",
+    "points": [
+      "Assembler méthode, contexte, mémoire et preuves.",
+      "Ajouter les contrôles utiles et les rôles bornés.",
+      "Qualifier l'adoption sur une petite unité réelle."
+    ],
+    "takeaway": "Reconstruire la configuration finale et justifier chacune de ses pièces.",
+    "notes": {
+      "intention": "Faire apparaître le problème avant le vocabulaire.",
+      "explication": "Le socle final répond aux problèmes rencontrés avant lui. Faire reconstruire la carte de mémoire sans ouvrir le README du socle. Comparer ensuite aux vrais fichiers et noter ce qu'ils ne fournissent pas : produit, commandes de stack, CI distante, ordonnanceur et accès effectifs.",
+      "question": "Quelle première preuve montre une adoption utile de la méthode ?",
+      "attendu": "Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.",
+      "transition": "Utiliser le schéma pour nommer les relations.",
+      "minutage": "0–15 min : situation et premières notions ; accueil compris pour M1."
+    },
+    "visual": "15-factory"
+  },
+  {
+    "module": 15,
+    "type": "figure",
+    "title": "L'usine assemble les acquis",
+    "figure": "15-factory",
+    "takeaway": "Le projet ajoute sa stack, ses données, ses accès et ses services réels.",
+    "notes": {
+      "intention": "Faire expliquer la relation représentée, pas mémoriser des boîtes.",
+      "explication": "Méthode : Décisions et responsabilités. Contexte produit : Contrats et commandes. Qualité : Preuves et documentation. Automatisation : Gardes, rôles et worker. Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution.",
+      "question": "Quelle relation du schéma pourriez-vous vérifier dans le laboratoire ?",
+      "attendu": "Assemblage puis comparaison avec le dépôt. Demander une source ou une observation pour justifier le lien.",
+      "transition": "Passer à l'exemple commenté et faire prédire son résultat.",
+      "minutage": "15–30 min : concepts et reformulation."
+    }
+  },
+  {
+    "module": 15,
+    "type": "case",
+    "title": "Un exemple à examiner",
+    "case": "Besoin vécu → pièce justifiée\nReprise → documents et Git\nRègle répétable → garde déterministe\nAutomatisation → protocole + infrastructure",
+    "takeaway": "Prédire → observer → expliquer l'écart.",
+    "notes": {
+      "intention": "Modéliser un raisonnement observable devant le groupe.",
+      "explication": "Faire reconstruire la carte de mémoire sans ouvrir le README du socle. Comparer ensuite aux vrais fichiers et noter ce qu'ils ne fournissent pas : produit, commandes de stack, CI distante, ordonnanceur et accès effectifs. Vigilance : La configuration est présentée comme un produit fini ou comme une garantie automatique de qualité.",
+      "question": "Quelle première preuve montre une adoption utile de la méthode ?",
+      "attendu": "Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.",
+      "transition": "Afficher les deux missions. Faire lire les livrables avant de commencer.",
+      "minutage": "30–55 min : démonstration commentée."
+    },
+    "visual": "15-factory"
+  },
+  {
+    "module": 15,
+    "type": "content",
+    "title": "À vous de produire",
+    "points": [
+      "E29 · Reconstruire puis comparer l'assemblage.",
+      "E30 · Préparer une adoption justifiée.",
+      "Rendre une carte, des limites et une première unité à prouver."
+    ],
+    "takeaway": "E29 + E30 · consignes complètes dans le cahier d'exercices",
+    "notes": {
+      "intention": "Passer du vocabulaire à une production vérifiable.",
+      "explication": "Lancer E29 pendant 25 minutes puis E30 pendant 45 minutes. Pilote et relecteur échangent les rôles. Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution. Les indices et extensions sont dans EXERCICES ; les réponses dans CORRIGES.",
+      "question": "Quelle preuve ou quel livrable allez-vous remettre ?",
+      "attendu": "Assemblage puis comparaison avec le dépôt. Faire présenter une source réelle, pas seulement une affirmation.",
+      "transition": "Comparer les productions, puis répondre aux trois questions du chapitre.",
+      "minutage": "55–80 min : exercice impair ; 80–125 min : exercice pair."
+    },
+    "visual": "15-factory"
+  },
+  {
+    "module": 15,
+    "type": "content",
+    "title": "Vérifier votre compréhension",
+    "lead": "Quelle première preuve montre une adoption utile de la méthode ?",
+    "points": [
+      "Répondre avant d'ouvrir le corrigé.",
+      "Expliquer un contre-exemple.",
+      "Conserver le livrable et la prochaine action."
+    ],
+    "takeaway": "L'évaluation finale vérifie les gestes, pas la copie du socle.",
+    "notes": {
+      "intention": "Qualifier le point de sortie et organiser une remédiation ciblée.",
+      "explication": "Demander pour chaque fichier quelle question il résout et ce que le projet doit encore fournir. Préparer l'évaluation sans dévoiler la solution. Erreur fréquente : La configuration est présentée comme un produit fini ou comme une garantie automatique de qualité. Faire ensuite traiter Q15.1 à Q15.3 dans le chapitre, sans les réduire à la seule question projetée.",
+      "question": "Quelle première preuve montre une adoption utile de la méthode ?",
+      "attendu": "Une petite unité dont le comportement, les preuves et la reprise fonctionnent réellement. Copier l'arborescence n'est pas cette preuve.",
+      "transition": "Distribuer EVALUATION sans montrer CORRIGE_FINAL.",
+      "minutage": "125–140 min : débrief ; 140–150 min : quiz et passation."
+    },
+    "visual": "15-factory"
+  },
+  {
+    "module": 16,
+    "type": "hero",
+    "title": "Démontrer votre autonomie",
+    "lead": "DEM-03 : permettre au responsable de rouvrir une demande.",
+    "points": [
+      "Partir de la référence corrigée.",
+      "Livrer contrat, code, preuves et passation."
+    ],
+    "takeaway": "270 minutes · individuel · critères connus avant de commencer",
+    "notes": {
+      "intention": "Présenter l'évaluation comme une nouvelle unité et non un test de mémoire.",
+      "explication": "Distribuer EVALUATION. Le responsable peut rouvrir, les autres sont refusés sans mutation. Le titre, le propriétaire et l'identifiant restent inchangés. Refaire l'action ne duplique rien. Ne pas ouvrir le corrigé pendant l'évaluation.",
+      "question": "Qu'est-ce qui change et qu'est-ce qui doit rester intact ?",
+      "attendu": "La transition fermé vers ouvert est nouvelle ; les données, la validation et les droits existants restent protégés.",
+      "transition": "Faire établir contrat et plan avant de coder.",
+      "minutage": "0–25 min : prise en main ; 25–60 min : contrat et plan."
+    }
+  },
+  {
+    "module": 16,
+    "type": "content",
+    "title": "Prouver les succès et les refus",
+    "points": [
+      "Alice rouvre ; Bob et Eve sont refusés.",
+      "Aucune mutation après refus ; répétition sans doublon.",
+      "Parcours depuis l'accueil ; régressions rejouées."
+    ],
+    "takeaway": "Le corrigé de référence contient douze tests ; leur nombre n'est pas le barème.",
+    "notes": {
+      "intention": "Garder visible la couverture attendue sans dicter l'implémentation.",
+      "explication": "Au jalon 160 minutes, demander un état du code et les preuves restant à produire. Les tests doivent qualifier les cas de leur version. Le corrigé peut utiliser une autre structure. L'inspection du parcours et des captures complète l'exécution HTTP.",
+      "question": "Une réponse 403 suffit-elle à accepter le cas interdit ?",
+      "attendu": "Non : il faut constater la ressource inchangée, puis vérifier que les cas autorisés et les règles précédentes restent corrects.",
+      "transition": "Faire préparer une remise traçable, même si une preuve manque.",
+      "minutage": "60–160 min : réalisation ; 160–215 min : preuves."
+    }
+  },
+  {
+    "module": 16,
+    "type": "content",
+    "title": "Rendre un état défendable",
+    "points": [
+      "Cadrage 10 · contrat 15 · code 20.",
+      "Preuves 30 · documentation 15 · revue 10.",
+      "Seuil : 70/100, sans faute critique définie au barème."
+    ],
+    "takeaway": "Votre prochaine unité personnelle devient le premier transfert de la méthode.",
+    "notes": {
+      "intention": "Conclure par une évaluation explicable et un transfert concret.",
+      "explication": "Utiliser le barème détaillé d'EVALUATION ; une preuve inventée ou une autorisation contournée est critique. Chaque personne explique une décision et une preuve. Retour en trois phrases : comportement démontré, limite, exercice de remédiation. Prévoir un second évaluateur si la cohorte dépasse la capacité des restitutions.",
+      "question": "Quelle petite unité de votre projet permettrait de réutiliser ces gestes ?",
+      "attendu": "Une unité bornée avec acteur, critère, risque, preuve et condition de reprise ; pas un objectif vague d'industrialisation.",
+      "transition": "Proposer le corrigé final après remise et conserver le plan de transfert.",
+      "minutage": "215–245 min : documentation/remise ; 245–270 min : restitution et bilan."
+    }
+  }
+]

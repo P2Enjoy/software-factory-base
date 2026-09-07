@@ -1,0 +1,23 @@
+{
+  "edition": "2026-09-05",
+  "title": "Coder avec un agent : les bases, la méthode, puis l'usine",
+  "module_minutes": 150,
+  "evaluation_minutes": 270,
+  "modules": [
+    {"id":1,"title":"De l'assistant à l'agent","file":"01-assistant-agent.md","objective":"Distinguer génération, outils, contexte, autonomie et responsabilité.","deliverable":"Carte des pouvoirs, responsabilités et risques","exercises":["E01","E02"],"figure":"11-agent"},
+    {"id":2,"title":"Transformer une demande en unité de travail","file":"02-unite.md","objective":"Délimiter un résultat utile, observable et réalisable.","deliverable":"Une unité cohérente avec critères d'acceptation","exercises":["E03","E04"],"figure":"12-unite"},
+    {"id":3,"title":"Construire le contexte","file":"03-contexte.md","objective":"Explorer les sources et suivre le fonctionnement réel.","deliverable":"Protocole d'exploration et hiérarchie des sources","exercises":["E05","E06"],"figure":"01-flux"},
+    {"id":4,"title":"Externaliser la mémoire","file":"04-memoire.md","objective":"Conserver les décisions et permettre la reprise d'une session.","deliverable":"README, DAT, JOURNAL, BACKLOG et CHANGELOG articulés","exercises":["E07","E08"],"figure":"06-memoire"},
+    {"id":5,"title":"Séparer méthode globale et contexte local","file":"05-global-local.md","objective":"Classer les règles et faire lire les bonnes sources.","deliverable":"Premier contrat global et compagnon local","exercises":["E09","E10"],"figure":"07-global-local"},
+    {"id":6,"title":"Spécifier avant d'implémenter","file":"06-specifier.md","objective":"Relier besoin, exemples, backlog, code et tests.","deliverable":"Spécification stable et chaîne de traçabilité","exercises":["E11","E12"],"figure":"03-trace"},
+    {"id":7,"title":"Concevoir la boucle d'exécution","file":"07-boucle.md","objective":"Ordonner l'exploration, la décision, l'implémentation et les preuves.","deliverable":"Protocole de session et checkpoints cohérents","exercises":["E13","E14"],"figure":"13-boucle"},
+    {"id":8,"title":"Rendre l'environnement reproductible","file":"08-environnement.md","objective":"Préparer runtime, configuration, services et données déterministes.","deliverable":"Bootstrap et contrat de seed rejouables","exercises":["E15","E16"],"figure":"14-environnement"},
+    {"id":9,"title":"Construire la preuve","file":"09-preuves.md","objective":"Produire et interpréter les tests et observations utiles.","deliverable":"Matrice de preuves et correction DEM-01","exercises":["E17","E18"],"figure":"04-preuves"},
+    {"id":10,"title":"Encadrer sécurité et production","file":"10-securite.md","objective":"Appliquer les droits serveur et encadrer les opérations sensibles.","deliverable":"Politique d'accès, correction DEM-02 et préparation de retour arrière","exercises":["E19","E20"],"figure":"05-droits"},
+    {"id":11,"title":"Utiliser Git comme mémoire durable","file":"11-git.md","objective":"Lire, conserver, synchroniser et récupérer un changement.","deliverable":"Discipline de commit, push et récupération","exercises":["E21","E22"],"figure":"02-git"},
+    {"id":12,"title":"Orchestrer plusieurs agents","file":"12-agents.md","objective":"Attribuer des missions bornées avec une responsabilité unique.","deliverable":"Rôles explorer, reviewer et verifier avec contrats","exercises":["E23","E24"],"figure":"09-roles"},
+    {"id":13,"title":"Automatiser les invariants","file":"13-invariants.md","objective":"Distinguer contrôles mécaniques, CI, preuves et jugement.","deliverable":"Cartographie des hooks et de leurs entrées","exercises":["E25","E26"],"figure":"08-gardes"},
+    {"id":14,"title":"Passer au worker autonome","file":"14-worker.md","objective":"Construire une reprise après interruption avec limites et arrêt.","deliverable":"Cycle planifié et protocole de reprise","exercises":["E27","E28"],"figure":"10-worker"},
+    {"id":15,"title":"Assembler la software factory","file":"15-factory.md","objective":"Reconstruire la configuration finale et justifier chacune de ses pièces.","deliverable":"Assemblage puis comparaison avec le dépôt","exercises":["E29","E30"],"figure":"15-factory"}
+  ]
+}

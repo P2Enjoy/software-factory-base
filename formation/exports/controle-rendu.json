@@ -1,0 +1,142 @@
+{
+  "edition": "2026-09-05",
+  "executed_at": "2026-09-06T05:13:37.898Z",
+  "slides": 80,
+  "checks": [
+    {
+      "name": "cours images chargées",
+      "ok": true
+    },
+    {
+      "name": "cours ancres internes",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "cours mobile sans débordement horizontal",
+      "ok": true,
+      "details": {
+        "scroll": 390,
+        "viewport": 390
+      }
+    },
+    {
+      "name": "cahier-exercices images chargées",
+      "ok": true
+    },
+    {
+      "name": "cahier-exercices ancres internes",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "corriges images chargées",
+      "ok": true
+    },
+    {
+      "name": "corriges ancres internes",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "guide-animation images chargées",
+      "ok": true
+    },
+    {
+      "name": "guide-animation ancres internes",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "fragment de navigation #1.5",
+      "ok": true
+    },
+    {
+      "name": "fragment de navigation #abc",
+      "ok": true
+    },
+    {
+      "name": "fragment de navigation #0",
+      "ok": true
+    },
+    {
+      "name": "fragment de navigation #999",
+      "ok": true
+    },
+    {
+      "name": "80 slides HTML",
+      "ok": true
+    },
+    {
+      "name": "flèche suivante",
+      "ok": true
+    },
+    {
+      "name": "notes accessibles",
+      "ok": true
+    },
+    {
+      "name": "raccourci notes",
+      "ok": true
+    },
+    {
+      "name": "dernière slide",
+      "ok": true
+    },
+    {
+      "name": "première slide",
+      "ok": true
+    },
+    {
+      "name": "slides mobile sans débordement",
+      "ok": true
+    },
+    {
+      "name": "aucune ressource distante au rendu",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "aucun chevauchement détecté sur les slides",
+      "ok": true,
+      "details": []
+    }
+  ],
+  "overflow": [],
+  "external_requests": [],
+  "sources": {
+    "programme.json": "fa53313a9f3eaefbabf568ef275329730e4ebc0136ec30cca32bbfa9a4be0032",
+    "slides.json": "329bfdbe3fe823704b8d5ff61eaa55350b44a4d4fcc8548495473f6e5019dbd1",
+    "illustrations.json": "fec6b7a6df02bc2d98ed4ed38e59b6e93fdba6d24fc60a49cc72849d6f6c5b63",
+    "styles.css": "e88229547d1e15f54718b51a5a0e8ee1c807eda1926f9472df2c0af10a1966e8",
+    "lecteur-slides.js": "9bf8b0e806b1395f7a0379a5b86eb323c38a6f85a2235faf0fb795062dda4019",
+    "outils/construire.py": "a09a93061366aaa3175c5ab2c30bd86826d27d6680d06394d857321eba52aecf",
+    "outils/exporter.cjs": "74f9962fc5d0c87e95cf0571e4751638fe123ec4265d3f71f4888276aa364739",
+    "SYLLABUS.md": "fb28b248775360f92dc461e21e982cea4d3e4bc472e924db0df9f9e48604bf89",
+    "INSTALLATION.md": "0fb1c941b2238b3134e410ac702b3075b5628c4a2f21e2b20bdf9e1424a58709",
+    "EXERCICES.md": "bd27fd49531c303a25e70646cc7ed29ec03e1860c19e4d67e32afe33b9cf75d6",
+    "EVALUATION.md": "a9512cdd107fecf968011fbdbce554706a7204dba802287b6a64e712b7e5e62d",
+    "CORRIGES.md": "df49f50462ba3e6204599dad5cb1399c171ac1195d2d933eb49fa308d3033dd2",
+    "CORRIGE_FINAL.md": "97627492bb6fc43744d3ba2b54734e1bce71edaabeaebfeb3186445738a45c65",
+    "FICHES.md": "49806bc3e93345764a9743cd0dffc38ce97a82cb159ce57ba7e890df3b471d9d",
+    "GLOSSAIRE.md": "0005fd1629081a6c8a878f638f01f2a727c9f9d0c4679a35f8e4b7d74e31813c",
+    "SOURCES.md": "ff32406f5315e6dd4b52a4c815a7fd70feff318a0de1db9955368c944a041e28",
+    "ANIMATION.md": "11923a6ca013fc04b849fd145ee91bdfe25dde4d0e4d7626300b50a84b85994b",
+    "cours/01-assistant-agent.md": "92c43fb3caae1fa7aed855a8b398d3956f3174eb2a7c4ebb19501fed509b342d",
+    "cours/02-unite.md": "8d8258db5451afe16661f278b72ab1b79fbffc56c2be8c22d190094d23cb2190",
+    "cours/03-contexte.md": "1b276067fb7417afae7edabcdfa838d167cbba151d9d970339889b722ff81064",
+    "cours/04-memoire.md": "9abce862cf5861b4039a4b8df86068e7b2f23afdb7d1e49b541535c025297587",
+    "cours/05-global-local.md": "38e944d633d1b181260ac94f1b00e49e21d16cbc648bcd476f9a74d9414d8a9e",
+    "cours/06-specifier.md": "7f833114f958d88b2b87cc6cdc49a524daf7665f1d2be488a521f147f036f44b",
+    "cours/07-boucle.md": "ed048eeaaf32203c35ebbaea52d840b2f52d5dd050183a87ded9a4fc9b0f377d",
+    "cours/08-environnement.md": "25170209b832d3f5cc6aa70cfac24a18532f4239b2df9d1c55820273604fc0c6",
+    "cours/09-preuves.md": "3e53ad26d36090eec44815edaf25cd03c942d9301217550b4aafd816ba323e5c",
+    "cours/10-securite.md": "376607e39db19e3ac758e288dec1d728d2cbb44a7c2873e61ade40ffee23004f",
+    "cours/11-git.md": "489d0848c819a21d770b6cbdce53cb78b084a15d3b1211080249833dd81f6167",
+    "cours/12-agents.md": "6d8c7afb874a42c149481daeb39bef707d1233f6dc30861ee858fdbb4accb128",
+    "cours/13-invariants.md": "b5064d6d48c984d36e1a4a2d344dfd575e899f2a30228c0fbe3d44f4e2270790",
+    "cours/14-worker.md": "99eb357db95bb55ae53200774c444defb433ccc4879f5018d2f80862f1f2b32f",
+    "cours/15-factory.md": "8b0468cbdc2c8727e12951ff4fc81dac9c586d9b1be0fa533fc282f642a4039b"
+  },
+  "browser": "151.0.7922.34"
+}

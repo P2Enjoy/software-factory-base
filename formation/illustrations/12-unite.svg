@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc"><title id="title">Passer de l&#x27;ambition à une unité</title><desc id="desc">Un petit résultat peut traverser plusieurs fichiers. Acteur: Qui a le besoin ?; Résultat: Que doit-il obtenir ?; Périmètre: Quel changement cohérent ?; Acceptation: Comment le constater ?. Une inconnue produit devient une décision explicite avant l&#x27;implémentation.</desc>
+<rect width="1200" height="460" rx="14" fill="#F7F8FA"/><g font-family="Arial, sans-serif">
+<text x="32" y="44" font-size="24" fill="#4B5563" font-weight="400"><tspan x="32" dy="0">Un petit résultat peut traverser plusieurs fichiers.</tspan></text>
+<path d="M288 226 H317 m-9 -8 9 8 -9 8" fill="none" stroke="#23468C" stroke-width="3"/>
+<path d="M583 226 H612 m-9 -8 9 8 -9 8" fill="none" stroke="#23468C" stroke-width="3"/>
+<path d="M878 226 H907 m-9 -8 9 8 -9 8" fill="none" stroke="#23468C" stroke-width="3"/>
+<rect x="32" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="50" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="69" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="69" dy="0">Acteur</tspan></text>
+<text x="69" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="69" dy="0">Qui a le besoin ?</tspan></text>
+<rect x="327" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="345" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="364" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="364" dy="0">Résultat</tspan></text>
+<text x="364" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="364" dy="0">Que doit-il</tspan><tspan x="364" dy="26.25">obtenir ?</tspan></text>
+<rect x="622" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="640" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="659" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="659" dy="0">Périmètre</tspan></text>
+<text x="659" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="659" dy="0">Quel changement</tspan><tspan x="659" dy="26.25">cohérent ?</tspan></text>
+<rect x="917" y="146" width="251" height="160" rx="12" fill="white" stroke="#23468C" stroke-width="2"/>
+<rect x="935" y="164" width="5" height="124" rx="2" fill="#D9CF4A"/>
+<text x="954" y="183" font-size="25" fill="#23468C" font-weight="700"><tspan x="954" dy="0">Acceptation</tspan></text>
+<text x="954" y="215" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="954" dy="0">Comment le</tspan><tspan x="954" dy="26.25">constater ?</tspan></text>
+<path d="M32 391 H1168" stroke="#D9CF4A" stroke-width="4"/>
+<text x="32" y="423" font-size="21" fill="#0D0D0D" font-weight="400"><tspan x="32" dy="0">Une inconnue produit devient une décision explicite avant l&#x27;implémentation.</tspan></text>
+</g></svg>

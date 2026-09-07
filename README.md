@@ -9,6 +9,14 @@ The factory is built around a strict separation:
 1. **Global rules** are reusable across projects and must remain independent of any product.
 2. **Project rules** live in companion files inside the target repository and contain the local architecture, terminology, commands, constraints, evidence and exceptions.
 
+## Formation au codage agentique
+
+Le [parcours de formation en français](formation/README.md) conserve les quinze
+modules du syllabus : les bases et les gestes d'ingénierie d'abord,
+l'assemblage de cette factory en conclusion. Le cours autonome, les exercices
+corrigés, les illustrations, les slides et les notes d'animation premium sont
+disponibles avec leurs [exports hors ligne](formation/README.md#commencer).
+
 ## Repository contents
 
 ```text

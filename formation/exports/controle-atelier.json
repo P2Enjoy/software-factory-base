@@ -1,0 +1,279 @@
+{
+  "executed_at": "2026-09-06T05:13:42.273Z",
+  "platform": "linux",
+  "temp": "/tmp/formation-preuves-Ht70TA",
+  "checks": [
+    {
+      "name": "préparer depart",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "départ : sept tests dont exactement quatre échecs attendus",
+      "ok": true
+    },
+    {
+      "name": "rouge pédagogique test_title_bounds_and_normalization",
+      "ok": true
+    },
+    {
+      "name": "rouge pédagogique test_role_and_ownership_matrix",
+      "ok": true
+    },
+    {
+      "name": "rouge pédagogique test_invalid_title_is_refused_without_creation",
+      "ok": true
+    },
+    {
+      "name": "rouge pédagogique test_foreign_request_refused_without_mutation",
+      "ok": true
+    },
+    {
+      "name": "refus de remplacer depart",
+      "ok": true
+    },
+    {
+      "name": "préparer reference",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "reference : suite complète verte",
+      "ok": true
+    },
+    {
+      "name": "refus de remplacer reference",
+      "ok": true
+    },
+    {
+      "name": "préparer finale",
+      "ok": true,
+      "details": ""
+    },
+    {
+      "name": "finale : suite complète verte",
+      "ok": true
+    },
+    {
+      "name": "refus de remplacer finale",
+      "ok": true
+    },
+    {
+      "name": "accueil Bob : trois demandes",
+      "ok": true
+    },
+    {
+      "name": "refus de validation visible",
+      "ok": true
+    },
+    {
+      "name": "saisie invalide conservée",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "aucune insertion après refus",
+      "ok": true
+    },
+    {
+      "name": "création visible depuis le formulaire",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "propriétaire et statut persistés",
+      "ok": true
+    },
+    {
+      "name": "création retrouvée après rechargement",
+      "ok": true
+    },
+    {
+      "name": "clôture de sa demande visible",
+      "ok": true
+    },
+    {
+      "name": "Bob : clôture tierce non proposée",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "appel direct Bob refusé sans mutation",
+      "ok": true
+    },
+    {
+      "name": "session éphémère après redémarrage",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "données conservées, seed non réappliqué",
+      "ok": true
+    },
+    {
+      "name": "liste mobile sans débordement, titre long",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "cible de clôture tierce : demande 4 ouverte de Bob",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "Alice peut clore autrui",
+      "ok": true
+    },
+    {
+      "name": "Eve : lecture sans commande d’écriture",
+      "ok": true
+    },
+    {
+      "name": "indicateur de focus déclaré et non transparent",
+      "ok": true,
+      "details": {
+        "text": "Aller au contenu",
+        "outline": "solid",
+        "width": 3,
+        "color": "rgb(35, 70, 140)"
+      }
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "réouverture par parcours réel",
+      "ok": true
+    },
+    {
+      "name": "clôture disponible après réouverture",
+      "ok": true
+    },
+    {
+      "name": "bob : aucune réouverture affichée",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "bob : réouverture API refusée sans mutation",
+      "ok": true
+    },
+    {
+      "name": "eve : aucune réouverture affichée",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "eve : réouverture API refusée sans mutation",
+      "ok": true
+    },
+    {
+      "name": "réouverture atteinte par Tab sans focus programmatique",
+      "ok": true
+    },
+    {
+      "name": "lecture API autorisée",
+      "ok": true
+    },
+    {
+      "name": "réouverture au clavier à petite largeur",
+      "ok": true
+    }
+  ],
+  "tests": {
+    "depart": {
+      "exit_code": 1,
+      "output": "test_creation_is_persisted_and_owned_by_actor (test_contract.ApiContract.test_creation_is_persisted_and_owned_by_actor) ... ok\ntest_foreign_request_refused_without_mutation (test_contract.ApiContract.test_foreign_request_refused_without_mutation) ... FAIL\ntest_invalid_title_is_refused_without_creation (test_contract.ApiContract.test_invalid_title_is_refused_without_creation) ... FAIL\ntest_no_session_and_reader_cannot_write (test_contract.ApiContract.test_no_session_and_reader_cannot_write) ... ok\ntest_repeated_closure_and_missing_request (test_contract.ApiContract.test_repeated_closure_and_missing_request) ... ok\ntest_role_and_ownership_matrix (test_contract.DomainContract.test_role_and_ownership_matrix) ... FAIL\ntest_title_bounds_and_normalization (test_contract.DomainContract.test_title_bounds_and_normalization) ... FAIL\n\n======================================================================\nFAIL: test_foreign_request_refused_without_mutation (test_contract.ApiContract.test_foreign_request_refused_without_mutation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/formation-preuves-Ht70TA/depart/test_contract.py\", line 91, in test_foreign_request_refused_without_mutation\n    self.assertEqual(self.request(\"POST\", \"/api/demandes/1/fermer\", {}, bob)[0], 403)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 200 != 403\n\n======================================================================\nFAIL: test_invalid_title_is_refused_without_creation (test_contract.ApiContract.test_invalid_title_is_refused_without_creation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/formation-preuves-Ht70TA/depart/test_contract.py\", line 86, in test_invalid_title_is_refused_without_creation\n    self.assertEqual(status, 400)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nAssertionError: 201 != 400\n\n======================================================================\nFAIL: test_role_and_ownership_matrix (test_contract.DomainContract.test_role_and_ownership_matrix)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/formation-preuves-Ht70TA/depart/test_contract.py\", line 25, in test_role_and_ownership_matrix\n    self.assertEqual(can_close(PROFILES[name], {\"owner\": owner}), allowed, (name, owner))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: True != False : ('bob', 'alice')\n\n======================================================================\nFAIL: test_title_bounds_and_normalization (test_contract.DomainContract.test_title_bounds_and_normalization)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/formation-preuves-Ht70TA/depart/test_contract.py\", line 19, in test_title_bounds_and_normalization\n    with self.assertRaises(ValueError, msg=repr(title)):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised : ''\n\n----------------------------------------------------------------------\nRan 7 tests in 1.523s\n\nFAILED (failures=4)\n"
+    },
+    "reference": {
+      "exit_code": 0,
+      "output": "test_creation_is_persisted_and_owned_by_actor (test_contract.ApiContract.test_creation_is_persisted_and_owned_by_actor) ... ok\ntest_foreign_request_refused_without_mutation (test_contract.ApiContract.test_foreign_request_refused_without_mutation) ... ok\ntest_invalid_title_is_refused_without_creation (test_contract.ApiContract.test_invalid_title_is_refused_without_creation) ... ok\ntest_no_session_and_reader_cannot_write (test_contract.ApiContract.test_no_session_and_reader_cannot_write) ... ok\ntest_repeated_closure_and_missing_request (test_contract.ApiContract.test_repeated_closure_and_missing_request) ... ok\ntest_role_and_ownership_matrix (test_contract.DomainContract.test_role_and_ownership_matrix) ... ok\ntest_title_bounds_and_normalization (test_contract.DomainContract.test_title_bounds_and_normalization) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 1.025s\n\nOK\n"
+    },
+    "finale": {
+      "exit_code": 0,
+      "output": "test_creation_is_persisted_and_owned_by_actor (test_contract.ApiContract.test_creation_is_persisted_and_owned_by_actor) ... ok\ntest_foreign_request_refused_without_mutation (test_contract.ApiContract.test_foreign_request_refused_without_mutation) ... ok\ntest_invalid_title_is_refused_without_creation (test_contract.ApiContract.test_invalid_title_is_refused_without_creation) ... ok\ntest_no_session_and_reader_cannot_write (test_contract.ApiContract.test_no_session_and_reader_cannot_write) ... ok\ntest_repeated_closure_and_missing_request (test_contract.ApiContract.test_repeated_closure_and_missing_request) ... ok\ntest_role_and_ownership_matrix (test_contract.DomainContract.test_role_and_ownership_matrix) ... ok\ntest_title_bounds_and_normalization (test_contract.DomainContract.test_title_bounds_and_normalization) ... ok\ntest_bob_and_eve_refused_without_mutation (test_finale.ReopenContract.test_bob_and_eve_refused_without_mutation) ... ok\ntest_missing_and_anonymous (test_finale.ReopenContract.test_missing_and_anonymous) ... ok\ntest_reopen_preserves_fields_and_repetition (test_finale.ReopenContract.test_reopen_preserves_fields_and_repetition) ... ok\ntest_reopen_then_close (test_finale.ReopenContract.test_reopen_then_close) ... ok\ntest_role_matrix (test_finale.ReopenContract.test_role_matrix) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 1.034s\n\nOK\n"
+    }
+  },
+  "servers": [
+    {
+      "version": "reference",
+      "url": "http://127.0.0.1:34677"
+    },
+    {
+      "version": "reference",
+      "url": "http://127.0.0.1:46061"
+    },
+    {
+      "version": "finale",
+      "url": "http://127.0.0.1:37329"
+    }
+  ],
+  "sources": {
+    "outils/verifier-atelier.cjs": "b4055c53bb03babe8c56dd3c5671bc5cf01ba41c56158fb127b5972356d30814",
+    "outils/processus.cjs": "de336e4a30ceb56a83e1e5bc868d2e0556a8e315c605918f4a7930a2d2f87906",
+    "atelier/finale.py": "addd490abaf854f81766cc3b3ee77c5a7e8170a6fec3c7338a359f7f8e129784",
+    "atelier/preparer.py": "f7c78ade8f7de4f84d8fb5d00420d30269f1f3a5bff3566bf51ae4f272431237",
+    "atelier/test_finale.py.modele": "91c8290f5d9db6456240c437b642b0b37d68cf5a3a04b605ca6603754d7bb985",
+    "atelier/commun/.gitignore": "c076f5632cdd45aacfc5670a4681db392e1c8a1d1e36f48f749abc6b01886887",
+    "atelier/commun/BACKLOG.md": "a6f2bbad22178a2faffe1cfe079ff6112ad4bbaab42326f700a4f4fdf318a67d",
+    "atelier/commun/DAT.md": "0f42a0c388ea4312294d2f5949bce9d2fe488dad756b37052139aee9a3f455af",
+    "atelier/commun/README.md": "e6e571353d52ca9d544ac55d93661b61d30450886c25b5e949277503eb002dd7",
+    "atelier/commun/SCENARIO_VISUEL.md": "c5d16016b9049e10199898461747a0f097460ea3f69ef16b4a78baa94e934046",
+    "atelier/commun/app.py": "8d36123af7532e770a120a05e958afe960b439b81221903917023de0b1f3138a",
+    "atelier/commun/style.css": "ca04da6eacf7e561ab3cb82dc095f4cd493a84ca1614ce6960d14ff3e365cfe7",
+    "atelier/commun/test_contract.py": "6920374ccf986a4392dd0d58eabb301e8ff4cbd30d809705f6cf26508d59a773",
+    "atelier/depart/domain.py": "334ede401fefe7a6415f1c8e1b13c491665de88cec78a43e549080a98444205d",
+    "atelier/reference/domain.py": "c4e1311983c9e8ccd5ff523c5f74fca2b90b7508ce04d1f68c985714198bbd79"
+  },
+  "python": "Python 3.14.4",
+  "browser": "151.0.7922.34",
+  "stops": [
+    {
+      "code": 0,
+      "signal": null,
+      "requested_signal": "SIGINT",
+      "forced": false
+    },
+    {
+      "code": 0,
+      "signal": null,
+      "requested_signal": "SIGINT",
+      "forced": false
+    },
+    {
+      "code": 0,
+      "signal": null,
+      "requested_signal": "SIGINT",
+      "forced": false
+    }
+  ]
+}

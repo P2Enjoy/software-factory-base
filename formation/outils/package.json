@@ -1,0 +1,7 @@
+{
+  "name": "formation-agentique-edition",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Outils locaux de fabrication et de vérification des supports",
+  "dependencies": {"playwright":"1.63.0","pptxgenjs":"4.0.1"}
+}

@@ -1,0 +1,2 @@
+# Fabrication uniquement ; aucun paquet Python pour l'atelier.
+markdown-it-py==3.0.0

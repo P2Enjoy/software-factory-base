@@ -1,0 +1,49 @@
+# @spec formation/SPECIFICATION.md#atelier | BACKLOG.md#dem-03
+# @verifies formation/CORRIGE_FINAL.md#preuves-de-reference | BACKLOG.md#dem-03
+import json
+import unittest
+from app import PROFILES
+from domain import can_reopen
+import test_contract
+
+
+class ReopenContract(unittest.TestCase):
+    setUp = test_contract.ApiContract.setUp
+    tearDown = test_contract.ApiContract.tearDown
+    request = test_contract.ApiContract.request
+    login = test_contract.ApiContract.login
+
+    def test_role_matrix(self):
+        for name, expected in (("alice", True), ("bob", False), ("eve", False)):
+            self.assertEqual(can_reopen(PROFILES[name]), expected)
+
+    def test_reopen_preserves_fields_and_repetition(self):
+        alice = self.login("alice")
+        before = json.loads(self.request("GET", "/api/demandes", cookie=alice)[2])[2]
+        for _ in range(2):
+            status, _, body = self.request("POST", "/api/demandes/3/rouvrir", {}, alice)
+            self.assertEqual(status, 200)
+            self.assertEqual(json.loads(body), {**before, "status": "ouvert"})
+        self.assertEqual(len(json.loads(self.request("GET", "/api/demandes", cookie=alice)[2])), 3)
+
+    def test_bob_and_eve_refused_without_mutation(self):
+        for name in ("bob", "eve"):
+            cookie = self.login(name)
+            self.assertEqual(self.request("POST", "/api/demandes/3/rouvrir", {}, cookie)[0], 403)
+            rows = json.loads(self.request("GET", "/api/demandes", cookie=cookie)[2])
+            self.assertEqual(rows[2]["status"], "ferme")
+
+    def test_missing_and_anonymous(self):
+        self.assertEqual(self.request("POST", "/api/demandes/3/rouvrir")[0], 401)
+        alice = self.login("alice")
+        self.assertEqual(self.request("POST", "/api/demandes/999/rouvrir", {}, alice)[0], 404)
+        rows = json.loads(self.request("GET", "/api/demandes", cookie=alice)[2])
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(rows[2]["status"], "ferme")
+
+    def test_reopen_then_close(self):
+        alice = self.login("alice")
+        self.assertEqual(self.request("POST", "/api/demandes/3/rouvrir", {}, alice)[0], 200)
+        status, _, body = self.request("POST", "/api/demandes/3/fermer", {}, alice)
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(body)["status"], "ferme")
