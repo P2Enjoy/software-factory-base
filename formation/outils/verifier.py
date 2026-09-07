@@ -22,7 +22,7 @@ OUT = ROOT / 'exports'
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--archive-only',action='store_true')
 args = parser.parse_args()
-report = {'executed_at':datetime.now(timezone.utc).isoformat(),'checks':[]}
+report = {'checks':[]}
 
 
 def check(name, condition, details=None):

@@ -37,7 +37,7 @@ for p in files:
     relative = p.relative_to(REPO).as_posix()
     data = p.read_bytes()
     inventory[relative] = {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
-MANIFEST.write_text(json.dumps({'edition':'2026-09-05','algorithm':'SHA-256','files':inventory},ensure_ascii=False,indent=2),encoding='utf-8')
+MANIFEST.write_text(json.dumps({'algorithm':'SHA-256','files':inventory},ensure_ascii=False,indent=2),encoding='utf-8')
 with ZipFile(ARCHIVE,'w',ZIP_DEFLATED,compresslevel=9) as archive:
     for p in files + [MANIFEST]:
         archive.write(p,p.relative_to(REPO).as_posix())

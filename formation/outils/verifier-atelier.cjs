@@ -13,7 +13,7 @@ const captures=path.join(out,'captures');
 fs.mkdirSync(captures,{recursive:true});
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'formation-preuves-'));
 const python=process.env.FORMATION_PYTHON || 'python3';
-const report={executed_at:new Date().toISOString(),platform:process.platform,temp,checks:[],tests:{},servers:[]};
+const report={platform:process.platform,temp,checks:[],tests:{},servers:[]};
 const sourceNames=['outils/verifier-atelier.cjs','outils/processus.cjs',...fs.readdirSync(path.join(root,'atelier'),{recursive:true}).filter(n=>!n.includes('__pycache__')&&fs.statSync(path.join(root,'atelier',n)).isFile()).map(n=>'atelier/'+n.replaceAll(path.sep,'/'))];
 report.sources=Object.fromEntries(sourceNames.map(n=>[n,createHash('sha256').update(fs.readFileSync(path.join(root,n))).digest('hex')]));
 const running=new Set();

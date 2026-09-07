@@ -1,6 +1,6 @@
 # Coder avec un agent : les bases, la méthode, puis l'usine
 
-**Formation au codage agentique · P2Enjoy · édition courante**
+**Formation au codage agentique · P2Enjoy**
 
 Vous savez déjà lancer Codex ou Claude Code et obtenir une petite application.
 Ce parcours vous apprend à comprendre ce que l'agent change, exprimer ce que vous
@@ -61,7 +61,7 @@ Compléments : [fiches pratiques](FICHES.md), [glossaire](GLOSSAIRE.md),
 [sources](SOURCES.md), [guide des illustrations](ILLUSTRATIONS.md),
 [bilan de vérification](VERIFICATION.md).
 
-## Nature de cette édition
+## Portée du support
 
 Le cours explique la méthode du dépôt dans son état disponible. Il distingue
 les principes réutilisables, les conventions P2Enjoy et les capacités actuelles
@@ -74,8 +74,43 @@ en reproduire de longs extraits. La licence du dépôt s'applique aux fichiers
 distribués ; voir [LICENSE](../LICENSE). Les noms d'outils ne constituent pas une
 certification de la formation par leurs éditeurs.
 
-## Regenerer les supports
+## Modifier puis régénérer les supports
 
 Les fichiers Markdown sont les sources du cours ; `slides.json` contient le
 texte et les notes du diaporama. Les SVG sont des figures éditables. Les exports
 sont produits par les scripts documentés dans [PRODUCTION.md](PRODUCTION.md).
+
+Ne pas modifier directement un fichier dans `exports/` pour conserver un
+changement : ce dossier est généré et sera remplacé. Reporter la modification
+dans le fichier source correspondant, puis lancer depuis la racine du dépôt :
+
+```bash
+python3 formation/outils/construire.py
+node formation/outils/exporter.cjs
+python3 formation/outils/emballer.py
+```
+
+La première commande reconstruit les HTML, les schémas et les notes. La deuxième
+recrée les PDF et le PowerPoint. La dernière remet à jour le ZIP et son
+inventaire. Sur un nouveau poste, effectuer auparavant l'installation décrite
+dans [PRODUCTION.md](PRODUCTION.md#installer-les-outils-dédition). Pour une
+publication formellement vérifiée, suivre ensuite toute la séquence de contrôles
+de [PRODUCTION.md](PRODUCTION.md#construire-et-vérifier).
+
+## Consulter la formation depuis GitHub
+
+GitHub affiche directement les fichiers Markdown et propose un aperçu des PDF.
+Le [cours en PDF](exports/cours.pdf), les [slides en PDF](exports/slides.pdf) et
+les autres supports peuvent donc être consultés depuis le dépôt ou téléchargés.
+
+Les fichiers HTML interactifs ne sont pas exécutés dans l'interface standard de
+GitHub : GitHub en montre le code ou le fichier brut. Le workflow
+`.github/workflows/pages.yml` publie donc `formation/exports/` comme un site
+GitHub Pages à chaque mise à jour des exports sur `main`. Il peut aussi être
+lancé manuellement depuis l'onglet Actions.
+
+Lors de la première publication, choisir **GitHub Actions** comme source dans
+**Settings → Pages** si le dépôt ne l'utilise pas encore. L'adresse publique est
+ensuite affichée dans l'environnement `github-pages` et dans le résumé du
+workflow. Le [kit complet](exports/formation-complete.zip) reste disponible pour
+une consultation entièrement hors ligne.

@@ -1,10 +1,10 @@
 # Sources et portée des affirmations
 
-Consultations documentaires : période récente. Les contenus pédagogiques, scénarios
+Sources documentaires consultées. Les contenus pédagogiques, scénarios
 et schémas sont originaux. Les liens ci-dessous permettent de vérifier les points
 propres aux outils ; aucune disponibilité, tarification ou performance d'un
 modèle n'est présumée. Les commandes du laboratoire sont définies et testées
-dans cette édition ; le bilan indique les résultats effectifs.
+pour ces supports ; le bilan indique les résultats effectifs.
 
 ## Méthode du depot
 

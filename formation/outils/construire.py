@@ -87,14 +87,14 @@ guide = '# Illustrations et équivalents textuels\n\nQuinze schémas vectoriels 
 for fig in FIGURES:
     guide += f'## {fig["title"]}\n\n![{fig["title"]}](illustrations/{fig["id"]}.svg)\n\n{fig["subtitle"]}\n\n'
     guide += '\n'.join(f'- {a} : {b}.' for a, b in fig['nodes']) + '\n\n' + fig['footer'] + '\n\n'
-put(ROOT / 'ILLUSTRATIONS.md', guide)
+put(ROOT / 'ILLUSTRATIONS.md', guide.rstrip() + '\n')
 
 notes = '# Notes par diapositive\n\n80 diapositives. Les durées se rattachent aux phases du module, sans s’ajouter\nau programme de 42 heures. Les deux ouvertures sont comprises dans M1.\n\n'
 for i, s in enumerate(SLIDES, 1):
     notes += f'## S{i:02d} — {s["title"]}\n\n'
     for key, label in [('minutage','Minutage'),('intention','Intention'),('explication','Explication / démonstration'),('question','Question'),('attendu','Réponse attendue'),('transition','Transition')]:
         notes += f'**{label}.** {s["notes"][key]}\n\n'
-put(OUT / 'notes-slides.md', notes)
+put(OUT / 'notes-slides.md', notes.rstrip() + '\n')
 
 
 def render_document(path, included):
@@ -135,19 +135,34 @@ def render_document(path, included):
     return title, f'<article id="{prefix}">{MD.renderer.render(tokens, MD.options, {})}</article>'
 
 
-def book(filename, title, files, subtitle):
+cover_visuals = {
+    'cours': ('cours.png', 'Parcours visuel reliant une idée, un flux de travail et une fabrique logicielle fiable.'),
+    'exercices': ('exercices.png', 'Atelier visuel composé de cartes, de chemins, de repères et de pièces à assembler.'),
+    'corriges': ('corriges.png', 'Chaîne logicielle examinée à travers plusieurs points de contrôle.'),
+    'animation': ('animation.png', 'Groupe de travail guidé autour d’un parcours de conception et de livraison.'),
+}
+
+
+def raster_data_uri(filename):
+    data = (ROOT / 'illustrations' / 'generated' / filename).read_bytes()
+    return 'data:image/png;base64,' + base64.b64encode(data).decode('ascii')
+
+
+def book(filename, title, files, subtitle, cover_visual):
     paths = [(ROOT / f).resolve() for f in files]
     sections = [render_document(path, set(paths)) for path in paths]
     toc = '<nav aria-label="Sommaire"><h2>Sommaire</h2><ul>' + ''.join(f'<li><a href="#{doc_id(path)}">{esc(section[0])}</a></li>' for path, section in zip(paths, sections)) + '</ul></nav>'
-    content = f'<section class="cover"><p class="eyebrow">P2Enjoy · Formation au codage agentique</p><h1>{esc(title)}</h1><div class="rule"></div><p>{esc(subtitle)}</p><p class="print-help">Document autonome hors ligne. Les liens externes des sources nécessitent une connexion.</p></section>'
+    cover_file, cover_alt = cover_visuals[cover_visual]
+    cover_image = raster_data_uri(cover_file)
+    content = f'<section class="cover"><div class="cover-copy"><p class="eyebrow">P2Enjoy · Formation au codage agentique</p><h1>{esc(title)}</h1><div class="rule"></div><p>{esc(subtitle)}</p><p class="print-help">Document autonome hors ligne. Les liens externes des sources nécessitent une connexion.</p></div><figure class="cover-visual"><img src="{cover_image}" alt="{esc(cover_alt)}"></figure></section>'
     put(OUT / filename, '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+'</title><style>'+CSS+'</style></head><body><a class="skip" href="#contenu">Aller au contenu</a><main class="book" id="contenu">'+content+toc+''.join(s[1] for s in sections)+'</main></body></html>')
 
 
 chapters = ['cours/' + m['file'] for m in PROGRAMME['modules']]
-book('cours.html', PROGRAMME['title'], ['SYLLABUS.md','INSTALLATION.md'] + chapters + ['EXERCICES.md','EVALUATION.md','CORRIGES.md','CORRIGE_FINAL.md','FICHES.md','GLOSSAIRE.md','SOURCES.md'], 'Le cours complet : quinze chapitres, trente exercices, leurs corrigés, les quiz et l’évaluation finale.')
-book('cahier-exercices.html', 'Cahier des exercices', ['INSTALLATION.md','EXERCICES.md','EVALUATION.md','FICHES.md'], 'Consignes, indices, critères et fiches à remplir. Les corrigés sont dans un volume séparé.')
-book('corriges.html', 'Corrigés et raisonnements', ['CORRIGES.md','CORRIGE_FINAL.md'], 'À consulter après votre première production. Une solution écrite ne remplace pas vos propres preuves.')
-book('guide-animation.html', 'Animer la formation', ['ANIMATION.md','exports/notes-slides.md'], 'Déroulé premium sur six journées et notes des quatre-vingts diapositives.')
+book('cours.html', PROGRAMME['title'], ['SYLLABUS.md','INSTALLATION.md'] + chapters + ['EXERCICES.md','EVALUATION.md','CORRIGES.md','CORRIGE_FINAL.md','FICHES.md','GLOSSAIRE.md','SOURCES.md'], 'Le cours complet : quinze chapitres, trente exercices, leurs corrigés, les quiz et l’évaluation finale.', 'cours')
+book('cahier-exercices.html', 'Cahier des exercices', ['INSTALLATION.md','EXERCICES.md','EVALUATION.md','FICHES.md'], 'Consignes, indices, critères et fiches à remplir. Les corrigés sont dans un volume séparé.', 'exercices')
+book('corriges.html', 'Corrigés et raisonnements', ['CORRIGES.md','CORRIGE_FINAL.md'], 'À consulter après votre première production. Une solution écrite ne remplace pas vos propres preuves.', 'corriges')
+book('guide-animation.html', 'Animer la formation', ['ANIMATION.md','exports/notes-slides.md'], 'Déroulé premium sur six journées et notes des quatre-vingts diapositives.', 'animation')
 
 slide_html = []
 for i, s in enumerate(SLIDES, 1):

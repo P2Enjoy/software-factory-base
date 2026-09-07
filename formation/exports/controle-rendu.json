@@ -1,6 +1,4 @@
 {
-  "edition": "2026-09-05",
-  "executed_at": "2026-09-06T05:13:37.898Z",
   "slides": 80,
   "checks": [
     {
@@ -105,14 +103,14 @@
   "overflow": [],
   "external_requests": [],
   "sources": {
-    "programme.json": "fa53313a9f3eaefbabf568ef275329730e4ebc0136ec30cca32bbfa9a4be0032",
-    "slides.json": "329bfdbe3fe823704b8d5ff61eaa55350b44a4d4fcc8548495473f6e5019dbd1",
+    "programme.json": "76d5c424d8b6af1e432333b12f0bcfa42ba449f709395a278559985ca1722f0c",
+    "slides.json": "6a9f9b30a57fdbc2bde4b1ccde181fe0759c0bcd46c48ce5457c8101d9e764fb",
     "illustrations.json": "fec6b7a6df02bc2d98ed4ed38e59b6e93fdba6d24fc60a49cc72849d6f6c5b63",
-    "styles.css": "e88229547d1e15f54718b51a5a0e8ee1c807eda1926f9472df2c0af10a1966e8",
+    "styles.css": "d43bf825d76c945f04d23bae244d13b14c71a24e6d3106b7e83809664b8b788b",
     "lecteur-slides.js": "9bf8b0e806b1395f7a0379a5b86eb323c38a6f85a2235faf0fb795062dda4019",
-    "outils/construire.py": "a09a93061366aaa3175c5ab2c30bd86826d27d6680d06394d857321eba52aecf",
-    "outils/exporter.cjs": "74f9962fc5d0c87e95cf0571e4751638fe123ec4265d3f71f4888276aa364739",
-    "SYLLABUS.md": "fb28b248775360f92dc461e21e982cea4d3e4bc472e924db0df9f9e48604bf89",
+    "outils/construire.py": "f1c7d670ba88e4fcee7084d8c1df3fa68839e98f0807065e902f3dda24e13d36",
+    "outils/exporter.cjs": "370b669dab5f4d3474e9036eb0c213b90884b601539d5cc31cd340a1d79ced4f",
+    "SYLLABUS.md": "8ef95277f269d84c7545aa487ebf5c74615397d11d3559dd1a36e92dcb1768e9",
     "INSTALLATION.md": "0fb1c941b2238b3134e410ac702b3075b5628c4a2f21e2b20bdf9e1424a58709",
     "EXERCICES.md": "bd27fd49531c303a25e70646cc7ed29ec03e1860c19e4d67e32afe33b9cf75d6",
     "EVALUATION.md": "a9512cdd107fecf968011fbdbce554706a7204dba802287b6a64e712b7e5e62d",
@@ -120,8 +118,8 @@
     "CORRIGE_FINAL.md": "97627492bb6fc43744d3ba2b54734e1bce71edaabeaebfeb3186445738a45c65",
     "FICHES.md": "49806bc3e93345764a9743cd0dffc38ce97a82cb159ce57ba7e890df3b471d9d",
     "GLOSSAIRE.md": "0005fd1629081a6c8a878f638f01f2a727c9f9d0c4679a35f8e4b7d74e31813c",
-    "SOURCES.md": "ff32406f5315e6dd4b52a4c815a7fd70feff318a0de1db9955368c944a041e28",
-    "ANIMATION.md": "11923a6ca013fc04b849fd145ee91bdfe25dde4d0e4d7626300b50a84b85994b",
+    "SOURCES.md": "5868b96f14187aecb51383a864991b79eaf511e5b775a1cd15d27181a73f5fe7",
+    "ANIMATION.md": "46377c84a8a968383b966f7b301f39d388638898c1c7dc120543a12247572950",
     "cours/01-assistant-agent.md": "92c43fb3caae1fa7aed855a8b398d3956f3174eb2a7c4ebb19501fed509b342d",
     "cours/02-unite.md": "8d8258db5451afe16661f278b72ab1b79fbffc56c2be8c22d190094d23cb2190",
     "cours/03-contexte.md": "1b276067fb7417afae7edabcdfa838d167cbba151d9d970339889b722ff81064",

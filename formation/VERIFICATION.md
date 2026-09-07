@@ -1,7 +1,7 @@
-# Bilan de vérification de l'édition
+# Bilan de vérification des supports
 
-Édition pédagogique récente ; campagne de fabrication et vérification
-achevée récemment. Ce bilan distingue contenu livré, preuves exécutées
+Campagne de fabrication et vérification des supports pédagogiques. Ce bilan
+distingue contenu livré, preuves exécutées
 et limites. Les commandes de reproduction sont dans [PRODUCTION](PRODUCTION.md).
 
 ## Couverture de la demande

@@ -1,0 +1,99 @@
+<!-- @spec formation/README.md#consulter-la-formation-depuis-github | docs/DESIGN_SYSTEM_APP.md#composition -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supports de la formation P2Enjoy au codage agentique.">
+  <title>Formation au codage agentique | P2Enjoy</title>
+  <style>
+    :root{--brand:#23468c;--success:#238c33;--accent:#d9cf4a;--ink:#0d0d0d;--muted:#4b5563;--paper:#fff;--bg:#f7f8fa;--line:#e5e7eb;--radius:18px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:linear-gradient(145deg,#eef3fb 0,#f7f8fa 48%,#f7f3d8 100%);font:17px/1.6 ui-sans-serif,system-ui,sans-serif}
+    a{color:inherit}
+    a:focus-visible{outline:3px solid var(--brand);outline-offset:4px}
+    .skip{position:absolute;left:-9999px;top:8px;padding:10px 14px;background:var(--paper);z-index:10}
+    .skip:focus{left:8px}
+    main{width:min(1120px,calc(100% - 32px));margin:auto;padding:72px 0 80px}
+    .hero{position:relative;overflow:hidden;padding:56px;border-radius:28px;background:var(--brand);color:var(--paper);box-shadow:0 28px 80px rgba(35,70,140,.2)}
+    .hero::after{content:"";position:absolute;width:360px;height:360px;right:-120px;top:-155px;border:72px solid var(--accent);border-radius:50%;opacity:.95}
+    .eyebrow{position:relative;z-index:1;margin:0 0 20px;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    h1{position:relative;z-index:1;max-width:780px;margin:0;font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-.045em}
+    .intro{position:relative;z-index:1;max-width:690px;margin:28px 0 0;font-size:21px;line-height:1.5}
+    h2{margin:56px 0 24px;font-size:30px;letter-spacing:-.025em}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .card{display:flex;min-height:220px;flex-direction:column;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.9);text-decoration:none;box-shadow:0 12px 36px rgba(13,13,13,.06);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .card:hover{transform:translateY(-4px);border-color:var(--brand);box-shadow:0 18px 46px rgba(35,70,140,.14)}
+    .card.primary{grid-column:span 2;min-height:260px;background:linear-gradient(120deg,var(--paper),#edf3ff)}
+    .number{display:grid;width:42px;height:42px;place-items:center;border-radius:12px;background:var(--accent);font-weight:800}
+    .card h3{margin:24px 0 8px;font-size:27px;line-height:1.15;letter-spacing:-.025em}
+    .card p{margin:0;color:var(--muted)}
+    .formats{margin-top:auto;padding-top:24px;color:var(--brand);font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .downloads{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .download{display:inline-flex;min-height:44px;align-items:center;padding:10px 16px;border:1px solid var(--brand);border-radius:10px;color:var(--brand);background:var(--paper);font-weight:700;text-decoration:none}
+    .download:hover{background:#edf3ff}
+    footer{margin-top:52px;padding-top:24px;border-top:1px solid rgba(75,85,99,.25);color:var(--muted);font-size:14px}
+    @media(max-width:700px){main{padding:24px 0 48px}.hero{padding:36px 24px}.hero::after{width:220px;height:220px;right:-100px;top:-110px;border-width:46px}.intro{font-size:18px}.grid{grid-template-columns:1fr}.card.primary{grid-column:auto}.card{min-height:200px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#supports">Aller aux supports</a>
+  <main>
+    <header class="hero">
+      <p class="eyebrow">P2Enjoy · Parcours autonome</p>
+      <h1>Formation au codage agentique</h1>
+      <p class="intro">Comprendre ce que l'agent change, exprimer une demande vérifiable et construire une software factory durable.</p>
+    </header>
+
+    <section id="supports" aria-labelledby="supports-title">
+      <h2 id="supports-title">Choisir un support</h2>
+      <div class="grid">
+        <a class="card primary" href="cours.html">
+          <span class="number" aria-hidden="true">01</span>
+          <h3>Suivre le cours complet</h3>
+          <p>Quinze chapitres, trente exercices, quiz, corrigés et évaluation finale dans un document autonome.</p>
+          <span class="formats">Lecture HTML</span>
+        </a>
+        <a class="card" href="slides.html">
+          <span class="number" aria-hidden="true">02</span>
+          <h3>Parcourir les slides</h3>
+          <p>Le diaporama interactif et ses quatre-vingts étapes de progression.</p>
+          <span class="formats">Présentation HTML</span>
+        </a>
+        <a class="card" href="cahier-exercices.html">
+          <span class="number" aria-hidden="true">03</span>
+          <h3>Pratiquer</h3>
+          <p>Les consignes, indices, critères et fiches nécessaires aux exercices.</p>
+          <span class="formats">Cahier HTML</span>
+        </a>
+        <a class="card" href="corriges.html">
+          <span class="number" aria-hidden="true">04</span>
+          <h3>Étudier les corrigés</h3>
+          <p>Les solutions et raisonnements à consulter après une première production.</p>
+          <span class="formats">Corrigés HTML</span>
+        </a>
+        <a class="card" href="guide-animation.html">
+          <span class="number" aria-hidden="true">05</span>
+          <h3>Animer la formation</h3>
+          <p>Le déroulé, les repères pédagogiques et les notes d'accompagnement.</p>
+          <span class="formats">Guide HTML</span>
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="downloads-title">
+      <h2 id="downloads-title">Télécharger</h2>
+      <div class="downloads">
+        <a class="download" href="cours.pdf">Cours PDF</a>
+        <a class="download" href="slides.pdf">Slides PDF</a>
+        <a class="download" href="slides.pptx">PowerPoint</a>
+        <a class="download" href="formation-complete.zip">Kit complet ZIP</a>
+      </div>
+    </section>
+
+    <footer>P2Enjoy · Formation au codage agentique</footer>
+  </main>
+</body>
+</html>

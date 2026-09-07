@@ -15,7 +15,7 @@ fs.mkdirSync(pngDir, {recursive:true});
 const slides = JSON.parse(fs.readFileSync(path.join(root, 'slides.json'), 'utf8'));
 const figures = JSON.parse(fs.readFileSync(path.join(root, 'illustrations.json'), 'utf8'));
 const browserPath = process.env.FORMATION_CHROMIUM;
-const report = {edition:'2026-09-05', executed_at:new Date().toISOString(), slides:slides.length, checks:[], overflow:[], external_requests:[]};
+const report = {slides:slides.length, checks:[], overflow:[], external_requests:[]};
 const sourceNames=['programme.json','slides.json','illustrations.json','styles.css','lecteur-slides.js','outils/construire.py','outils/exporter.cjs','SYLLABUS.md','INSTALLATION.md','EXERCICES.md','EVALUATION.md','CORRIGES.md','CORRIGE_FINAL.md','FICHES.md','GLOSSAIRE.md','SOURCES.md','ANIMATION.md',...fs.readdirSync(path.join(root,'cours')).filter(n=>n.endsWith('.md')).map(n=>'cours/'+n)];
 report.sources=Object.fromEntries(sourceNames.map(n=>[n,createHash('sha256').update(fs.readFileSync(path.join(root,n))).digest('hex')]));
 function check(name, ok, details) {

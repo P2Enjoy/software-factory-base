@@ -1,0 +1,50 @@
+# @spec formation/README.md#consulter-la-formation-depuis-github | docs/AUTOMATION.md#extension-et-ci
+name: Publier la formation sur GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/pages.yml
+      - formation/exports/**
+      - formation/site/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Recuperer le depot
+        uses: actions/checkout@v6
+
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparer le site statique
+        run: |
+          mkdir _site
+          cp -R formation/exports/. _site/
+          cp formation/site/index.html _site/index.html
+          touch _site/.nojekyll
+
+      - name: Charger le site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Publier le site
+        id: deployment
+        uses: actions/deploy-pages@v4

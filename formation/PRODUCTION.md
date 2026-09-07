@@ -1,4 +1,4 @@
-# Reproduire l'édition des supports
+# Reproduire les supports
 
 La lecture du cours, la projection, les PDF et le laboratoire ne nécessitent
 aucune installation de ces outils de fabrication. Cette page s'adresse à la
@@ -25,7 +25,8 @@ exports comme source principale : la prochaine fabrication les remplacera.
 
 Dans la racine du dépôt ou du ZIP décompressé : Python 3.11+, Node.js compatible
 avec les dépendances verrouillées et un navigateur Chromium pour Playwright.
-L'édition a été fabriquée sous Linux ; les versions exactes sont dans le bilan.
+La fabrication est prévue sous Linux et reste reproductible avec les prérequis
+décrits ici.
 Ces commandes téléchargent des outils et demandent donc une connexion lors de
 la préparation, contrairement à la lecture des supports déjà produits.
 
@@ -91,7 +92,7 @@ et aux polices de la machine de projection, non simulée par le rendu HTML.
 
 ## Dépendance d'édition signalée
 
-L'audit npm récent signale `image-size`, dépendance transitive de
+L'audit npm signale `image-size`, dépendance transitive de
 PptxGenJS, et son parent : deux alertes élevées liées à des boucles de parseurs
 d'images ICNS/JXL/HEIF. Aucune version corrigée n'est annoncée dans les avis
 [ICNS](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr) et
@@ -102,7 +103,7 @@ par Chromium à partir des schémas locaux, sans import d'image fournie par un
 tiers ni endpoint de téléversement. Le paquet vulnérable est présent dans les
 dépendances de développement de l'édition, pas dans le laboratoire ni dans les
 HTML/PDF lus par les participants. Ne pas transformer ce générateur en service
-d'import d'images non fiables. Réexaminer l'avis avant une nouvelle édition ;
+d'import d'images non fiables. Réexaminer l'avis avant une nouvelle publication ;
 ne pas lancer `npm audit fix --force`, qui propose ici un retour majeur ancien
 et ne constitue pas une qualification de compatibilité.
 
@@ -115,7 +116,7 @@ décompression. Le manifeste SHA-256 permet de constater une modification des
 fichiers ; ce n'est ni une signature d'auteur ni une preuve de qualité.
 
 La remise conserve les changements dans le working tree, sans commit ni push
-automatique. Sur le poste de cette édition, des exclusions Git locales concernent
+automatique. Sur le poste de fabrication, des exclusions Git locales concernent
 notamment SPECIFICATION.md, DECISIONS.md et les BACKLOG/DAT du laboratoire.
 Ils sont bien présents dans le ZIP. Avant un futur commit de publication,
 contrôler explicitement leur inclusion : un simple ajout des fichiers visibles
