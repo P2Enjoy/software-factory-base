@@ -22,7 +22,11 @@ indépendante et bornée :
 - `factory_reviewer` lorsqu'un changement cohérent et non trivial peut être
   relu contre ses contrats ;
 - `factory_verifier` lorsque l'arbre est stabilisé et qu'une preuve ciblée ou
-  ses résultats doivent être analysés.
+  ses résultats doivent être analysés ;
+- `factory_resolver` lorsqu'une entrée du registre d'incohérences doit être
+  instruite pour la boucle de résolution de `CLAUDE.md` §5 : précédents,
+  contrats et issue proposée, que tu vérifies avant de décider, d'appliquer et
+  de retirer l'entrée toi-même.
 
 Ne délègue pas une tâche triviale. Chaque délégation précise l'objectif, le
 périmètre, les sources à lire et le livrable attendu. N'utilise pas de

@@ -1,4 +1,4 @@
-# @spec docs/AUTOMATION.md#codex-subagents
+# @spec docs/AUTOMATION.md#subagents
 name = "factory_reviewer"
 description = "Revue en lecture seule d'un changement stabilisé contre ses spécifications, sa sécurité et ses preuves."
 sandbox_mode = "read-only"

@@ -55,12 +55,13 @@ Résous les conflits SUR PLACE, puis pousse.
 
 Ne renonce jamais à pousser, et ne contourne jamais un conflit par une branche.
 
-**L'ORDRE DE LA SESSION, EN UNE LIGNE**, détaillé au §3.2 et au §4.3 :
+**L'ORDRE DE LA SESSION, EN UNE LIGNE**, détaillé au §3.2, au §3.3 et au §4.3 :
 
 ```
 Git → Docker → pile + seed → choisir l'unité → lire et écrire la spéc COMPLÈTE → committer
      → coder → committer et pousser au fil de l'eau → prouver SON unité
-     → [fin de session] campagne complète → boucle de correction → committer, pousser
+     → boucle de résolution du registre → [fin de session] campagne complète
+     → boucle de correction → committer, pousser
      → journal, backlog, garde Git, compte rendu
 ```
 
@@ -781,9 +782,10 @@ docs/INCONSISTENCY_REPORT.md
 
 avec sa mesure.
 
-Laisse le comportement inchangé plutôt que de corriger ce défaut au passage.
+Laisse le comportement inchangé plutôt que de corriger ce défaut au passage : il reçoit son issue à
+la boucle de résolution du §3.3, une fois ton unité prouvée.
 
-### 3.2. ORDRE DE TRAVAIL D'UNE SESSION — SPÉCIFIER, CODER, POUSSER, PUIS PROUVER
+### 3.2. ORDRE DE TRAVAIL D'UNE SESSION — SPÉCIFIER, CODER, POUSSER, PROUVER, PUIS RÉSOUDRE LE REGISTRE
 
 Voici la séquence, et il n'y en a pas d'autre.
 Tu ne réordonnes rien, et tu ne remontes pas la campagne de preuves en tête de session.
@@ -821,7 +823,10 @@ derrière elle du code poussé, pas un arbre de travail perdu (§0).
 données, ses scénarios d'API, son harnais dédié, ses captures. Ce sont des exécutions courtes et ciblées, que tu rejoues
 autant de fois que nécessaire. **Tu ne lances pas la campagne complète ici.**
 
-**7. En fin de session seulement, tu lances la campagne complète**, une fois — et tu entres dans la
+**7. Tu résous le registre d'incohérences** — §3.3. Ton unité est codée, poussée et prouvée : c'est le
+moment où les défauts consignés reçoivent leur issue, et le seul.
+
+**8. En fin de session seulement, tu lances la campagne complète**, une fois — et tu entres dans la
 boucle de correction du §4.3.
 
 **Ce que cette séquence interdit explicitement**, parce que chacune de ces erreurs a été observée :
@@ -830,7 +835,40 @@ boucle de correction du §4.3.
   unité** — quarante à soixante-dix minutes dépensées avant le premier geste utile ;
 - attendre que tout soit prouvé pour committer — une session interrompue ne laisse alors rien ;
 - coder une fonctionnalité neuve sans spécification écrite et committée d'abord ;
-- réécrire la spécification d'une unité `[~]` dont la spécification existe déjà, au lieu de coder.
+- réécrire la spécification d'une unité `[~]` dont la spécification existe déjà, au lieu de coder ;
+- traiter le registre d'incohérences avant que l'unité soit prouvée, ou après la campagne complète —
+  dans le premier cas il prend le temps du produit, dans le second il invalide la campagne.
+
+### 3.3. BOUCLE DE RÉSOLUTION DU REGISTRE — APRÈS LES PREUVES DE L'UNITÉ, AVANT LA CAMPAGNE
+
+Elle s'exécute une fois par session, exactement ici : ton unité est codée, poussée et prouvée
+(§3.2, points 5 et 6), et la campagne complète n'a pas commencé (§4.3).
+
+Les critères de décision, les trois issues possibles et la seule raison de laisser une entrée
+ouverte sont ceux de « Résolution du registre d'incohérences » dans "CLAUDE.md" §5. Tu ne les
+réinventes pas ici ; tu les appliques, entrée par entrée, dans l'ordre du registre :
+
+1. relis le constat et sa mesure, puis reproduis-le sur la pile debout ; un constat qui ne se
+   reproduit plus est tranché sans changement, avec cette mesure pour motif ;
+2. cherche le précédent : la façon dont le même cas est déjà traité ailleurs dans le produit, dans sa
+   spécification, dans "docs/DESIGN_SYSTEM.md" et "docs/DESIGN_SYSTEM_APP.md". Tu peux confier cette
+   instruction au rôle de résolution de "docs/AUTOMATION.md" §6, qui te rend une issue proposée et
+   ses sources ; tu vérifies ses constats dans le dépôt avant de décider ;
+3. décide l'issue et écris-la avec son motif, avant la première ligne de code qui en dépend ;
+4. applique-la : correction avec ses tests, sa documentation et ses commentaires `@spec` et
+   `@verifies` ; ou motif au journal ; ou nouvelle unité "[ ]" au backlog, avec son constat et sa
+   mesure ;
+5. prouve-la par la preuve ciblée qui couvre le comportement corrigé, jamais par la campagne
+   entière ; les captures d'une correction d'interface sont produites et observées comme au §2.3 ;
+6. retire l'entrée du registre, puis committe et pousse avant de passer à la suivante.
+
+**Budget.** La boucle est bornée par le temps qu'exige la campagne complète du §4.3, quarante à
+soixante-dix minutes mesurées. Dès que ce temps est menacé, tu termines le tour en cours par l'issue
+la plus courte — la conversion en unité s'il le faut —, puis tu sors : les entrées non traitées
+restent ouvertes telles quelles, et tu les nommes au compte rendu (§4.4). Une entrée à moitié
+corrigée n'existe pas : elle est corrigée et prouvée, ou convertie en unité.
+
+Un registre absent, ou sans entrée ouverte, fait passer directement au §4.3.
 
 ## 4. COMMENT TU DÉTERMINES CE QU'IL RESTE À FAIRE
 
@@ -875,15 +913,13 @@ Chaque unité porte sa Definition of Done.
 
 Il définit l'ordre d'exécution et la Definition of Done commune.
 
-4. "docs/INCONSISTENCY_REPORT.md", section "Ouverts" — EN CONSULTATION SEULEMENT.
+4. "docs/INCONSISTENCY_REPORT.md", section "Ouverts".
 
-Ce registre sert à DEUX choses, et à deux choses uniquement :
+Ce registre sert à TROIS choses, et à trois choses uniquement :
 
 - vérifier si un défaut connu bloque l'unité que tu as choisie ;
-- y consigner ce que tu observes en travaillant.
-
-Une entrée laissée sans issue se tranche et se referme dans la session qui la rencontre, selon
-« Autonomie de décision » de "CLAUDE.md".
+- y consigner ce que tu observes en travaillant ;
+- recevoir sa boucle de résolution au moment du §3.3, et à ce moment-là seulement.
 
 ### 4.2. COMMENT CHOISIR L'UNITÉ DE LA SESSION — LE PRODUIT D'ABORD
 
@@ -905,8 +941,8 @@ Une entrée du registre ne devient l'objet d'une session QUE dans deux cas :
   comme un préalable, dans la même session, et tu reviens à l'unité ;
 - le responsable a explicitement ordonné son traitement.
 
-Ces deux cas règlent la PRIORITÉ, jamais l'autorisation de trancher : une entrée rencontrée
-sur le chemin de l'unité, ou consignée en travaillant, reçoit son issue immédiatement.
+Ces deux cas règlent le choix de l'UNITÉ, jamais le sort des entrées : toutes les autres reçoivent
+leur issue à la boucle de résolution du §3.3, une fois l'unité prouvée, jamais au milieu de son code.
 
 « Solder » une unité "[~]" dont le code est livré mais dont il ne manque que
 des preuves reste utile, mais ne prime plus sur la construction : une session
@@ -928,13 +964,14 @@ compte rendu doit le dire en ces termes.
 La documentation reste obligatoire (CLAUDE.md §5) mais elle est PROPORTIONNÉE :
 l'entrée de journal dit ce qui a été fait et où reprendre, en quelques
 paragraphes, pas en essai. Les longues analyses rétrospectives, les bilans
-chiffrés de bilans précédents et les relectures du registre pour lui-même
-sont interdits : ce temps appartient au produit.
+chiffrés de bilans précédents et les relectures du registre hors de la
+boucle du §3.3 sont interdits : ce temps appartient au produit.
 
 ### 4.3. COMMENT TERMINER LA SESSION — CAMPAGNE, PUIS BOUCLE DE CORRECTION
 
 C'est **ici**, et nulle part avant, que la campagne complète s'exécute. Ton code est déjà écrit,
-committé et poussé (§3.2, point 5) : ce qui suit ne peut donc plus rien te faire perdre.
+committé et poussé (§3.2, point 5) et le registre a reçu sa boucle (§3.3) : ce qui suit ne peut donc
+plus rien te faire perdre.
 
 **1. Lance la campagne complète, une fois :**
 
@@ -952,7 +989,8 @@ changement** :
 
 1. isole la cause. Si tu t'apprêtes à conclure à une régression, établis d'abord la ligne de base
    du §2.4 **sur cette preuve seule** — une anomalie présente des deux côtés du `git stash` est
-   préexistante, elle se consigne au registre (§3.1) et ne t'appartient pas ;
+   préexistante, elle se consigne au registre (§3.1), attend la boucle de la session suivante et ne
+   t'appartient pas ;
 2. corrige la CAUSE, jamais le symptôme. Aucun `try/catch` vide, aucune temporisation, aucun test
    désactivé, aucun contournement destiné à verdir une preuve (§3.1) ;
 3. **committe et pousse la correction immédiatement**, sans attendre le tour de boucle suivant ;
@@ -1004,7 +1042,7 @@ Il couvre l'INTÉGRALITÉ de la session, pas seulement son dernier geste. La HI�
 1. **Les fonctionnalités CODÉES, en tête et en détail** — écran, geste, règle métier, migration, API livrés ou modifiés. Pour CHACUNE, en langage clair et pas en jargon de commit : ce qu'elle fait pour l'utilisateur, et les CAPTURES produites conformément à "CLAUDE.md" section 16 — jointes au compte rendu quand l'outillage de la session le permet, sinon nommées explicitement par leur chemin sous "docs/captures/" pour qu'elles restent trouvables. C'est le cœur du compte rendu ; le reste n'est que son contexte.
 2. Les preuves réellement exécutées et leur résultat, avec les formulations du paragraphe 25 de "CLAUDE.md" — n'annonce jamais vérifié ce qui ne l'a pas été.
 3. Ce qui reste "[~]" ou "[ ]", et pourquoi.
-4. En bref, sans développer : les migrations, les entrées de "docs/INCONSISTENCY_REPORT.md" consignées, les points que tu as tranchés avec leur motif, et tout arbitrage désormais attendu du responsable avec le cas dont il relève.
+4. En bref, sans développer : les migrations, les entrées de "docs/INCONSISTENCY_REPORT.md" résolues avec leur issue, consignées ou laissées ouvertes avec leur motif, les points que tu as tranchés avec leur motif, et tout arbitrage désormais attendu du responsable avec le cas dont il relève.
 5. Le commit final et la confirmation que "origin/main" le porte.
 
 Lorsque la session conclut à l'arrêt définitif de la boucle, ce compte rendu prend la

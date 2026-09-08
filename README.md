@@ -21,9 +21,16 @@ disponibles avec leurs [exports hors ligne](formation/README.md#commencer).
 
 ```text
 .
+├── .claude/
+│   └── agents/
+│       ├── factory-explorer.md
+│       ├── factory-resolver.md
+│       ├── factory-reviewer.md
+│       └── factory-verifier.md
 ├── .codex/
 │   ├── agents/
 │   │   ├── factory-explorer.toml
+│   │   ├── factory-resolver.toml
 │   │   ├── factory-reviewer.toml
 │   │   └── factory-verifier.toml
 │   └── config.toml
@@ -68,6 +75,7 @@ It defines reusable rules for:
 - single-writer ownership and bounded subagent delegation;
 - architecture and maintainability;
 - documentation and specification traceability;
+- inconsistency register resolution;
 - Git discipline;
 - testing and E2E validation;
 - visual verification;
@@ -85,15 +93,16 @@ Any instruction that requires knowledge of the current repository belongs in the
 CLAUDE_PROJECT.md
 ```
 
-### `AGENTS.md` and `.codex/agents/`
+### `AGENTS.md`, `.codex/agents/` and `.claude/agents/`
 
-`AGENTS.md` is the compact Codex adapter for the global method. It tells the primary agent to read the normative contracts and defines when the project-scoped custom agents are useful.
+`AGENTS.md` is the compact Codex adapter for the global method. It tells the primary agent to read the normative contracts and defines when the project-scoped custom agents are useful. Claude Code needs no adapter: it reads `CLAUDE.md` natively and discovers the subagents defined in `.claude/agents/`.
 
-The three custom agents have deliberately narrow roles:
+The same four roles are defined for both tools, as TOML files for Codex and as Markdown files with frontmatter for Claude Code. They have deliberately narrow roles:
 
 - `factory_explorer` maps contracts, dependencies and execution paths in read-only mode;
 - `factory_reviewer` reviews a stabilized change in read-only mode;
-- `factory_verifier` executes one documented, targeted proof and may write only its expected temporary artifacts.
+- `factory_verifier` executes one documented, targeted proof and may write only its expected temporary artifacts;
+- `factory_resolver` investigates one entry of the inconsistency register in read-only mode and proposes its outcome, with precedents, sources and the minimal proof, for the resolution loop defined in `CLAUDE.md`.
 
 The primary agent remains the sole source editor, decision maker and operator of Git mutations. Subagents may inspect Git in read-only mode. They are optional and never become a completion dependency.
 
@@ -144,6 +153,7 @@ It defines the lifecycle of a work session, including:
 - selection of one coherent backlog unit;
 - specification before implementation;
 - targeted proofs during development;
+- resolution of the inconsistency register once the unit is proven and before the final campaign;
 - end of session verification;
 - documentation and backlog synchronization;
 - final Git state checks.
@@ -290,6 +300,8 @@ persist a coherent checkpoint
 run targeted proofs and verify real behavior
     ↓
 correct and persist as needed
+    ↓
+resolve the inconsistency register: fix, decide, or convert to a backlog unit
     ↓
 run the final campaign
     ↓

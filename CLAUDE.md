@@ -311,6 +311,49 @@ styles, générateurs et tests.
 
 Un dépôt de socle qui ne livre aucun produit et ne possède volontairement aucun backlog produit référence ses scripts de méthode au contrat normatif stable qui les définit, avec un chemin documentaire et une ancre. Cette exception ne s'applique pas au code d'un dépôt applicatif.
 
+Résolution du registre d'incohérences
+
+`docs/INCONSISTENCY_REPORT.md` est le registre des défauts constatés hors de
+l'unité en cours. Chaque entrée porte le constat, sa mesure et le fichier, la
+règle ou l'écran concerné. Le registre se remplit en travaillant et se vide par
+une boucle de résolution dédiée, exécutée une fois l'unité codée, poussée et
+ses preuves ciblées vertes, et avant la campagne complète qui précède la
+clôture. Plus tôt, elle prend le temps du produit ; plus tard, elle invalide la
+campagne.
+
+La boucle prend les entrées ouvertes dans l'ordre du registre. Pour chacune,
+l'issue se décide avec les mêmes critères, dans cet ordre :
+
+1. le bon sens : le comportement que quiconque attendrait sans lire la
+   spécification ;
+2. les précédents de l'application : la façon dont le même cas est déjà traité
+   ailleurs dans le produit, qui fait loi tant qu'elle n'est pas elle-même le
+   défaut ;
+3. la cohérence avec l'UX et l'UI en place : `docs/DESIGN_SYSTEM.md`,
+   `docs/DESIGN_SYSTEM_APP.md` et les parcours existants ;
+4. les bonnes pratiques d'ergonomie, d'efficience, de qualité, de sécurité et
+   de maintenabilité.
+
+Chaque entrée reçoit exactement une de ces trois issues, puis quitte le
+registre :
+
+- corrigée : la cause est corrigée avec ses tests, sa documentation et ses
+  commentaires de traçabilité, puis prouvée par une preuve ciblée ;
+- tranchée sans changement : le comportement est déclaré conforme et le motif
+  est écrit dans `docs/JOURNAL.md` ;
+- convertie en unité : la correction dépasse la session ; l'entrée devient une
+  unité `[ ]` de `docs/BACKLOG.md` qui reprend son constat et sa mesure.
+
+Seule une entrée qui relève d'un cas de « Demande d'arbitrage » reste ouverte,
+avec le cas nommé et ce qui reste livrable sans la réponse.
+
+Chaque issue est committée et poussée dès qu'elle est appliquée, une entrée par
+commit. La boucle s'interrompt lorsqu'elle menace le temps des preuves finales ;
+les entrées non traitées restent ouvertes telles quelles et sont nommées dans
+le compte rendu. La boucle n'élargit pas l'unité et ne refait pas une
+fonctionnalité ; un défaut nouveau découvert pendant la boucle est consigné et
+attend la boucle suivante.
+
 Persistance immédiate des décisions (règle non négociable du responsable)
 
 Dès qu'une spécification, une décision de conception ou un résultat de
@@ -922,6 +965,9 @@ Une tâche n'est terminée que lorsque toutes les conditions applicables sont sa
 - le changelog a été mis à jour sous "[Non publié]" ;
 - le contrat de déploiement a été mis à jour si nécessaire ;
 - le backlog reflète le véritable état ;
+- la boucle de résolution du registre d'incohérences a été exécutée ; une
+  entrée ne reste ouverte que pour un cas d'arbitrage nommé ou parce que la
+  boucle a été interrompue, et le compte rendu le dit ;
 - les documents que le changement rend faux ont été relus et corrigés : mentions
   de blocage levées retirées, incohérences résolues supprimées du rapport,
   hypothèses vérifiées requalifiées, limites connues disparues retirées ;
@@ -1098,6 +1144,8 @@ Ne jamais appliquer une migration de production sans instruction humaine explici
 - les vérifications visuelles réalisées ;
 - les documents mis à jour ;
 - les migrations ou opérations de déploiement nécessaires ;
+- les entrées du registre d'incohérences résolues, avec leur issue, et celles
+  laissées ouvertes, avec leur motif ;
 - les limites ou éléments restant en cours ;
 - le commit créé ;
 - l'état du push.

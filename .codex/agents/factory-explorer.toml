@@ -1,4 +1,4 @@
-# @spec docs/AUTOMATION.md#codex-subagents
+# @spec docs/AUTOMATION.md#subagents
 name = "factory_explorer"
 description = "Exploration en lecture seule des contrats, fichiers, dépendances et flux concernés par une unité."
 sandbox_mode = "read-only"
