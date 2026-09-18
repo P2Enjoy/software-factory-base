@@ -14,11 +14,6 @@ l'animation). Le bilan de l'édition précisait qu'aucune séance avec apprenant
 n'avait encore eu lieu ([VERIFICATION.md](VERIFICATION.md), Limites explicites).
 Les deux sessions de septembre 2026 sont donc le premier retour de terrain.
 
-État du document : les sections 1 à 3 et 9 sont rédigées à partir du dépôt et
-du kit. Les sections 4 à 8 (enseignement réel des sessions, écarts, options,
-recommandation et plan) sont en cours de rédaction à partir des transcriptions
-et seront ajoutées dans le commit suivant, avec le compte rendu `SESSIONS.md`.
-
 ## 1. Périmètre
 
 Révisable dans cette étude : tout ce qui se trouve sous `formation/` (chapitres,
@@ -44,8 +39,8 @@ emportant ses preuves et la régénération des exports concernés.
   Drive du responsable (dossiers « Meet Recordings » et « Google Meet / IA USINE
   DIGITALE (recurring) »). Elles contiennent des données personnelles des
   participants ; elles ne sont ni copiées ni citées nominativement dans le
-  dépôt. Le compte rendu factuel de ce qui a été enseigné, anonymisé, est
-  produit avec la section 4 dans le fichier `SESSIONS.md`.
+  dépôt. Le compte rendu factuel de ce qui a été enseigné, anonymisé, est dans
+  [SESSIONS.md](SESSIONS.md).
 - L'édition actuelle des supports : [SYLLABUS.md](SYLLABUS.md),
   [programme.json](programme.json), les quinze chapitres de `cours/`,
   [EXERCICES.md](EXERCICES.md), [CORRIGES.md](CORRIGES.md),
@@ -139,6 +134,315 @@ et le kit. Ils entrent dans le plan de révision lorsqu'ils concernent
    chiffrés (« Quinze chapitres, trente exercices », « quatre-vingts étapes ») et
    ses liens doivent être alignés manuellement à chaque changement de structure.
 
+## 4. Ce qui a été enseigné
+
+Le compte rendu factuel des deux sessions, avec le vocabulaire employé, les
+procédures montrées, les exercices réellement conduits et les réactions des
+participants, est dans [SESSIONS.md](SESSIONS.md). Trois traits le résument.
+
+La session 1 (2 h 47) enseigne à cadrer un agent. Son objet central est la
+« fiche de goal », un fichier d'objectifs produit en dialoguant avec un assistant
+sous un prompt qui interdit l'ambiguïté, puis remis à l'agent comme contexte.
+Autour de cet objet viennent une hiérarchie d'outillage (assistant, harnais,
+agent, orchestrateur, usine), la dérive d'instructions, la décomposition en
+sous-systèmes, le few-shot prompting et le métaprompting.
+
+La session 2 (4 h 10) enseigne à industrialiser. Après une digression d'environ
+cinquante-cinq minutes sur le matériel et la chaîne d'approvisionnement, elle
+traite le choix entre les trois modes d'un outil, la configuration complète d'un
+espace de travail local avec ses garde-fous, le passage obligé par un dépôt Git
+hébergé, le contrôle à distance, la planification de routines, la création d'un
+agent spécialisé enregistré dans un dossier d'agents, la distinction entre agent
+et compétence, puis l'usine : rôles séparés, communication entre agents, agents
+de contrôle qualité qui relancent les développeurs, preuves visuelles par cycle,
+et une économie explicite du choix des modèles.
+
+Le troisième trait est le support de travail : les participants n'ont jamais
+manipulé de laboratoire pédagogique. Ils ont travaillé sur leurs propres projets,
+et sont repartis de la session 2 avec un dépôt, un contrôle à distance
+opérationnel et un agent enregistré sur leur machine.
+
+## 5. Écarts entre les sessions et les supports
+
+### 5.1 Format et volume
+
+Les supports décrivent 42 heures animées sur six journées, quinze modules de
+150 minutes et une évaluation de 270 minutes, avec un minutage interne fixe
+(30 minutes de concepts, 25 de démonstration, 25 puis 45 d'exercices, 15 de
+débrief, 10 de quiz). Les deux sessions totalisent 6 h 57, plus une troisième
+session de deux à trois heures annoncée, soit environ un quart du volume prévu.
+Aucun module n'a été animé selon son minutage, aucune journée n'a été jouée.
+
+Le guide d'animation prévoit une cohorte allant jusqu'à huit personnes par
+évaluateur, du travail en binôme avec alternance des rôles pilote et relecteur,
+et 25 minutes de restitution finale. Le format réel est un formateur pour deux
+participants, conversationnel, sans binôme possible.
+
+### 5.2 Le support de travail n'a pas servi
+
+Le laboratoire « Bureau des demandes » structure le parcours : il est prérequis
+du module 3, porte les deux défauts corrigés aux modules 9 et 10, et fournit le
+sujet de l'évaluation finale. La mesure faite sur le cahier d'exercices donne
+21 exercices sur 30 ancrés dans ce laboratoire par un nom de fichier, une unité
+DEM, un profil ou une commande ; 9 seulement sont transposables tels quels.
+
+Aucune trace de ce laboratoire dans les deux sessions : ni les profils, ni les
+unités DEM, ni les fichiers du prototype, ni son contrat de titre, ni sa matrice
+de droits. Le support pédagogique le plus coûteux de l'édition n'a pas été
+mobilisé une seule fois.
+
+### 5.3 Les exercices et l'évaluation n'ont pas été utilisés
+
+Les trente exercices identifiés, les quarante-cinq questions de quiz et
+l'évaluation notée sur 100 avec son barème et ses critères critiques n'ont pas
+été employés. Le cahier d'exercices a été promis aux participants en début de
+session 1 mais n'a pas été présenté en séance.
+
+Ce qui a effectivement été fait : un exercice oral de classement de situations
+(trois situations posées sur quatre annoncées), un exercice de rédaction d'un
+premier goal sur un sujet fictif avec restitution, un atelier de configuration
+guidée d'un agent de veille sur le projet réel d'un participant, et la mise en
+place complète du dépôt et du contrôle à distance chez les deux participants.
+
+### 5.4 Les slides et le guide d'animation n'ont pas été employés
+
+Les 80 diapositives, leurs notes et le guide minuté ne sont pas apparus. Le
+formateur a projeté un site web publié pour l'occasion en session 1, puis
+exclusivement des outils réels en session 2.
+
+### 5.5 Couverture module par module
+
+| Module | Traité en session ? | Observation |
+| --- | --- | --- |
+| M1 De l'assistant à l'agent | oui, et dépassé | les sessions ajoutent le harnais, la hiérarchie jusqu'à l'usine, les trois modes d'outil et la dérive d'instructions, absents du chapitre |
+| M2 Demande en unité de travail | partiellement | les écrans « transformer une demande en unité » et « découper une demande trop large » ont été parcourus, mais la forme écrite enseignée est la fiche de goal, absente du chapitre |
+| M3 Construire le contexte | partiellement | « créer le contexte du goal » et la distinction faits, hypothèses, décisions ont été enseignés ; l'exploration du code du laboratoire ne l'a pas été |
+| M4 Externaliser la mémoire | non | les documents montrés (journal d'exécution, document d'exploration, backlog numéroté, dossier d'architecture) recoupent le sujet, sans la répartition README, DAT, JOURNAL, BACKLOG, CHANGELOG du chapitre |
+| M5 Séparer global et local | non | aucune mention d'un contrat global et de son compagnon local, ni du routage de lecture selon l'outil |
+| M6 Spécifier avant d'implémenter | non | ni table d'exemples discriminants, ni oracle, ni marqueurs de traçabilité ; le cadrage anti-ambiguïté joue un rôle voisin, par le dialogue et non par une table |
+| M7 Concevoir la boucle | partiellement | Definition of Done énoncée et appuyée ; la boucle de session et ses checkpoints n'ont pas été enseignés |
+| M8 Environnement reproductible | non | seed, bootstrap, ports, migrations absents ; la session 2 traite l'installation d'outils, qui est un autre sujet |
+| M9 Construire la preuve | autrement | enseigné : exiger un rapport de bas niveau, la tendance de l'outil à « tricher » sur les tests d'interface, les captures comme preuve de cycle, des agents de test distincts selon la nature de la preuve. Non enseigné : la matrice unitaire, API, E2E, visuel du chapitre et la correction guidée |
+| M10 Sécurité et production | autrement | enseigné : session dédiée pour le contrôle clavier et souris, illusion du secret par messagerie, chiffrement asymétrique, probabilité cumulée de défaut, mémoire spécialisée d'un réviseur. Non enseigné : autorisation serveur, matrice rôle et propriété, refus sans mutation |
+| M11 Git comme mémoire durable | non | Git a servi de prérequis d'outillage (créer un dépôt, authentifier, cloner, laisser l'agent pousser) ; ni index, ni diff, ni récupération distante, ni divergence |
+| M12 Orchestrer plusieurs agents | avec une autre architecture | voir 5.6 |
+| M13 Automatiser les invariants | marginalement | l'agent pragmatique qui refuse un commit sans marqueur est cité une fois, en fin de session 1 ; hooks, entrées et CI non traités |
+| M14 Passer au worker autonome | autrement, et réellement | voir 5.7 |
+| M15 Assembler la software factory | autrement | le chapitre fait reconstruire l'arborescence du socle ; les sessions construisent une usine d'agents avec des rôles agiles et une économie de modèles |
+
+### 5.6 Deux architectures d'orchestration coexistent
+
+Le module 12 enseigne l'organisation du socle : un agent principal, seul éditeur
+et seul opérateur Git, assisté de trois rôles auxiliaires en lecture seule
+(explorateur, relecteur, vérificateur) qui ne décident rien, ne clôturent rien et
+ne délèguent pas. Le mot « orchestrateur » n'apparaît nulle part dans le chapitre.
+
+Les sessions enseignent autre chose : un orchestrateur qui est lui-même un agent,
+doté de son propre fichier d'objectifs, qui décide quand et comment appeler les
+phases ; des agents qui s'envoient des messages entre eux ; un agent de contrôle
+qualité qui relance automatiquement les agents de développement tant que son
+exigence n'est pas satisfaite ; et un jeu de rôles calqué sur une équipe agile.
+L'humain n'y est plus l'agent principal mais le client.
+
+Ces deux architectures ne se contredisent pas : la première est le contrat de
+travail d'une session assistée, la seconde celui d'une usine autonome. Les
+supports n'enseignent que la première et nomment la seconde sans la décrire. Le
+chapitre 15 conclut le parcours sur un assemblage de fichiers, là où les sessions
+concluent sur une organisation d'agents.
+
+### 5.7 L'outillage a rattrapé puis dépassé le support
+
+Le module 14 enseigne le worker autonome comme un exercice sur table. Il l'écrit
+explicitement : la démonstration utilise « une carte d'interruption, pas un
+ordonnanceur réel », « ce cours simule ce geste sans créer de service extérieur »,
+et la réponse de quiz retenue est qu'un fichier de déclenchement n'installe aucune
+planification, un mécanisme externe devant exister réellement.
+
+En session 2, ce mécanisme externe a été configuré en direct, en quelques minutes,
+par une commande de l'outil, avec une routine horaire de test, puis illustré par
+une usine réelle s'exécutant toutes les quatre heures et rendant ses preuves en
+captures d'écran. Le contrôle à distance, le pilotage depuis un téléphone, une
+machine hébergée fournie avec l'abonnement et l'exécution sur serveur distant
+relèvent du même constat : ce que le support présente comme hors de portée du
+cours est devenu une manipulation de séance.
+
+Un second point de dérive, indépendant des sessions : le module 13 affirme que le
+socle « ne fournit pas de workflow CI distant », l'exercice E25 demande de
+« constater son absence » et son corrigé la confirme. Le dépôt contient
+`.github/workflows/pages.yml` depuis le 7 septembre 2026 à 13 h 08, soit deux
+heures après le commit qui a introduit ces chapitres. Ce workflow publie les
+exports et n'exécute aucun contrôle, mais la formulation absolue des trois
+passages met en difficulté une personne qui fait l'exercice aujourd'hui.
+
+### 5.8 Notions enseignées sans emplacement dans les supports
+
+Vérification faite sur les quinze chapitres, le cahier d'exercices, les corrigés,
+les fiches, le glossaire et les slides : les termes « goal », « few-shot »,
+« métaprompting », « compétence » au sens de l'outil, « Definition of Ready »,
+« consigner » et le taux de rétention des instructions n'apparaissent nulle part.
+« Harnais » n'apparaît qu'une fois, au module 13, dans un autre sens (le harnais
+de test des garde-fous). « Orchestrateur » n'apparaît dans aucun chapitre.
+
+Liste des notions enseignées lors des deux sessions et absentes des supports :
+
+1. la fiche de goal : sa raison d'être, sa structure, sa production ;
+2. la procédure de cadrage anti-ambiguïté avec un assistant, y compris le prompt
+   d'ouverture, les questions à choix multiples avec option recommandée et les
+   réponses par codes ;
+3. la hiérarchie assistant, harnais, agent, orchestrateur, usine ;
+4. le choix entre les trois modes d'un outil, et ce que chacun permet ;
+5. la dérive d'instructions, sa cause et ses conséquences pratiques ;
+6. le few-shot prompting et le métaprompting ;
+7. la décomposition en sous-systèmes et unités d'action ;
+8. « consigner » plutôt qu'exécuter, et la Definition of Ready ;
+9. la configuration d'un espace de travail local et ses garde-fous (dossier de
+   travail, listes blanches de dossiers et de sites, appareil de confiance,
+   enregistrement d'écran, instructions globales) ;
+10. la planification de routines et le contrôle à distance ;
+11. l'enregistrement d'un agent, son dossier, sa mémoire isolée, et la
+    distinction entre un agent et une compétence ;
+12. la communication entre agents ;
+13. les rôles de l'usine et leur séparation stricte ;
+14. les agents de contrôle qualité qui relancent les agents de développement ;
+15. l'économie du choix des modèles par rôle et le coût d'exploitation ;
+16. la mémoire spécialisée d'un agent comme moyen de compenser un modèle ;
+17. l'usage d'un protocole d'outillage plutôt que du contrôle clavier et souris
+    pour tester une interface.
+
+### 5.9 Notions des supports non enseignées
+
+Les onze premiers modules portent, selon la spécification, « les bases et les
+gestes d'ingénierie ». La quasi-totalité de leur contenu propre n'a pas été
+traitée : spécification par l'exemple et oracle, chaîne de traçabilité,
+reproductibilité de l'environnement et seed, matrice de preuves, autorisation
+côté serveur et refus sans mutation, états de Git et synchronisation, répartition
+documentaire entre les cinq documents, séparation entre méthode globale et
+contexte local.
+
+Ce constat n'invalide pas ces contenus. Il indique qu'un cycle court avec ce
+public commence par l'usine et n'atteint pas les fondations, alors que le
+parcours écrit fait l'inverse.
+
+### 5.10 Le public et sa demande
+
+La définition du public est juste : des personnes qui savent lancer un outil de
+code et ont déjà produit de petites applications, sans réflexes d'ingénierie
+formalisés. La promesse écrite (« transformer une demande en travail agentique
+cadré, documenté, reproductible et vérifié ») décrit correctement ce qui a été
+enseigné.
+
+La demande exprimée en séance est plus étroite et plus concrète : industrialiser
+des projets qui existent déjà, déléguer sans perdre le contrôle, disposer d'un
+journal de ce que font les agents, maîtriser le coût d'exploitation, arbitrer
+entre exécution locale et service hébergé. Les participants arrivent avec des
+projets et repartent avec des agents configurés sur ces projets. Un parcours dont
+le support de travail est un laboratoire fictif ne répond pas à cette demande.
+
+## 6. Options de réorganisation
+
+Quatre options ont été instruites.
+
+**Option A, ne rien changer au parcours et publier un scénario court à côté.**
+Coût minimal, aucun invariant touché. Elle laisse les quinze chapitres décrire un
+contenu qui ne couvre pas la moitié de ce qui est enseigné, et laisse le
+laboratoire sans usage constaté. Écartée : elle traite le symptôme (le format) et
+non la cause (le contenu manquant).
+
+**Option B, réorganiser l'ordre des quinze modules pour commencer par l'usine.**
+Elle rapprocherait le parcours de la séquence réellement animée. Elle contredit
+une décision explicite du responsable, consignée dans
+[DECISIONS.md](DECISIONS.md) et rappelée dans [PRODUCTION.md](PRODUCTION.md) et
+[ANIMATION.md](ANIMATION.md), qui conserve l'ordre validé et écarte une
+condensation. Elle contredit aussi la logique du chapitre 15, qui suppose que
+l'usine répond à des problèmes rencontrés avant elle. Son coût est élevé :
+renumérotation des quiz, réécriture de tous les renvois entre modules, blocs de
+slides, journées du guide d'animation, table de remédiation. Écartée.
+
+**Option C, enrichir les quinze modules de tout ce qui a été enseigné.**
+Elle comble les manques là où ils appartiennent, sans toucher aux invariants de
+structure. Prise seule, elle gonfle un parcours déjà à 42 heures et ne résout pas
+le problème du format court, ni celui du support de travail.
+
+**Option D, retenue, combiner un enrichissement ciblé des chapitres et une
+couche de parcours au-dessus.** Les chapitres restent la référence de
+connaissances, dans leur ordre validé, et reçoivent les notions manquantes qui
+relèvent de leur sujet. Un document de parcours décrit séparément les
+déclinaisons du même socle, dont celle qui a été réellement animée. Les exercices
+reçoivent une variante sur projet réel là où ils dépendent du laboratoire. Aucune
+constante des outils n'est touchée : ni le nombre de modules, ni celui des
+exercices, des quiz, des slides ou des figures, ni les durées nominales.
+
+## 7. Décision
+
+L'option D est retenue, avec les motifs suivants, dans l'ordre de la ligne de
+décision de la méthode.
+
+**Un seul comportement, partout.** Le socle de connaissances reste unique et
+ordonné une seule fois. Les formats d'animation deviennent des vues sur ce socle,
+pas des parcours concurrents qui divergeraient.
+
+**Le moindre coût pour la personne.** Un participant en cycle court trouve un
+document qui lui dit quels chapitres lire, dans quel ordre, et avec quelle
+variante d'exercice sur son propre projet. Un lecteur autonome garde le parcours
+complet. Aucun des deux n'a besoin de reconstituer l'information.
+
+**La réversibilité.** Ajouter un document et enrichir des textes se défait par un
+retrait. Renuméroter les modules, déplacer des exercices ou changer le nombre de
+slides engage les outils, les rapports d'empreintes et tous les renvois croisés.
+
+**L'invariant appliqué là où il fait autorité.** L'ordre des quinze modules est
+une décision du responsable ; elle n'est pas remise en cause. L'écart réel, qui
+est l'absence de notions enseignées, est traité là où il se constate, dans le
+texte des chapitres.
+
+Deux points tranchés au passage, avec leur motif :
+
+- **Le laboratoire est conservé.** Il n'a pas servi, mais il est la seule base
+  déterministe qui permette des exercices corrigés, une évaluation notée et un
+  contrôle automatisé. Le supprimer retirerait la preuve sans rien apporter. Il
+  cesse en revanche d'être le seul support : chaque exercice qui en dépend reçoit
+  une variante sur projet réel.
+- **Aucune notion enseignée n'est écartée au motif qu'elle dépend d'un outil.**
+  Les supports nomment les fonctions par leur rôle plutôt que par leur libellé
+  commercial, et renvoient aux sources officielles pour les détails d'interface,
+  comme le fait déjà [SOURCES.md](SOURCES.md). Une fonction qui existe chez les
+  deux fournisseurs principaux est enseignée comme un geste, pas comme un produit.
+
+## 8. Plan de révision
+
+Onze unités, à exécuter dans cet ordre, chacune emportant son texte, ses renvois
+et la régénération des exports quand elle la déclenche. Les unités 1 et 2 sont des
+préalables : elles rétablissent la capacité à fabriquer et à vérifier le kit.
+
+| # | Unité | Fichiers principaux | Invariant touché |
+| --- | --- | --- | --- |
+| 1 | Rétablir les deux documents manquants du laboratoire, versionnés à l'identique de ceux du kit | `atelier/commun/BACKLOG.md`, `atelier/commun/DAT.md` | aucun |
+| 2 | Documenter les prérequis de fabrication réels et retirer les mentions devenues fausses | `PRODUCTION.md`, `outils/requirements.txt` | aucun |
+| 3 | Créer le document de parcours décrivant les trois déclinaisons du socle et la séquence réellement animée | `PARCOURS.md` (nouveau), renvois depuis `README.md` et `SYLLABUS.md` | aucun |
+| 4 | Publier le compte rendu des sessions comme source de la révision | `SESSIONS.md` | aucun |
+| 5 | Enrichir M1 : hiérarchie assistant, harnais, agent, orchestrateur, usine ; les trois modes d'outil et leur critère de choix | `cours/01-assistant-agent.md`, `GLOSSAIRE.md` | aucun |
+| 6 | Enrichir M2 et M3 : la fiche de goal comme forme écrite de l'unité ; la procédure de cadrage anti-ambiguïté ; le few-shot ; la dérive d'instructions et l'isolement des tâches | `cours/02-unite.md`, `cours/03-contexte.md`, `FICHES.md` | aucun |
+| 7 | Enrichir M5 et M7 : métaprompting ; consigner plutôt qu'exécuter ; Definition of Ready | `cours/05-global-local.md`, `cours/07-boucle.md` | aucun |
+| 8 | Enrichir M12 : orchestrateur agent, agent contre compétence, enregistrement et mémoire isolée, communication entre agents, rôles de l'usine, agents de contrôle qualité, choix du modèle par rôle | `cours/12-agents.md`, `GLOSSAIRE.md` | aucun |
+| 9 | Réviser M13 et M14 : corriger les affirmations sur l'absence de workflow distant ; remplacer la simulation de planification par la planification réelle, le contrôle à distance et les garde-fous d'un espace de travail local | `cours/13-invariants.md`, `cours/14-worker.md`, `EXERCICES.md` (E25), `CORRIGES.md` (E25, E29) | aucun |
+| 10 | Enrichir M15 : le renversement de rôle vers le client, les rôles agiles et leurs rituels, l'économie d'exploitation | `cours/15-factory.md` | aucun |
+| 11 | Ajouter à chaque exercice ancré dans le laboratoire une variante sur projet réel, et aligner le portail et les chiffres affichés | `EXERCICES.md`, `CORRIGES.md`, `site/index.html` | aucun |
+
+Après les unités 5 à 11, les blocs de slides des modules touchés sont mis à jour
+dans `slides.json` à structure constante (cinq diapositives par module,
+quatre-vingts au total), et les sections correspondantes du guide d'animation
+sont resynchronisées, puisque ce guide recopie aujourd'hui à la main les textes
+des slides sans contrôle mécanique.
+
+Deux travaux d'outillage sont proposés hors de ce plan, parce qu'ils touchent les
+scripts de fabrication et non les supports : un contrôle de cohérence entre
+`programme.json`, `SYLLABUS.md` et `slides.json`, et un contrôle de la règle de
+durée des exercices. Ils lèveraient les écarts décrits en 3.3, points 3 et 4.
+
+Aucune unité de ce plan ne modifie `CLAUDE.md`, `docs/CloudWorker.md`,
+`docs/DESIGN_SYSTEM.md`, `AGENTS.md`, les définitions de rôles ni les garde-fous
+du socle. La révision porte sur les supports de formation et sur eux seuls.
+
 ## 9. Contraintes de fabrication et de vérification
 
 Cette section fixe ce qu'une réorganisation peut changer librement, ce qui exige
@@ -170,7 +474,7 @@ chaque chapitre.
 | 45 quiz, trois par module, identifiants Q{n}.1 à Q{n}.3 couplés au numéro de module, réponses en table dans CORRIGES.md | `verifier.py` l. 73 à 77 | SYLLABUS ; ANIMATION (« les trois quiz du chapitre ») |
 | 80 slides : 2 d'accueil (module 0), 5 par module (contenu avec visuel, figure, cas, contenu, contenu), 3 d'évaluation (module 16) ; six clés de notes non vides | `verifier.py` l. 78 à 79, 114, 122 à 123 ; `exporter.cjs` l. 50 à 53, 57, 65, 68 ; `construire.py` l. 92, 165, 193 | ANIMATION (« Slides a à b » par module, l. 6, 34, 454) ; `site/index.html` l. 62 ; `docs/DESIGN_SYSTEM_APP.md` ; VERIFICATION |
 | 15 figures SVG, un fichier par entrée de `illustrations.json`, `kind` parmi flow, grid, split, rights, roles | `verifier.py` l. 80 ; `construire.py` l. 57 à 72, 86 | ILLUSTRATIONS.md (régénéré) ; VERIFICATION ; PRODUCTION |
-| Durées 150 et 270 minutes, total 2 520 | `programme.json` l. 3 à 4 ; `verifier.py` l. 63 ; `construire.py` l. 92 (« 42 heures ») | chaque chapitre (« Durée animée : 150 min ») ; SYLLABUS ; ANIMATION (bornes 0–30, 30–55, 55–125, 125–150 répétées quinze fois) ; EVALUATION ; `slides.json` (cinq chaînes `minutage` par module et slides 78 à 80) ; SPECIFICATION ; README ; VERIFICATION ; DECISIONS |
+| Durées 150 et 270 minutes, total 2 520 | `programme.json` l. 3 à 4 ; `verifier.py` l. 63 ; `construire.py` l. 92 (« 42 heures ») | chaque chapitre (« Durée animée : 150 min ») ; SYLLABUS ; ANIMATION (bornes 0 à 30, 30 à 55, 55 à 125, 125 à 150 répétées quinze fois) ; EVALUATION ; `slides.json` (cinq chaînes `minutage` par module et slides 78 à 80) ; SPECIFICATION ; README ; VERIFICATION ; DECISIONS |
 | Noms des livres assemblés et des PDF | `construire.py` l. 162 à 165 ; `exporter.cjs` l. 19, 32 ; `verifier.py` l. 64 à 65, 109, 137 ; `emballer.py` l. 18 à 31 | README de la formation ; PRODUCTION ; `site/index.html` l. 53 à 92 |
 
 ### 9.3 Ce qui peut changer sans toucher aux outils
